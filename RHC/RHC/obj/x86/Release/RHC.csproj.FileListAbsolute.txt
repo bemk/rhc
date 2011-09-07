@@ -1,0 +1,5 @@
+C:\Users\Jeremy\Desktop\Project\RHC\RHC\bin\Release\RHC.exe
+C:\Users\Jeremy\Desktop\Project\RHC\RHC\bin\Release\RHC.pdb
+C:\Users\Jeremy\Desktop\Project\RHC\RHC\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Jeremy\Desktop\Project\RHC\RHC\obj\x86\Release\RHC.exe
+C:\Users\Jeremy\Desktop\Project\RHC\RHC\obj\x86\Release\RHC.pdb

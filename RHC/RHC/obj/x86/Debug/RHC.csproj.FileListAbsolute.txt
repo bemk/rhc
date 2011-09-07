@@ -3,3 +3,8 @@ C:\Users\Jeremy\Desktop\Project\RHC\RHC\bin\Debug\RHC.pdb
 C:\Users\Jeremy\Desktop\Project\RHC\RHC\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Jeremy\Desktop\Project\RHC\RHC\obj\x86\Debug\RHC.exe
 C:\Users\Jeremy\Desktop\Project\RHC\RHC\obj\x86\Debug\RHC.pdb
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\RHC\RHC\obj\x86\Debug\RHC.exe
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\RHC\RHC\obj\x86\Debug\RHC.pdb
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\RHC\RHC\bin\Debug\RHC.exe
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\RHC\RHC\bin\Debug\RHC.pdb
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\RHC\RHC\obj\x86\Debug\ResolveAssemblyReference.cache

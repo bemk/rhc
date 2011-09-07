@@ -17,7 +17,10 @@ namespace RHC
             try
             {
                 Program p = new Program();
-                p.ReadData();
+                while (true)
+                {
+                    p.ReadData(Console.ReadLine());
+                }
                 //p.SearchCommands();
             }
             catch (Exception e)
@@ -40,14 +43,18 @@ namespace RHC
                 {
                     for (char b = 'a'; b <= 'z'; b++)
                     {
-                        string write = "" + a + b;
-                        SERIAL_PORT.WriteLine(write);
-
-                        string read = SERIAL_PORT.ReadLine();
-                        if (!read.Contains("ERR"))
+                        Console.WriteLine("" + a + b);
+                        for (int c = 0; c <= 5; c++)
                         {
-                            Console.WriteLine("Commando: " + write);
-                            Console.WriteLine(read);
+                            string write = "" + a + b + " " + c;
+                            SERIAL_PORT.WriteLine(write);
+
+                            string read = SERIAL_PORT.ReadLine();
+                            if (!read.Contains("ERR"))
+                            {
+                                Console.WriteLine("Command: " + write);
+                                Console.WriteLine(read);
+                            }
                         }
                     }
                 }
@@ -79,16 +86,16 @@ namespace RHC
             }
         }
 
-        public void ReadData()
+        public void ReadData(string command)
         {
             int heartRate, RPM, speed, distance, power, energy, currentPower;
             string time;
             using (SERIAL_PORT)
             {
                 SERIAL_PORT.Open();
-                while (true)
-                {
-                    SERIAL_PORT.WriteLine(GET_DATA);
+                //while (true)
+                //{
+                    SERIAL_PORT.WriteLine(command);
 
                     string read = SERIAL_PORT.ReadLine();
                     if (!read.Contains("ERR"))
@@ -116,9 +123,13 @@ namespace RHC
                         // Empty line
                         Console.WriteLine();
                     }
+                    else
+                    {
+                        Console.WriteLine("Command " + command + " not found.");
+                    }
                     // Delay 1000 ms.
-                    System.Threading.Thread.Sleep(1000);
-                }
+                    //System.Threading.Thread.Sleep(1000);
+               // }
             }
         }
     }

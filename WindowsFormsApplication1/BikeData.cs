@@ -28,15 +28,5 @@ namespace WindowsFormsApplication1
             CurrentPowers = new List<int>();
             Time = "0:00";
         }
-
-        public int Average(List<int> list)
-        {
-            int total = 0;
-            foreach (int number in list)
-            {
-                total += number;
-            }
-            return total / list.Count;
-        }
     }
 }

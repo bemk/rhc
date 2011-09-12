@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -27,12 +28,10 @@ namespace WindowsFormsApplication1
         {
             if (!connection.Connect())
             {
-                string error = "Could not connect to the bike.";
-                setStatus(error);
-                MessageBox.Show(error);
+                setStatus("Could not connect, check cable.", Color.Red);
                 return;
             }
-            setStatus("Recording.");
+            setStatus("Recording.", Color.Green);
             
             // Timer to retrieve the data.
             System.Timers.Timer updater = new System.Timers.Timer();
@@ -45,13 +44,32 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                connection.GetData();
-                updateLabels();
+                if (connection.IsConnected())
+                {
+                    connection.GetData();
+                    //connection.SetPower(setPowerBar.Value);
+                    updateLabels();
+                }
+                else
+                {
+                    setStatus("Reconnecting, please wait.", Color.Orange);
+                    if (connection.Connect())
+                    {
+                        if (Program.DEBUG) Console.WriteLine("Succesfully reconnected.");
+                        setStatus("Succesfully reconnected.", Color.Green);
+                    }
+                    else
+                    {
+                        if (Program.DEBUG) Console.WriteLine("Reconnecting failed.");
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
-                if (Program.DEBUG) Console.WriteLine("Foutje in Form1.UpdateData() " + ex.Message);
-                MessageBox.Show("Connection lost.");
+                if (Program.DEBUG) Console.WriteLine("Connection lost " + ex.Message);
+                setStatus("Connection lost.", Color.Red);
+
+                connection.Close();
             }
         }
 
@@ -68,15 +86,16 @@ namespace WindowsFormsApplication1
                 currentPowerData.Text = connection.GetBikeData().CurrentPowers.Last().ToString();
                 timeData.Text = connection.GetBikeData().Time;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                if(Program.DEBUG) Console.WriteLine("Foutje in Form1.updateLabels() " + ex.Message);
+                if(Program.DEBUG) Console.WriteLine("Updaten van labels failed: " + ex.Message);
             }
         }
 
-        private void setStatus(string status)
+        private void setStatus(string status, Color kleur)
         {
             statusLabel.Text = status;
+            statusLabel.ForeColor = kleur;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

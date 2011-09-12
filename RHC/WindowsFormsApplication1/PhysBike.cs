@@ -68,33 +68,55 @@ namespace WindowsFormsApplication1
 
         public int getPower()
         {
-            getMsg("PW");
+            String pw = getMsg("PW");
+            if (pw != "ERR")
+            {
+                String[] split = pw.Split('\t');
+                return Int32.Parse(split[4]);
+            }
             return -1;
         }
 
         public int getCurrentPower()
         {
-            String power = getMsg("PW");
+            String pw = getMsg("PW");
+            if (pw != "ERR")
+            {
+                String[] split = pw.Split('\t');
+                return Int32.Parse(split[7]);
+            }
             return -1;
         }
         public int getHeartBeat()
         {
             String hb = getMsg("PW");
+            if (hb != "ERR")
+            {
+                String[] split = hb.Split('\t');
+                return Int32.Parse(split[0]);
+            }
             return -1;
         }
         public int getRPM()
         {
             String RPM = getMsg("VS");
+            if (RPM != "ERR")
+                return Int32.Parse(RPM);
             return -1;
         }
         public int getBikeID()
         {
             String ID = getMsg("ID");
-            return Int32.Parse(ID);
+            if (ID != "ERR") 
+               return Int32.Parse(ID);
+            return -1;
         }
         public String getTime()
         {
-            return ("TE");
+            String time = getMsg("TE");
+            if (time != "ERR")
+                return time;
+            return null;
         }
     }
 }

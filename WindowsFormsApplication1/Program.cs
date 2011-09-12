@@ -5,12 +5,15 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
+
     static class Program
     {
+        public static bool DEBUG = true;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+        //[STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();

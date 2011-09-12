@@ -23,9 +23,9 @@ namespace WindowsFormsApplication1
             {
                 connection.Open();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                if(Program.DEBUG) Console.WriteLine("Foutje in BikeConnection.Connect() " + ex.Message);
                 return false;
             }
             return true;
@@ -52,6 +52,13 @@ namespace WindowsFormsApplication1
             {
                 string[] split = read.Split('\t');
                 data.HeartRates.Add(Convert.ToInt32(split[0]));
+                data.RPMs.Add(Convert.ToInt32(split[1]));
+                data.Speeds.Add(Convert.ToInt32(split[2]));
+                data.Distances.Add(Convert.ToInt32(split[3]));
+                data.Powers.Add(Convert.ToInt32(split[4]));
+                data.Energies.Add(Convert.ToInt32(split[5]));
+                data.Time = split[6];
+                data.CurrentPowers.Add(Convert.ToInt32(split[7]));
             }
         }
     }

@@ -9,15 +9,24 @@ namespace WindowsFormsApplication1
     public class BikeData
     {
         public List<int> HeartRates;
+        public List<int> RPMs;
+        public List<int> Speeds;
+        public List<int> Distances;
+        public List<int> Powers;
+        public List<int> Energies;
+        public List<int> CurrentPowers;
+        public string Time;
 
         public BikeData()
         {
             HeartRates = new List<int>();
-        }
-
-        public int Last(List<int> list)
-        {
-            return list[list.Count - 1];
+            RPMs = new List<int>();
+            Speeds = new List<int>();
+            Distances = new List<int>();
+            Powers = new List<int>();
+            Energies = new List<int>();
+            CurrentPowers = new List<int>();
+            Time = "0:00";
         }
 
         public int Average(List<int> list)

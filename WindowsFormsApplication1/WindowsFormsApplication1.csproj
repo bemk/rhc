@@ -77,7 +77,7 @@
   <ItemGroup>
     <Compile Include="BikeConnection.cs" />
     <Compile Include="BikeData.cs" />
-    <Compile Include="PhysBike.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -30,6 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.timeData = new System.Windows.Forms.Label();
+            this.currentPowerData = new System.Windows.Forms.Label();
+            this.energyData = new System.Windows.Forms.Label();
+            this.powerData = new System.Windows.Forms.Label();
+            this.time = new System.Windows.Forms.Label();
+            this.distanceData = new System.Windows.Forms.Label();
+            this.speedData = new System.Windows.Forms.Label();
             this.RPMData = new System.Windows.Forms.Label();
             this.heartRateData = new System.Windows.Forms.Label();
             this.currentPower = new System.Windows.Forms.Label();
@@ -46,12 +53,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.filesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -61,6 +68,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.timeData);
+            this.groupBox1.Controls.Add(this.currentPowerData);
+            this.groupBox1.Controls.Add(this.energyData);
+            this.groupBox1.Controls.Add(this.powerData);
+            this.groupBox1.Controls.Add(this.time);
+            this.groupBox1.Controls.Add(this.distanceData);
+            this.groupBox1.Controls.Add(this.speedData);
             this.groupBox1.Controls.Add(this.RPMData);
             this.groupBox1.Controls.Add(this.heartRateData);
             this.groupBox1.Controls.Add(this.currentPower);
@@ -76,6 +90,69 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
+            // 
+            // timeData
+            // 
+            this.timeData.AutoSize = true;
+            this.timeData.Location = new System.Drawing.Point(99, 188);
+            this.timeData.Name = "timeData";
+            this.timeData.Size = new System.Drawing.Size(13, 13);
+            this.timeData.TabIndex = 15;
+            this.timeData.Text = "0";
+            // 
+            // currentPowerData
+            // 
+            this.currentPowerData.AutoSize = true;
+            this.currentPowerData.Location = new System.Drawing.Point(99, 166);
+            this.currentPowerData.Name = "currentPowerData";
+            this.currentPowerData.Size = new System.Drawing.Size(13, 13);
+            this.currentPowerData.TabIndex = 14;
+            this.currentPowerData.Text = "0";
+            // 
+            // energyData
+            // 
+            this.energyData.AutoSize = true;
+            this.energyData.Location = new System.Drawing.Point(99, 142);
+            this.energyData.Name = "energyData";
+            this.energyData.Size = new System.Drawing.Size(13, 13);
+            this.energyData.TabIndex = 13;
+            this.energyData.Text = "0";
+            // 
+            // powerData
+            // 
+            this.powerData.AutoSize = true;
+            this.powerData.Location = new System.Drawing.Point(99, 117);
+            this.powerData.Name = "powerData";
+            this.powerData.Size = new System.Drawing.Size(13, 13);
+            this.powerData.TabIndex = 12;
+            this.powerData.Text = "0";
+            // 
+            // time
+            // 
+            this.time.AutoSize = true;
+            this.time.Location = new System.Drawing.Point(7, 188);
+            this.time.Name = "time";
+            this.time.Size = new System.Drawing.Size(33, 13);
+            this.time.TabIndex = 11;
+            this.time.Text = "Time:";
+            // 
+            // distanceData
+            // 
+            this.distanceData.AutoSize = true;
+            this.distanceData.Location = new System.Drawing.Point(99, 93);
+            this.distanceData.Name = "distanceData";
+            this.distanceData.Size = new System.Drawing.Size(13, 13);
+            this.distanceData.TabIndex = 10;
+            this.distanceData.Text = "0";
+            // 
+            // speedData
+            // 
+            this.speedData.AutoSize = true;
+            this.speedData.Location = new System.Drawing.Point(99, 70);
+            this.speedData.Name = "speedData";
+            this.speedData.Size = new System.Drawing.Size(13, 13);
+            this.speedData.TabIndex = 9;
+            this.speedData.Text = "0";
             // 
             // RPMData
             // 
@@ -225,7 +302,7 @@
             this.menu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(455, 23);
+            this.menu.Size = new System.Drawing.Size(456, 23);
             this.menu.TabIndex = 3;
             this.menu.Text = "menu";
             // 
@@ -239,11 +316,25 @@
             this.filesToolStripMenuItem.Size = new System.Drawing.Size(37, 19);
             this.filesToolStripMenuItem.Text = "File";
             // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -252,9 +343,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.statusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 318);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 330);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(455, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(456, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -270,25 +361,11 @@
             this.statusLabel.Size = new System.Drawing.Size(125, 17);
             this.statusLabel.Text = "Waiting for user input.";
             // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // loadToolStripMenuItem
-            // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loadToolStripMenuItem.Text = "Load";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 340);
+            this.ClientSize = new System.Drawing.Size(456, 352);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -339,6 +416,13 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.Label timeData;
+        private System.Windows.Forms.Label currentPowerData;
+        private System.Windows.Forms.Label energyData;
+        private System.Windows.Forms.Label powerData;
+        private System.Windows.Forms.Label time;
+        private System.Windows.Forms.Label distanceData;
+        private System.Windows.Forms.Label speedData;
     }
 }
 

@@ -7,17 +7,21 @@ using System.Windows.Forms;
 
 namespace RHC
 {
-    class Program
+    public class Program
     {
         public SerialPort SERIAL_PORT = new SerialPort("COM3");
         public string GET_DATA = "pw";
+
+        public delegate void DataEvent(String data);
+        public event DataEvent NewDataRead;
 
         public static void Main()
         {
             try
             {
                 Program p = new Program();
-                p.ReadData();
+                Form1 form = new Form1(p);
+                Application.Run(form);                
                 //p.SearchCommands();
             }
             catch (Exception e)
@@ -28,6 +32,35 @@ namespace RHC
 
         public Program()
         {
+
+        }
+
+        public void StartReadData()
+        {
+            //Event Driven Programming
+            SERIAL_PORT.Open();
+            SERIAL_PORT.DataReceived += OnDataReceived;
+            SERIAL_PORT.WriteLine(GET_DATA);
+        }
+
+        private class Pokeman : Exception {}
+        private void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            //On Event, do stuff, and initiate the event again (trigger)
+            try
+            {                
+                string data = (sender as SerialPort).ReadLine();
+                if (!data.Contains("ERR"))
+                {
+                    NewDataRead.Invoke(data);
+                }
+                SERIAL_PORT.WriteLine(GET_DATA); //event trigger
+            }
+            catch (Pokeman)
+            {
+                //Catch all the things!
+                //http://troll.me/images/x-all-the-things/catch-all-the-pokemans.jpg
+            }
 
         }
 
@@ -79,11 +112,9 @@ namespace RHC
             }
         }
 
-        public void ReadData()
+        public void ReadDataRuk()
         {
-            int heartRate, RPM, speed, distance, power, energy, currentPower;
-            string time;
-            using (SERIAL_PORT)
+            using (SERIAL_PORT) //Verkeerd gebruik van using keyword
             {
                 SERIAL_PORT.Open();
                 while (true)
@@ -94,14 +125,14 @@ namespace RHC
                     if (!read.Contains("ERR"))
                     {
                         string[] split = read.Split('\t');
-                        heartRate = Convert.ToInt32(split[0]);
-                        RPM = Convert.ToInt32(split[1]);
-                        speed = Convert.ToInt32(split[2]);
-                        distance = Convert.ToInt32(split[3]);
-                        power = Convert.ToInt32(split[4]);
-                        energy = Convert.ToInt32(split[5]);
-                        time = split[6];
-                        currentPower = Convert.ToInt32(split[7]);
+                        int heartRate = Convert.ToInt32(split[0]);
+                        int RPM = Convert.ToInt32(split[1]);
+                        int speed = Convert.ToInt32(split[2]);
+                        int distance = Convert.ToInt32(split[3]);
+                        int power = Convert.ToInt32(split[4]);
+                        int energy = Convert.ToInt32(split[5]);
+                        string time = split[6];
+                        int currentPower = Convert.ToInt32(split[7]);
                         //Console.WriteLine("HEART   RPM     SPEED   DIST.   POWER   ENERGY  TIME    HUIDIG POWER");
                         //Console.WriteLine(read);
                         Console.WriteLine("HeartRate: " + heartRate);
@@ -114,7 +145,7 @@ namespace RHC
                         Console.WriteLine("CurrentPower: " + currentPower);
 
                         // Empty line
-                        Console.WriteLine();
+                        Console.WriteLine();                   
                     }
                     // Delay 1000 ms.
                     System.Threading.Thread.Sleep(1000);

@@ -12,24 +12,23 @@ namespace WindowsFormsApplication1
 
         private void sendMsg(String Msg)
         {
-            if (connection == null)
-            {
-                Console.WriteLine("ERROR: Connection doesn't exist!");
-            }
-            if (!connection.IsOpen)
-                Console.WriteLine("ERROR: Connection closed!");
+            checkConnection();
             connection.WriteLine(Msg);
         }
 
         private String getMsg(String Msg)
         {
+            checkConnection();
+            connection.WriteLine(Msg);
+            return (connection.ReadLine());
+        }
+
+        private void checkConnection()
+        {
             if (connection == null)
                 Console.WriteLine("ERROR: Connection doesn't exist!");
             if (!connection.IsOpen)
                 Console.WriteLine("ERROR: Connection closed!");
-
-            connection.WriteLine(Msg);
-            return (connection.ReadLine());
         }
 
         private void connect(String comport)

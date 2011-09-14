@@ -25,7 +25,7 @@ namespace WindowsFormsApplication1
         }
         public void reset() {
             this.Power = 65;
-            this.CurrentPower = 65;
+            this.CurrentPower = 0;
         }
         public void setPower(int power) {
             this.Power = power;

@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class Form1
+    partial class Client
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.timeData = new System.Windows.Forms.Label();
             this.currentPowerData = new System.Windows.Forms.Label();
@@ -48,7 +48,6 @@
             this.RPM = new System.Windows.Forms.Label();
             this.heartRate = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chart = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -57,9 +56,13 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bikeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.virtualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -239,22 +242,13 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.chart);
+            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Location = new System.Drawing.Point(234, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(208, 213);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Charts";
-            // 
-            // chart
-            // 
-            this.chart.ForeColor = System.Drawing.Color.DarkRed;
-            this.chart.Location = new System.Drawing.Point(6, 19);
-            this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(196, 182);
-            this.chart.TabIndex = 1;
-            this.chart.Paint += new System.Windows.Forms.PaintEventHandler(this.chart_Paint);
             // 
             // groupBox3
             // 
@@ -284,7 +278,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -294,13 +287,13 @@
             this.button1.Size = new System.Drawing.Size(76, 44);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // menu
             // 
             this.menu.BackColor = System.Drawing.SystemColors.Control;
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.filesToolStripMenuItem});
+            this.filesToolStripMenuItem,
+            this.bikeToolStripMenuItem});
             this.menu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
@@ -330,7 +323,6 @@
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -338,7 +330,29 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // bikeToolStripMenuItem
+            // 
+            this.bikeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.physicalToolStripMenuItem,
+            this.virtualToolStripMenuItem});
+            this.bikeToolStripMenuItem.Name = "bikeToolStripMenuItem";
+            this.bikeToolStripMenuItem.Size = new System.Drawing.Size(41, 19);
+            this.bikeToolStripMenuItem.Text = "Bike";
+            // 
+            // physicalToolStripMenuItem
+            // 
+            this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.physicalToolStripMenuItem.Text = "Physical";
+            this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
+            // 
+            // virtualToolStripMenuItem
+            // 
+            this.virtualToolStripMenuItem.Name = "virtualToolStripMenuItem";
+            this.virtualToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.virtualToolStripMenuItem.Text = "Virtual";
+            this.virtualToolStripMenuItem.Click += new System.EventHandler(this.virtualToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -363,13 +377,22 @@
             this.statusLabel.Size = new System.Drawing.Size(125, 17);
             this.statusLabel.Text = "Waiting for user input.";
             // 
+            // panel1
+            // 
+            this.panel1.ForeColor = System.Drawing.Color.DarkRed;
+            this.panel1.Location = new System.Drawing.Point(6, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(196, 188);
+            this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Form1
+            // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -382,7 +405,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menu;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Client";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -429,8 +452,11 @@
         private System.Windows.Forms.Label time;
         private System.Windows.Forms.Label distanceData;
         private System.Windows.Forms.Label speedData;
+        private System.Windows.Forms.ToolStripMenuItem bikeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem virtualToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Panel chart;
     }
 }
 

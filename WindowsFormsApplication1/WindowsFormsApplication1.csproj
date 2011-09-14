@@ -83,7 +83,7 @@
   <ItemGroup>
     <Compile Include="BikeConnection.cs" />
     <Compile Include="BikeData.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="VirtBike.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +91,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Bike.cs" />
+    <Compile Include="PhysBike.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

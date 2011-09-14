@@ -97,6 +97,16 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
+        public decimal getSpeed()
+        {
+            String spd = getMsg("PW");
+            if (spd != "ERR")
+            {
+                String[] split = spd.Split('\t');
+                return decimal.Parse(split[2])/10;
+            }
+            return -1;
+        }
         public int getRPM()
         {
             String RPM = getMsg("VS");

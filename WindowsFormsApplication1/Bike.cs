@@ -13,6 +13,7 @@ namespace WindowsFormsApplication1
         int getCurrentPower(); // Current power in Watt
         int getHeartBeat(); // Heartbeat in beats per minute
         int getRPM(); // Rotations of the wheel per minute
+        decimal getSpeed();
         int getBikeID();
         String getTime();
     }

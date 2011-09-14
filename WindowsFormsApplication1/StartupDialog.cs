@@ -6,23 +6,19 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 
 namespace WindowsFormsApplication1
 {
-    public partial class Form1 : Form
+    public partial class StartupDialog : Form
     {
-        private BikeConnection connection = new BikeConnection();
-
-        public Form1()
+        public StartupDialog()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            StartupDialog dialog = new StartupDialog();
-            dialog.ShowDialog();
+            MessageBox.Show(comboBox1.SelectedIndex.ToString());
         }
     }
 }

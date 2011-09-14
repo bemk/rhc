@@ -56,6 +56,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bikeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.virtualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -296,7 +299,8 @@
             // 
             this.menu.BackColor = System.Drawing.SystemColors.Control;
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.filesToolStripMenuItem});
+            this.filesToolStripMenuItem,
+            this.bikeToolStripMenuItem});
             this.menu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
@@ -317,21 +321,45 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // bikeToolStripMenuItem
+            // 
+            this.bikeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.physicalToolStripMenuItem,
+            this.virtualToolStripMenuItem});
+            this.bikeToolStripMenuItem.Name = "bikeToolStripMenuItem";
+            this.bikeToolStripMenuItem.Size = new System.Drawing.Size(41, 19);
+            this.bikeToolStripMenuItem.Text = "Bike";
+            // 
+            // physicalToolStripMenuItem
+            // 
+            this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.physicalToolStripMenuItem.Text = "Physical";
+            this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
+            // 
+            // virtualToolStripMenuItem
+            // 
+            this.virtualToolStripMenuItem.Name = "virtualToolStripMenuItem";
+            this.virtualToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.virtualToolStripMenuItem.Text = "Virtual";
+            this.virtualToolStripMenuItem.Click += new System.EventHandler(this.virtualToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -418,6 +446,9 @@
         private System.Windows.Forms.Label time;
         private System.Windows.Forms.Label distanceData;
         private System.Windows.Forms.Label speedData;
+        private System.Windows.Forms.ToolStripMenuItem bikeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem virtualToolStripMenuItem;
     }
 }
 

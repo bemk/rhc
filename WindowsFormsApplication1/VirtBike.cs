@@ -23,33 +23,41 @@ namespace WindowsFormsApplication1
         ~VirtBike()
         {
         }
-        public void reset() {
+        public void reset() 
+        {
             this.Power = 65;
             this.CurrentPower = 65;
         }
-        public void setPower(int power) {
+        public void setPower(int power) 
+        {
             this.Power = power;
         }
-        public int getPower() { 
+        public int getPower() 
+        { 
             return this.Power; 
         }
-        public int getCurrentPower() { 
+        public int getCurrentPower() 
+        { 
             return this.CurrentPower;
         }
-        public int getHeartBeat() { 
+        public int getHeartBeat() 
+        { 
             return this.HeartBeat;
         }
-        public int getRPM() { 
+        public int getRPM() 
+        { 
             return this.RPM;
         }
         public decimal getSpeed()
         {
             return this.Speed;
         }
-        public int getBikeID() { 
+        public int getBikeID() 
+        { 
             return this.ID;
         }
-        public String getTime() { 
+        public String getTime() 
+        { 
             return null;
         }
     }

@@ -7,16 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing.Drawing2D;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
         private BikeConnection connection = new BikeConnection();
+        private String selected = "";
+        private Point oldPoint = new Point();
 
         public Form1()
         {
             InitializeComponent();
+            timer1.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,6 +54,7 @@ namespace WindowsFormsApplication1
                     connection.GetData();
                     //connection.SetPower(setPowerBar.Value);
                     updateLabels();
+                    
                 }
                 else
                 {
@@ -100,7 +106,9 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tempChartLabel.Text = comboBox1.Text;
+            selected = comboBox1.Text;
+            //Console.WriteLine(selected);
+            chart.Update();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -116,6 +124,21 @@ namespace WindowsFormsApplication1
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void chart_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = chart.CreateGraphics();
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Pen p = new Pen(chart.ForeColor, 3);
+            p.LineJoin = LineJoin.Bevel;
+            //Point newPoint = new Point(connection.GetBikeData().Speeds.las
+       //     g.DrawLine(p, oldPoint, newPoint);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            chart.Refresh();
         }
     }
 }

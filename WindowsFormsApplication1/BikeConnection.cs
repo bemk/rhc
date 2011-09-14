@@ -13,7 +13,7 @@ namespace WindowsFormsApplication1
 
         public BikeConnection()
         {
-            connection = new SerialPort("COM3");
+            connection = new SerialPort("COM7");
             data = new BikeData();
         }
 

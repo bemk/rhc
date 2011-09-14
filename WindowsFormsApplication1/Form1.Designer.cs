@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.timeData = new System.Windows.Forms.Label();
@@ -47,7 +48,7 @@
             this.RPM = new System.Windows.Forms.Label();
             this.heartRate = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tempChartLabel = new System.Windows.Forms.Label();
+            this.chart = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -59,6 +60,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -237,7 +239,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.tempChartLabel);
+            this.groupBox2.Controls.Add(this.chart);
             this.groupBox2.Location = new System.Drawing.Point(234, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(208, 213);
@@ -245,14 +247,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Charts";
             // 
-            // tempChartLabel
+            // chart
             // 
-            this.tempChartLabel.AutoSize = true;
-            this.tempChartLabel.Location = new System.Drawing.Point(6, 20);
-            this.tempChartLabel.Name = "tempChartLabel";
-            this.tempChartLabel.Size = new System.Drawing.Size(91, 13);
-            this.tempChartLabel.TabIndex = 0;
-            this.tempChartLabel.Text = "No data selected.";
+            this.chart.ForeColor = System.Drawing.Color.DarkRed;
+            this.chart.Location = new System.Drawing.Point(6, 19);
+            this.chart.Name = "chart";
+            this.chart.Size = new System.Drawing.Size(196, 182);
+            this.chart.TabIndex = 1;
+            this.chart.Paint += new System.Windows.Forms.PaintEventHandler(this.chart_Paint);
             // 
             // groupBox3
             // 
@@ -361,6 +363,12 @@
             this.statusLabel.Size = new System.Drawing.Size(125, 17);
             this.statusLabel.Text = "Waiting for user input.";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,7 +388,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
@@ -412,7 +419,6 @@
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.Label RPMData;
         private System.Windows.Forms.Label heartRateData;
-        private System.Windows.Forms.Label tempChartLabel;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
@@ -423,6 +429,8 @@
         private System.Windows.Forms.Label time;
         private System.Windows.Forms.Label distanceData;
         private System.Windows.Forms.Label speedData;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel chart;
     }
 }
 

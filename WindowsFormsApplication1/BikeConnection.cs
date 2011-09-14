@@ -23,12 +23,24 @@ namespace WindowsFormsApplication1
             {
                 connection.Open();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                if(Program.DEBUG) Console.WriteLine("Foutje in BikeConnection.Connect() " + ex.Message);
+                if(Program.DEBUG) Console.WriteLine("Could not open connection " + ex.Message);
                 return false;
             }
             return true;
+        }
+
+        public void Close()
+        {
+            try
+            {
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                if (Program.DEBUG) Console.WriteLine("Could not close connection: " + ex.Message);
+            }
         }
 
         public BikeData GetBikeData()
@@ -39,6 +51,15 @@ namespace WindowsFormsApplication1
         public bool IsConnected()
         {
             return connection.IsOpen;
+        }
+
+        public bool SetPower(int power)
+        {
+            if (!connection.IsOpen) return false;
+
+            connection.WriteLine("cm");
+            connection.WriteLine("pw " + power.ToString());
+            return true;
         }
 
         public void GetData()

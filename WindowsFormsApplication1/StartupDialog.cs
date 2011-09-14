@@ -18,7 +18,16 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show(comboBox1.SelectedIndex.ToString());
+            Close();
+        }
+
+        private void StartupDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (comboBox1.SelectedIndex != Program.PHYSICALBIKE
+                && comboBox1.SelectedIndex != Program.VIRTUALBIKE)
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }

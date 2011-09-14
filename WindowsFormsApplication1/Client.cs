@@ -10,11 +10,11 @@ using System.IO;
 
 namespace WindowsFormsApplication1
 {
-    public partial class Form1 : Form
+    public partial class Client : Form
     {
-        private BikeConnection connection = new BikeConnection();
+        private int bike = -1;
 
-        public Form1()
+        public Client()
         {
             InitializeComponent();
         }
@@ -23,6 +23,12 @@ namespace WindowsFormsApplication1
         {
             StartupDialog dialog = new StartupDialog();
             dialog.ShowDialog();
+
+        }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+
         }
     }
 }

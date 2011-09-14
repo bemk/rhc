@@ -7,6 +7,7 @@ namespace WindowsFormsApplication1
 {
     static class Program
     {
+        public const bool DEBUG = true;
         public const int PHYSICALBIKE = 0;
         public const int VIRTUALBIKE = 1;
 
@@ -18,7 +19,7 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new VirtSettings());
         }
     }
 }

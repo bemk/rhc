@@ -61,8 +61,12 @@
             this.ClientSize = new System.Drawing.Size(220, 42);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "StartupDialog";
             this.Text = "Form2";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartupDialog_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

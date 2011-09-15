@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WindowsFormsApplication1
 {
-    class VirtBike : Bike
+    public class VirtBike : Bike
     {
         private Int32 HeartBeat = 0;
         private Int32 Speed = 0;

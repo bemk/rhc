@@ -18,16 +18,14 @@ namespace WindowsFormsApplication1
         private BikeData data;
         private String selectedData = "";
         private VirtBike virtbike = new VirtBike();
-        private Point oldPoint;
         private int x = 0;
+        private int y = 0;
+        private List<Point> chart = new List<Point>();
 
         public Client()
         {
             InitializeComponent();
-            this.SetStyle(
-                           ControlStyles.AllPaintingInWmPaint |
-                             ControlStyles.UserPaint |
-                              ControlStyles.DoubleBuffer, true);
+            this.DoubleBuffered = true;
             timer1.Start();
         }
 
@@ -84,27 +82,51 @@ namespace WindowsFormsApplication1
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            
             g.SmoothingMode = SmoothingMode.AntiAlias;
             Pen p = new Pen(panel1.ForeColor, 3);
             p.LineJoin = LineJoin.Bevel;
             SizeF stringsize = g.MeasureString(selectedData,panel1.Font);
             g.DrawString(selectedData,panel1.Font,p.Brush,new Point(panel1.Width-(int)stringsize.Width,0));
+
             if (bike == Program.VIRTUALBIKE)
             {
-                Point newPoint = new Point(x, virtbike.getPower());
-                x++;
-                Console.WriteLine(virtbike.getPower());
-                g.DrawLine(p, oldPoint, newPoint);
-                oldPoint = newPoint;
+                if (comboBox1.Text.Equals("Power"))
+                {
+                    Point newPoint = new Point(x, (int)(virtbike.getPower()/2.2));
+                    x+=2;
+                   // Console.WriteLine(virtbike.getPower());
+                    chart.Add(newPoint);
+                    Point[] points = new Point[100];
+                    int k;
+                    for (int i = 0; i < chart.Count;i++ )
+                    {
+                        try
+                        {
+                            points[i] = (chart.ElementAt(i));
+                            k = i;
+                        }
+                        catch (Exception ex)
+                        {
+                            for (k = 1; k < points.Length-2; k++)
+                            {
+                                points[k - 1] = points[k];
+                            }
+                            points[points.Length - 1] = chart.ElementAt(i);
+                        }
+                    }
+                    g.TranslateTransform(-(points[k].X-panel1.Width+20), 0);
+                    for (int j = 1; j < chart.Count; j++)
+                    {
+                        g.DrawLine(p, points[j - 1], points[j]);
+                    }                    
+                }
             }
-
             else
             {
                 
             }
             base.OnPaint(e);
-            
-            
         }
 
         private void timer1_Tick(object sender, EventArgs e)

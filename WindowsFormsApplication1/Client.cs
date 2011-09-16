@@ -30,7 +30,6 @@ namespace WindowsFormsApplication1
             SetStyle(ControlStyles.DoubleBuffer, true);
             UpdateStyles();
             this.DoubleBuffered = true;
-            Console.WriteLine(this.DoubleBuffered);
             timer1.Start();
         }
 
@@ -94,17 +93,18 @@ namespace WindowsFormsApplication1
             SizeF stringsize = g.MeasureString(selectedData,panel1.Font);
             g.DrawString(selectedData,panel1.Font,p.Brush,new Point(panel1.Width-(int)stringsize.Width,0));
 
-            if (bike is VirtBike)
+            if (true)
             {
+                Console.WriteLine("virtbike");
                 if (comboBox1.Text == "Power")
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(x, (int)-(bike.GetPower()/2.3));
                     x+=2;
-                    if (x > panel1.Width)
-                    {
-                        g.TranslateTransform(-newPoint.X, 0);
-                    }
+                    //if (x > panel1.Width)
+                //    {
+                //        g.TranslateTransform(-newPoint.X, 0);
+               //     }
                     g.DrawLine(p, oldPoint, newPoint);
                     oldPoint = newPoint;
                     //g.TranslateTransform(-(points[k].X-panel1.Width+20), 0);
@@ -112,7 +112,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                
+
             }
             base.OnPaint(e);
         }

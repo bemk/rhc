@@ -7,6 +7,9 @@ namespace WindowsFormsApplication1
 {
     static class Program
     {
+        public const bool DEBUG = true;
+        public const string COM_PORT = "COM3";
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -15,7 +18,7 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Client());
         }
     }
 }

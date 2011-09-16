@@ -11,9 +11,17 @@ namespace WindowsFormsApplication1
 {
     public partial class VirtSettings : Form
     {
-        public VirtSettings()
+        private VirtBike bike;
+
+        public VirtSettings(VirtBike bike)
         {
+            this.bike = bike;
             InitializeComponent();
+        }
+
+        private void heartRateBar_Scroll(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -5,28 +5,27 @@ using System.Text;
 
 namespace WindowsFormsApplication1
 {
-    [Serializable]
     public class BikeData
     {
-        public List<int> HeartRates;
-        public List<int> RPMs;
-        public List<int> Speeds;
-        public List<int> Distances;
-        public List<int> Powers;
-        public List<int> Energies;
-        public List<int> CurrentPowers;
-        public string Time;
+        private int heartRate = 0;
+        private int RPM = 0;
+        private int speed = 0;
+        private int distance = 0;
+        private int power = 0;
+        private int energy = 0;
+        private int currentPower = 0;
+        private string time = "";
 
-        public BikeData()
+        public BikeData(int heartRate, int RPM, int speed, int distance, int power, int energy, int currentPower, string time)
         {
-            HeartRates = new List<int>();
-            RPMs = new List<int>();
-            Speeds = new List<int>();
-            Distances = new List<int>();
-            Powers = new List<int>();
-            Energies = new List<int>();
-            CurrentPowers = new List<int>();
-            Time = "0:00";
+            this.heartRate = heartRate;
+            this.RPM = RPM;
+            this.speed = speed;
+            this.distance = distance;
+            this.power = power;
+            this.energy = energy;
+            this.currentPower = currentPower;
+            this.time = time;
         }
     }
 }

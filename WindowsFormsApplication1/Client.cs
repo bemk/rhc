@@ -13,8 +13,9 @@ namespace WindowsFormsApplication1
 {
     public partial class Client : Form
     {
-        private int bike = -1;
-        private BikeData data;
+        private Bike bike;
+        private List<BikeData> data;
+        private VirtSettings virtSettings;
 
         public Client()
         {
@@ -23,34 +24,38 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            data = new BikeData();
-            setBike(Program.PHYSICALBIKE);
+            data = new List<BikeData>();
+            setBike(new PhysBike(Program.COM_PORT));
+            virtSettings = new VirtSettings(new VirtBike());
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setBike(Program.PHYSICALBIKE);
+            setBike(new PhysBike(Program.COM_PORT));
         }
 
-        private void setBike(int bike)
+        private void setBike(Bike bike)
         {
-            if (bike == Program.PHYSICALBIKE)
+            if (bike is PhysBike)
             {
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
-                bike = Program.PHYSICALBIKE;
+                bike = new PhysBike(Program.COM_PORT);
+                virtSettings.Close();
             }
-            else if (bike == Program.VIRTUALBIKE)
+            else if (bike is VirtBike)
             {
                 virtualToolStripMenuItem.Checked = true;
                 physicalToolStripMenuItem.Checked = false;
-                bike = Program.VIRTUALBIKE;
+                bike = new VirtBike();
+                virtSettings = new VirtSettings((VirtBike)bike);
+                virtSettings.Show();
             }
         }
 
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setBike(Program.VIRTUALBIKE);
+            setBike(new VirtBike());
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

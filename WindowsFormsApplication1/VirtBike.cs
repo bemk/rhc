@@ -7,56 +7,56 @@ namespace WindowsFormsApplication1
 {
     class VirtBike : Bike
     {
-        private Int32 HeartBeat = 0;
-        private Int32 Speed = 0;
-        private Int32 Power = 0;
-        private Int32 CurrentPower = 0;
+        private Int32 heartBeat = 0;
+        private Int32 speed = 0;
+        private Int32 power = 0;
+        private Int32 currentPower = 0;
         private Int32 RPM = 0;
         private Int32 ID = 0;
 
         public VirtBike()
         {
-            this.reset();
+            Reset();
             Random i = new Random();
             this.ID = i.Next();
         }
         ~VirtBike()
         {
         }
-        public void reset() 
+        public void Reset() 
         {
-            this.Power = 65;
-            this.CurrentPower = 0;
+            this.power = 25;
+            this.currentPower = 0;
         }
-        public void setPower(int power) 
+        public void SetPower(int power) 
         {
-            this.Power = power;
+            this.power = power;
         }
-        public int getPower() 
+        public int GetPower() 
         { 
-            return this.Power; 
+            return this.power; 
         }
-        public int getCurrentPower() 
+        public int GetCurrentPower() 
         { 
-            return this.CurrentPower;
+            return this.currentPower;
         }
-        public int getHeartBeat() 
+        public int GetHeartBeat() 
         { 
-            return this.HeartBeat;
+            return this.heartBeat;
         }
-        public int getRPM() 
+        public int GetRPM() 
         { 
             return this.RPM;
         }
-        public decimal getSpeed()
+        public decimal GetSpeed()
         {
-            return this.Speed;
+            return this.speed;
         }
-        public int getBikeID() 
+        public int GetBikeID() 
         { 
             return this.ID;
         }
-        public String getTime() 
+        public String GetTime() 
         { 
             return null;
         }

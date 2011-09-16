@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.timeData = new System.Windows.Forms.Label();
@@ -47,7 +48,7 @@
             this.RPM = new System.Windows.Forms.Label();
             this.heartRate = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tempChartLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -62,6 +63,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -240,7 +242,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.tempChartLabel);
+            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Location = new System.Drawing.Point(234, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(208, 213);
@@ -248,14 +250,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Charts";
             // 
-            // tempChartLabel
+            // panel1
             // 
-            this.tempChartLabel.AutoSize = true;
-            this.tempChartLabel.Location = new System.Drawing.Point(6, 20);
-            this.tempChartLabel.Name = "tempChartLabel";
-            this.tempChartLabel.Size = new System.Drawing.Size(91, 13);
-            this.tempChartLabel.TabIndex = 0;
-            this.tempChartLabel.Text = "No data selected.";
+            this.panel1.AutoScroll = true;
+            this.panel1.ForeColor = System.Drawing.Color.DarkRed;
+            this.panel1.Location = new System.Drawing.Point(6, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(196, 188);
+            this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // groupBox3
             // 
@@ -285,6 +288,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -337,6 +341,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // bikeToolStripMenuItem
             // 
@@ -384,6 +389,12 @@
             this.statusLabel.Size = new System.Drawing.Size(125, 17);
             this.statusLabel.Text = "Waiting for user input.";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -403,7 +414,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
@@ -435,7 +445,6 @@
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.Label RPMData;
         private System.Windows.Forms.Label heartRateData;
-        private System.Windows.Forms.Label tempChartLabel;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
@@ -449,6 +458,8 @@
         private System.Windows.Forms.ToolStripMenuItem bikeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem virtualToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

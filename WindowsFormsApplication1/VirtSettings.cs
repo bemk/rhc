@@ -19,16 +19,6 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-        private void VirtSettings_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            client.setBikeMenuToPhysicalBike();
-        }
-
-        private void heartRateBar_Scroll(object sender, EventArgs e)
-        {
-
-        }
-
         private void heartRateConnected_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -51,7 +41,7 @@ namespace WindowsFormsApplication1
 
         private void powerBar_Scroll(object sender, EventArgs e)
         {
-            bike.setPower(powerBar.Value);
+            bike.SetPower(powerBar.Value);
         }
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
@@ -77,12 +67,6 @@ namespace WindowsFormsApplication1
         private void Seconds_ValueChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void updateTimer_Tick(object sender, EventArgs e)
-        {
-           // Console.WriteLine(virtbike.getPower());
-            client.setVirtBike(virtbike);
         }
 
         private void heartRateBar_Scroll(object sender, EventArgs e)

@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1
     {
        private Bike bike;
         private List<BikeData> data;
-        private VirtSettings virtSettings;
+        private Form virtSettings;
 
         private String selectedData = "";
         private int x = 0;
@@ -64,10 +64,6 @@ namespace WindowsFormsApplication1
                 virtSettings.Show();
             }
         }
-        public void setBikeMenuToPhysicalBike()
-        {
-            setBike(Program.PHYSICALBIKE);
-        }
 
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -101,7 +97,7 @@ namespace WindowsFormsApplication1
                 if (comboBox1.Text.Equals("Power"))
                 {
                     g.TranslateTransform(0, panel1.Height);
-                    Point newPoint = new Point(x, (int)-(virtbike.getPower()/2.3));
+                    Point newPoint = new Point(x, (int)-(bike.GetPower()/2.3));
                     x+=2;
                     if (x > panel1.Width)
                     {
@@ -131,12 +127,6 @@ namespace WindowsFormsApplication1
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(1);
-        }
-
-
-        public void setVirtBike(VirtBike virtbike)
-        {
-            this.virtbike = virtbike;
         }
     }
 }

@@ -54,7 +54,7 @@ namespace WindowsFormsApplication1
                 connection.Close();
         }
 
-        public void reset()
+        public void Reset()
         {
             sendMsg("RS");
         }
@@ -86,7 +86,7 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
-        public int GetHeartBeat()
+        public int GetHeartRate()
         {
             String hb = getMsg("PW");
             if (hb != "ERR")

@@ -21,7 +21,8 @@ namespace WindowsFormsApplication1
 
         private void heartRateBar_Scroll(object sender, EventArgs e)
         {
-
+            bike.SetHeartRate(heartRateBar.Value);
+            Console.WriteLine(heartRateBar.Value);
         }
     }
 }

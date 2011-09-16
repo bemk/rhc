@@ -5,9 +5,9 @@ using System.Text;
 
 namespace WindowsFormsApplication1
 {
-    class VirtBike : Bike
+    public class VirtBike : Bike
     {
-        private Int32 heartBeat = 0;
+        private Int32 heartRate = 0;
         private Int32 speed = 0;
         private Int32 power = 0;
         private Int32 currentPower = 0;
@@ -40,9 +40,14 @@ namespace WindowsFormsApplication1
         { 
             return this.currentPower;
         }
-        public int GetHeartBeat() 
+        public int GetHeartRate() 
         { 
-            return this.heartBeat;
+            return this.heartRate;
+        }
+
+        public void SetHeartRate(int heartRate)
+        {
+            this.heartRate = heartRate;
         }
         public int GetRPM() 
         { 

@@ -8,8 +8,7 @@ namespace WindowsFormsApplication1
     static class Program
     {
         public const bool DEBUG = true;
-        public const int PHYSICALBIKE = 0;
-        public const int VIRTUALBIKE = 1;
+        public const string COM_PORT = "COM3";
 
         /// <summary>
         /// The main entry point for the application.

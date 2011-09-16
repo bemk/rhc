@@ -54,18 +54,18 @@ namespace WindowsFormsApplication1
                 connection.Close();
         }
 
-        public void reset()
+        public void Reset()
         {
             sendMsg("RS");
         }
 
-        public void setPower(int power)
+        public void SetPower(int power)
         {
             sendMsg("CM");
             sendMsg("PW " + power.ToString());
         }
 
-        public int getPower()
+        public int GetPower()
         {
             String pw = getMsg("PW");
             if (pw != "ERR")
@@ -76,7 +76,7 @@ namespace WindowsFormsApplication1
             return -1;
         }
 
-        public int getCurrentPower()
+        public int GetCurrentPower()
         {
             String pw = getMsg("PW");
             if (pw != "ERR")
@@ -86,7 +86,7 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
-        public int getHeartBeat()
+        public int GetHeartRate()
         {
             String hb = getMsg("PW");
             if (hb != "ERR")
@@ -96,7 +96,7 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
-        public decimal getSpeed()
+        public decimal GetSpeed()
         {
             String spd = getMsg("PW");
             if (spd != "ERR")
@@ -106,21 +106,21 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
-        public int getRPM()
+        public int GetRPM()
         {
             String RPM = getMsg("VS");
             if (RPM != "ERR")
                 return Int32.Parse(RPM);
             return -1;
         }
-        public int getBikeID()
+        public int GetBikeID()
         {
             String ID = getMsg("ID");
             if (ID != "ERR") 
                return Int32.Parse(ID);
             return -1;
         }
-        public String getTime()
+        public String GetTime()
         {
             String time = getMsg("TE");
             if (time != "ERR")

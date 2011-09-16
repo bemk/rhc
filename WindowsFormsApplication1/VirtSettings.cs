@@ -11,16 +11,12 @@ namespace WindowsFormsApplication1
 {
     public partial class VirtSettings : Form
     {
-        private Client client;
-        private VirtBike virtbike;
+        private VirtBike bike;
 
-        public VirtSettings(Client client, VirtBike virtbike)
+        public VirtSettings(VirtBike bike)
         {
+            this.bike = bike;
             InitializeComponent();
-            this.client = client;
-            this.virtbike = virtbike;
-            updateTimer.Start();
-            
         }
 
         private void VirtSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -55,7 +51,7 @@ namespace WindowsFormsApplication1
 
         private void powerBar_Scroll(object sender, EventArgs e)
         {
-            virtbike.setPower(powerBar.Value);
+            bike.setPower(powerBar.Value);
         }
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
@@ -87,6 +83,12 @@ namespace WindowsFormsApplication1
         {
            // Console.WriteLine(virtbike.getPower());
             client.setVirtBike(virtbike);
+        }
+
+        private void heartRateBar_Scroll(object sender, EventArgs e)
+        {
+            bike.SetHeartRate(heartRateBar.Value);
+            Console.WriteLine(heartRateBar.Value);
         }
     }
 }

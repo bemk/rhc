@@ -14,10 +14,11 @@ namespace WindowsFormsApplication1
 {
     public partial class Client : Form
     {
-        private int bike = -1;
-        private BikeData data;
+       private Bike bike;
+        private List<BikeData> data;
+        private VirtSettings virtSettings;
+
         private String selectedData = "";
-        private VirtBike virtbike = new VirtBike();
         private int x = 0;
         private Point oldPoint = new Point(0, (int)-(25 / 2.3));
 
@@ -35,28 +36,32 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            data = new BikeData();
-            setBike(Program.PHYSICALBIKE);
+            data = new List<BikeData>();
+            setBike(new PhysBike(Program.COM_PORT));
+            virtSettings = new VirtSettings(new VirtBike());
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setBike(Program.PHYSICALBIKE);
+            setBike(new PhysBike(Program.COM_PORT));
         }
 
-        private void setBike(int bike)
+        private void setBike(Bike bike)
         {
-            if (bike == Program.PHYSICALBIKE)
+            if (bike is PhysBike)
             {
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
-                this.bike = Program.PHYSICALBIKE;
+                bike = new PhysBike(Program.COM_PORT);
+                virtSettings.Close();
             }
-            else if (bike == Program.VIRTUALBIKE)
+            else if (bike is VirtBike)
             {
                 virtualToolStripMenuItem.Checked = true;
                 physicalToolStripMenuItem.Checked = false;
-                this.bike = Program.VIRTUALBIKE;
+                bike = new VirtBike();
+                virtSettings = new VirtSettings((VirtBike)bike);
+                virtSettings.Show();
             }
         }
         public void setBikeMenuToPhysicalBike()
@@ -66,9 +71,7 @@ namespace WindowsFormsApplication1
 
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setBike(Program.VIRTUALBIKE);
-            VirtSettings virtsettings = new VirtSettings(this,virtbike);
-            virtsettings.Visible = true;
+            setBike(new VirtBike());
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -93,7 +96,7 @@ namespace WindowsFormsApplication1
             SizeF stringsize = g.MeasureString(selectedData,panel1.Font);
             g.DrawString(selectedData,panel1.Font,p.Brush,new Point(panel1.Width-(int)stringsize.Width,0));
 
-            if (bike == Program.VIRTUALBIKE)
+            if (bike is VirtBike)
             {
                 if (comboBox1.Text.Equals("Power"))
                 {

@@ -54,7 +54,6 @@
             this.speed = new System.Windows.Forms.Label();
             this.RPM = new System.Windows.Forms.Label();
             this.heartRate = new System.Windows.Forms.Label();
-            this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.distanceNumber)).BeginInit();
@@ -348,12 +347,7 @@
             this.heartRate.TabIndex = 0;
             this.heartRate.Text = "Heart rate:";
             // 
-            // updateTimer
-            // 
-            this.updateTimer.Enabled = true;
-            this.updateTimer.Interval = 50;
-            this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
-            // 
+
             // VirtSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

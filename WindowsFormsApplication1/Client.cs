@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
 {
     public partial class Client : Form
     {
-       private Bike bike;
+        private Bike bike;
         private List<BikeData> data;
         private Form virtSettings;
 
@@ -94,17 +94,29 @@ namespace WindowsFormsApplication1
 
             if (bike is VirtBike)
             {
-                if (comboBox1.Text.Equals("Power"))
+                if (comboBox1.Text == "Power")
                 {
+<<<<<<< HEAD
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(x, (int)-(bike.GetPower()/2.3));
+=======
+                    Point newPoint = new Point(x, (int)(bike.GetPower()/2.2));
+>>>>>>> 4075256886166745a67677df88eb81b03ab7a985
                     x+=2;
                     if (x > panel1.Width)
                     {
                         g.TranslateTransform(-newPoint.X, 0);
                     }
+<<<<<<< HEAD
                     g.DrawLine(p, oldPoint, newPoint);
                     oldPoint = newPoint;
+=======
+                    //g.TranslateTransform(-(points[k].X-panel1.Width+20), 0);
+                    for (int j = 1; j < chart.Count; j++)
+                    {
+                        g.DrawLine(p, points[j - 1], points[j]);
+                    }                    
+>>>>>>> 4075256886166745a67677df88eb81b03ab7a985
                 }
             }
             else
@@ -126,7 +138,11 @@ namespace WindowsFormsApplication1
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             Environment.Exit(1);
+=======
+            Environment.Exit(0);
+>>>>>>> 4075256886166745a67677df88eb81b03ab7a985
         }
     }
 }

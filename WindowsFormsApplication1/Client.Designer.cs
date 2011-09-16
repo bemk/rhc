@@ -63,7 +63,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new WindowsFormsApplication1.DoubleBufferPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -470,7 +470,7 @@
         private System.Windows.Forms.ToolStripMenuItem bikeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem virtualToolStripMenuItem;
-        private WindowsFormsApplication1.DoubleBufferPanel panel1;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox4;
     }

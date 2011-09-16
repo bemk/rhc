@@ -399,6 +399,5 @@
         private System.Windows.Forms.NumericUpDown distanceNumber;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown energyNumber;
-        private System.Windows.Forms.Timer updateTimer;
     }
 }

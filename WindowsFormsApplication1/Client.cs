@@ -45,19 +45,19 @@ namespace WindowsFormsApplication1
             setBike(new PhysBike(Program.COM_PORT));
         }
 
-        private void setBike(Bike bike)
+        private void setBike(Bike b)
         {
-            if (bike is PhysBike)
+            if (b is PhysBike)
             {
+                resetLabels();
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
                 bike = new PhysBike(Program.COM_PORT);
                 virtSettings.Close();
-
-                
             }
-            else if (bike is VirtBike)
+            else if (b is VirtBike)
             {
+                resetLabels();
                 virtualToolStripMenuItem.Checked = true;
                 physicalToolStripMenuItem.Checked = false;
                 bike = new VirtBike();
@@ -119,6 +119,10 @@ namespace WindowsFormsApplication1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (bike is VirtBike)
+            {
+                updateLabels();
+            }
             panel1.Invalidate();
         }
 
@@ -130,6 +134,49 @@ namespace WindowsFormsApplication1
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            updateLabels();
+        }
+
+        private void resetLabels()
+        {
+            heartRateData.Text = "0";
+            RPMData.Text = "0";
+            speedData.Text = "0";
+            distanceData.Text = "0";
+            powerData.Text = "0";
+            energyData.Text = "0";
+            currentPowerData.Text = "0";
+            timeData.Text = "00:00:00";
+        }
+
+        private void updateLabels()
+        {
+            if (bike is VirtBike)
+            {
+                if (((VirtBike)bike).GetHeartRateConnected())
+                {
+                    heartRateData.Text = bike.GetHeartRate().ToString();
+                }
+                else
+                {
+                    heartRateData.Text = "0";
+                }
+            }
+            else if (bike is PhysBike)
+            {
+                heartRateData.Text = bike.GetHeartRate().ToString();
+            }
+            RPMData.Text = bike.GetRPM().ToString();
+            speedData.Text = bike.GetSpeed().ToString();
+            distanceData.Text = bike.GetDistance().ToString();
+            powerData.Text = bike.GetPower().ToString();
+            energyData.Text = bike.GetEnergy().ToString();
+            currentPowerData.Text = bike.GetCurrentPower().ToString();
+            timeData.Text = bike.GetTime();
         }
     }
 }

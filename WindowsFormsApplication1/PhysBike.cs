@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1
             if (connection == null)
                 Console.WriteLine("ERROR: Connection doesn't exist!");
             if (!connection.IsOpen)
-                Console.WriteLine("ERROR: Connection closed!");
+                Console.WriteLine("ERROR: Connection isn't open!");
         }
 
         private void connect(String comport)
@@ -83,6 +83,28 @@ namespace WindowsFormsApplication1
             {
                 String[] split = pw.Split('\t');
                 return Int32.Parse(split[7]);
+            }
+            return -1;
+        }
+
+        public int GetEnergy()
+        {
+            String pw = getMsg("PW");
+            if (pw != "ERR")
+            {
+                String[] split = pw.Split('\t');
+                return Int32.Parse(split[6]); // 5 or 6.
+            }
+            return -1;
+        }
+
+        public int GetDistance()
+        {
+            string pw = getMsg("PW");
+            if(pw != "ERR")
+            {
+                string[] split = pw.Split('\t');
+                return Int32.Parse(split[3]);
             }
             return -1;
         }

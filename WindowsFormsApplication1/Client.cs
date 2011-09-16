@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1
     {
         private Bike bike;
         private List<BikeData> data;
-        private Form virtSettings;
+        private VirtSettings virtSettings;
 
         private String selectedData = "";
         private int x = 0;
@@ -37,8 +37,8 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             data = new List<BikeData>();
-            setBike(new PhysBike(Program.COM_PORT));
-            virtSettings = new VirtSettings(new VirtBike());
+             virtSettings = new VirtSettings(new VirtBike());
+             setBike(new PhysBike(Program.COM_PORT));
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,6 +54,8 @@ namespace WindowsFormsApplication1
                 virtualToolStripMenuItem.Checked = false;
                 bike = new PhysBike(Program.COM_PORT);
                 virtSettings.Close();
+
+                
             }
             else if (bike is VirtBike)
             {
@@ -96,27 +98,16 @@ namespace WindowsFormsApplication1
             {
                 if (comboBox1.Text == "Power")
                 {
-<<<<<<< HEAD
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(x, (int)-(bike.GetPower()/2.3));
-=======
-                    Point newPoint = new Point(x, (int)(bike.GetPower()/2.2));
->>>>>>> 4075256886166745a67677df88eb81b03ab7a985
                     x+=2;
                     if (x > panel1.Width)
                     {
                         g.TranslateTransform(-newPoint.X, 0);
                     }
-<<<<<<< HEAD
                     g.DrawLine(p, oldPoint, newPoint);
                     oldPoint = newPoint;
-=======
                     //g.TranslateTransform(-(points[k].X-panel1.Width+20), 0);
-                    for (int j = 1; j < chart.Count; j++)
-                    {
-                        g.DrawLine(p, points[j - 1], points[j]);
-                    }                    
->>>>>>> 4075256886166745a67677df88eb81b03ab7a985
                 }
             }
             else
@@ -138,11 +129,7 @@ namespace WindowsFormsApplication1
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            Environment.Exit(1);
-=======
             Environment.Exit(0);
->>>>>>> 4075256886166745a67677df88eb81b03ab7a985
         }
     }
 }

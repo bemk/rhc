@@ -19,15 +19,12 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
-<<<<<<< HEAD
-=======
         private void heartRateBar_Scroll(object sender, EventArgs e)
         {
             bike.SetHeartRate(heartRateBar.Value);
             Console.WriteLine(heartRateBar.Value);
         }
 
->>>>>>> 4075256886166745a67677df88eb81b03ab7a985
         private void heartRateConnected_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -77,14 +74,5 @@ namespace WindowsFormsApplication1
         {
 
         }
-<<<<<<< HEAD
-
-        private void heartRateBar_Scroll(object sender, EventArgs e)
-        {
-            bike.SetHeartRate(heartRateBar.Value);
-            Console.WriteLine(heartRateBar.Value);
-        }
-=======
->>>>>>> 4075256886166745a67677df88eb81b03ab7a985
     }
 }

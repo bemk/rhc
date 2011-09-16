@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
 {
     public partial class Client : Form
     {
-       private Bike bike;
+        private Bike bike;
         private List<BikeData> data;
         private VirtSettings virtSettings;
 
@@ -60,10 +60,6 @@ namespace WindowsFormsApplication1
                 virtSettings.Show();
             }
         }
-        public void setBikeMenuToPhysicalBike()
-        {
-            setBike(Program.PHYSICALBIKE);
-        }
 
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -92,11 +88,11 @@ namespace WindowsFormsApplication1
             SizeF stringsize = g.MeasureString(selectedData,panel1.Font);
             g.DrawString(selectedData,panel1.Font,p.Brush,new Point(panel1.Width-(int)stringsize.Width,0));
 
-            if (bike == Program.VIRTUALBIKE)
+            if (bike is VirtBike)
             {
-                if (comboBox1.Text.Equals("Power"))
+                if (comboBox1.Text == "Power")
                 {
-                    Point newPoint = new Point(x, (int)(virtbike.getPower()/2.2));
+                    Point newPoint = new Point(x, (int)(bike.GetPower()/2.2));
                     x+=2;
                    // Console.WriteLine(virtbike.getPower());
                     chart.Add(newPoint);
@@ -118,7 +114,7 @@ namespace WindowsFormsApplication1
                             points[points.Length - 1] = chart.ElementAt(i);
                         }
                     }
-                    g.TranslateTransform(-(points[k].X-panel1.Width+20), 0);
+                    //g.TranslateTransform(-(points[k].X-panel1.Width+20), 0);
                     for (int j = 1; j < chart.Count; j++)
                     {
                         g.DrawLine(p, points[j - 1], points[j]);
@@ -144,13 +140,7 @@ namespace WindowsFormsApplication1
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Environment.Exit(1);
-        }
-
-
-        public void setVirtBike(VirtBike virtbike)
-        {
-            this.virtbike = virtbike;
+            Environment.Exit(0);
         }
     }
 }

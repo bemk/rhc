@@ -19,13 +19,17 @@ namespace WindowsFormsApplication1
         private String selectedData = "";
         private VirtBike virtbike = new VirtBike();
         private int x = 0;
-        private int y = 0;
-        private List<Point> chart = new List<Point>();
+        private Point oldPoint = new Point(0, (int)-(25 / 2.3));
 
         public Client()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            UpdateStyles();
             this.DoubleBuffered = true;
+            Console.WriteLine(this.DoubleBuffered);
             timer1.Start();
         }
 
@@ -83,7 +87,7 @@ namespace WindowsFormsApplication1
         {
             Graphics g = e.Graphics;
             
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.SmoothingMode = SmoothingMode.HighQuality;
             Pen p = new Pen(panel1.ForeColor, 3);
             p.LineJoin = LineJoin.Bevel;
             SizeF stringsize = g.MeasureString(selectedData,panel1.Font);
@@ -93,33 +97,15 @@ namespace WindowsFormsApplication1
             {
                 if (comboBox1.Text.Equals("Power"))
                 {
-                    Point newPoint = new Point(x, (int)(virtbike.getPower()/2.2));
+                    g.TranslateTransform(0, panel1.Height);
+                    Point newPoint = new Point(x, (int)-(virtbike.getPower()/2.3));
                     x+=2;
-                   // Console.WriteLine(virtbike.getPower());
-                    chart.Add(newPoint);
-                    Point[] points = new Point[100];
-                    int k;
-                    for (int i = 0; i < chart.Count;i++ )
+                    if (x > panel1.Width)
                     {
-                        try
-                        {
-                            points[i] = (chart.ElementAt(i));
-                            k = i;
-                        }
-                        catch (Exception ex)
-                        {
-                            for (k = 1; k < points.Length-2; k++)
-                            {
-                                points[k - 1] = points[k];
-                            }
-                            points[points.Length - 1] = chart.ElementAt(i);
-                        }
+                        g.TranslateTransform(-newPoint.X, 0);
                     }
-                    g.TranslateTransform(-(points[k].X-panel1.Width+20), 0);
-                    for (int j = 1; j < chart.Count; j++)
-                    {
-                        g.DrawLine(p, points[j - 1], points[j]);
-                    }                    
+                    g.DrawLine(p, oldPoint, newPoint);
+                    oldPoint = newPoint;
                 }
             }
             else

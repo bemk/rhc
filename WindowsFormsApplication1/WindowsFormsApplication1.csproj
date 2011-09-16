@@ -82,6 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeData.cs" />
+    <Compile Include="DubbleBufferedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="VirtSettings.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -48,7 +48,7 @@
             this.RPM = new System.Windows.Forms.Label();
             this.heartRate = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new WindowsFormsApplication1.DoubleBufferPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -325,21 +325,21 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -392,7 +392,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 50;
+            this.timer1.Interval = 60;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Client
@@ -458,7 +458,7 @@
         private System.Windows.Forms.ToolStripMenuItem bikeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem virtualToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
+        private WindowsFormsApplication1.DoubleBufferPanel panel1;
         private System.Windows.Forms.Timer timer1;
     }
 }

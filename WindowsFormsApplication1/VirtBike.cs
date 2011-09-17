@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1
         private Int32 distance = 0;
         private Int32 energy = 0;
         private string time = "";
-        private bool heartRateConnected = true;
+        private bool heartRateConnected = false; // The checkbox is unchecked by default.
 
         public VirtBike()
         {
@@ -24,6 +24,8 @@ namespace WindowsFormsApplication1
             Random i = new Random();
             this.ID = i.Next();
         }
+
+        // Remove this constructor if possible ,,
         public VirtBike(int heartRate, int rpm, int speed, int distance, int power, int energy, int currentPower, string time)
         {
             this.heartRate = heartRate;
@@ -39,57 +41,102 @@ namespace WindowsFormsApplication1
         ~VirtBike()
         {
         }
+
         public void Reset() 
         {
             this.power = 25;
             this.currentPower = 0;
         }
-        public void SetPower(int power) 
+
+        #region virtual bike setters
+
+        public void SetHeartRateConnected(bool newHeartRateConnected)
         {
-            this.power = power;
+            heartRateConnected = newHeartRateConnected;
         }
-        public int GetPower() 
-        { 
-            return this.power; 
+
+        public void SetPower(int newPower) 
+        {
+            power = newPower;
         }
-        public int GetCurrentPower() 
-        { 
-            return this.currentPower;
+
+        public void SetHeartRate(int newHeartRate)
+        {
+            heartRate = newHeartRate;
         }
-        public int GetHeartRate() 
-        { 
-            return this.heartRate;
+
+        public void SetRPM(int newRPM)
+        {
+            RPM = newRPM;
+        }
+
+        public void SetSpeed(int newSpeed)
+        {
+            speed = newSpeed;
+        }
+
+        public void SetDistance(int newDistance)
+        {
+            distance = newDistance;
+        }
+
+        public void SetEnergy(int newEnergy)
+        {
+            energy = newEnergy;
+        }
+
+        public void SetCurrentPower(int newCurrentPower)
+        {
+            currentPower = newCurrentPower;
+        }
+
+        public void SetTime(string newTime)
+        {
+            time = newTime;
+        }
+
+        #endregion
+
+        #region virtual bike getters
+
+        public int GetPower()
+        {
+            return power;
+        }
+
+        public int GetCurrentPower()
+        {
+            return currentPower;
+        }
+
+        public int GetHeartRate()
+        {
+            return heartRate;
         }
 
         public int GetDistance()
         {
-            return this.distance;
+            return distance;
         }
 
-        public void SetHeartRate(int heartRate)
-        {
-            this.heartRate = heartRate;
-        }
         public int GetRPM() 
         { 
-            return this.RPM;
+            return RPM;
         }
+
         public decimal GetSpeed()
         {
-            return this.speed;
+            return speed;
         }
+
         public int GetBikeID() 
         { 
-            return this.ID;
+            return ID;
         }
+
         public string GetTime()
         {
             return time;
-        }
-
-        public void SetHeartRateConnected(bool b)
-        {
-            heartRateConnected = b;
         }
 
         public bool GetHeartRateConnected()
@@ -102,34 +149,6 @@ namespace WindowsFormsApplication1
             return energy;
         }
 
-        public void SetRPM(int p)
-        {
-            RPM = p;
-        }
-
-        public void SetSpeed(int p)
-        {
-            speed = p;
-        }
-    
-        public void SetDistance(int p)
-        {
-            distance = p;
-        }
-
-        public void SetEnergy(int p)
-        {
-            energy = p;
-        }
-
-        public void SetCurrentPower(int p)
-        {
-            currentPower = p;
-        }
-
-        public void SetTime(string p)
-        {
-            time = p;
-        }
+        #endregion
     }
 }

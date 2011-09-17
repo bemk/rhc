@@ -29,12 +29,18 @@ namespace WindowsFormsApplication1
         private List<Point> pointsEnergy = new List<Point>();
         private List<Point> pointsCurrentPower = new List<Point>();
 
-        private String selectedData = "";
         private Point oldPoint;
         
         public Client()
         {
+            // Please no methods here ;)
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            setBike(new PhysBike(Program.COM_PORT));
+            openFileDialog1.ShowDialog();
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
@@ -42,11 +48,6 @@ namespace WindowsFormsApplication1
             UpdateStyles();
             this.DoubleBuffered = true;
             timer1.Start();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowDialog();
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,7 +70,7 @@ namespace WindowsFormsApplication1
                 //resetLabels();
                 virtualToolStripMenuItem.Checked = true;
                 physicalToolStripMenuItem.Checked = false;
-                virtSettings = new VirtSettings((VirtBike)bike,this);
+                virtSettings = new VirtSettings((VirtBike)bike);
                 virtSettings.Show();
             }
         }
@@ -91,18 +92,22 @@ namespace WindowsFormsApplication1
             saveFileDialog1.ShowDialog();
         }
 
+        // So much sh!t, created a new class Chart for it,
+        // all what's left to do is move it :(
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;            
             g.SmoothingMode = SmoothingMode.HighQuality;
             Pen p = new Pen(panel1.ForeColor, 3);
             p.LineJoin = LineJoin.Bevel;
+            string selectedData = comboBox1.SelectedText;
             SizeF stringsize = g.MeasureString(selectedData,panel1.Font);
             g.DrawString(selectedData,panel1.Font,p.Brush,new Point(panel1.Width-(int)stringsize.Width,0));
 
             if (bike is VirtBike)
             {
-                if (comboBox1.Text == "Heart rate")
+                // Hell no, prefer comboBox1.SelectedIndex in a switchstate :z
+                if (comboBox1.Text == "Heart rate") // index 0
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetHeartRate() / 1.5+5));
@@ -133,7 +138,7 @@ namespace WindowsFormsApplication1
                         }
                     }
                 }
-                if (comboBox1.Text == "RPM")
+                if (comboBox1.Text == "RPM") // index 1
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetRPM() / 1.2+5));
@@ -165,7 +170,7 @@ namespace WindowsFormsApplication1
                     }
                 }
                 
-                if (comboBox1.Text == "Speed")
+                if (comboBox1.Text == "Speed") // index 2
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-((int)bike.GetSpeed() / 4.2+5));
@@ -197,7 +202,7 @@ namespace WindowsFormsApplication1
                     }
                 }
                 
-                if (comboBox1.Text == "Distance")
+                if (comboBox1.Text == "Distance") // index 3
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetDistance() / 600+5));
@@ -229,7 +234,7 @@ namespace WindowsFormsApplication1
                     }
                 }
                 
-                if (comboBox1.Text == "Power")
+                if (comboBox1.Text == "Power") // index 4
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetPower() / 2.4+5));
@@ -261,7 +266,7 @@ namespace WindowsFormsApplication1
                     }
                 }
                 
-                if (comboBox1.Text == "Energy")
+                if (comboBox1.Text == "Energy") // index 5
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetEnergy() / 600 + 5));
@@ -293,7 +298,7 @@ namespace WindowsFormsApplication1
                     }
                 }
                 
-                if (comboBox1.Text == "CurrentPower")
+                if (comboBox1.Text == "CurrentPower") // index 6
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetCurrentPower() / 2.4+5));
@@ -324,6 +329,7 @@ namespace WindowsFormsApplication1
                         }
                     }
                 }
+                // Easy enough huh?
             }
             else
             {
@@ -341,11 +347,6 @@ namespace WindowsFormsApplication1
                 updateLabels();
             }
             panel1.Invalidate();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedData = comboBox1.Text;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

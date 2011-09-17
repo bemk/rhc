@@ -9,6 +9,7 @@ namespace WindowsFormsApplication1
     [Serializable]
     public class BikeData 
     {
+        // WHy the f*ck so many fields!? Clean up pl0x
         public List<Point> pointsHeartrate{get; set;}
         public List<Point> pointsRPM {get; set;}
         public List<Point> pointsSpeed {get; set;}

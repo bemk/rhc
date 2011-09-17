@@ -46,9 +46,8 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            data = new List<BikeData>();
-             virtSettings = new VirtSettings(new VirtBike());
-             setBike(new PhysBike(Program.COM_PORT));
+            openFileDialog1.ShowDialog();
+             
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -84,20 +83,12 @@ namespace WindowsFormsApplication1
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            XmlTextWriter writer = new XmlTextWriter("C:\\testbikedata.xml", Encoding.UTF8);
-            writer.Formatting = Formatting.Indented;
-            writer.WriteStartElement("BikeData");
-            writer.WriteStartElement("HeartRate");
-            writer.WriteString("132");
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-            writer.Close();
+            saveFileDialog1.ShowDialog();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            
+            Graphics g = e.Graphics;            
             g.SmoothingMode = SmoothingMode.HighQuality;
             Pen p = new Pen(panel1.ForeColor, 3);
             p.LineJoin = LineJoin.Bevel;
@@ -395,5 +386,94 @@ namespace WindowsFormsApplication1
             currentPowerData.Text = bike.GetCurrentPower().ToString();
             timeData.Text = bike.GetTime();
         }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            e.Cancel = false;
+            foreach (BikeData bdata in data)
+            {
+                bdata.pointsHeartrate = this.pointsHeartrate;
+                bdata.pointsRPM = this.pointsRPM;
+                bdata.pointsSpeed = this.pointsSpeed;
+                bdata.pointsDistance = this.pointsDistance;
+                bdata.pointsPower = this.pointsPower;
+                bdata.pointsEnergy = this.pointsEnergy;
+                bdata.pointsCurrentPower = this.pointsCurrentPower;
+            }
+            //Console.WriteLine(saveFileDialog1.FileName);
+            ObjectToFile(data,saveFileDialog1.FileName);
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            
+        }
+        /// <summary>
+        /// Function to save object to external file
+        /// </summary>
+        /// <param name="_Object">object to save</param>
+        /// <param name="_FileName">File name to save object</param>
+        /// <returns>Return true if object save successfully, if not return false</returns>
+        public bool ObjectToFile(object _Object, string _FileName)
+        {
+            try
+            {
+                // create new memory stream
+                System.IO.MemoryStream _MemoryStream = new System.IO.MemoryStream();
+
+                // create new BinaryFormatter
+                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter _BinaryFormatter
+                            = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                // Serializes an object, or graph of connected objects, to the given stream.
+                _BinaryFormatter.Serialize(_MemoryStream, _Object);
+
+                // convert stream to byte array
+                byte[] _ByteArray = _MemoryStream.ToArray();
+
+                // Open file for writing
+                System.IO.FileStream _FileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Create, System.IO.FileAccess.Write);
+
+                // Writes a block of bytes to this stream using data from a byte array.
+                _FileStream.Write(_ByteArray.ToArray(), 0, _ByteArray.Length);
+
+                // close file stream
+                _FileStream.Close();
+
+                // cleanup
+                _MemoryStream.Close();
+                _MemoryStream.Dispose();
+                _MemoryStream = null;
+                _ByteArray = null;
+
+                return true;
+            }
+            catch (Exception _Exception)
+            {
+                // Error
+                Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+            }
+
+            // Error occured, return null
+            return false;
+        }
+
+        public bool FileToObject(string _FileName)
+        {
+            try
+            {
+                System.IO.FileStream fileStream = new FileStream(_FileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite);
+                byte[] byteArray;
+
+            }
+            catch (Exception _Exception)
+            {
+                //Error
+                Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+            }
+            //Error occured, return null;
+            return false;
+        }
+        
     }
 }

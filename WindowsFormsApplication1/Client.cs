@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
     public partial class Client : Form
     {
         private Bike bike;
-        private List<BikeData> data;
+        private List<BikeData> data = new List<BikeData>();
         private VirtSettings virtSettings;
 
         //Temp place for the points
@@ -47,7 +47,6 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
-             
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,7 +58,7 @@ namespace WindowsFormsApplication1
         {
             if (b is PhysBike)
             {
-                resetLabels();
+                //resetLabels();
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
                 bike = new PhysBike(Program.COM_PORT);
@@ -67,18 +66,24 @@ namespace WindowsFormsApplication1
             }
             else if (b is VirtBike)
             {
-                resetLabels();
+                //resetLabels();
                 virtualToolStripMenuItem.Checked = true;
                 physicalToolStripMenuItem.Checked = false;
-                bike = new VirtBike();
-                virtSettings = new VirtSettings((VirtBike)bike);
+                virtSettings = new VirtSettings((VirtBike)bike,this);
                 virtSettings.Show();
             }
         }
 
+        public void addBikeDataToList(BikeData bd)
+        {
+            data.Add(bd);
+        }
+
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setBike(new VirtBike());
+            if (bike == null || bike is PhysBike)
+                bike = new VirtBike();
+            setBike(bike);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -101,30 +106,30 @@ namespace WindowsFormsApplication1
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetHeartRate() / 1.5+5));
-                    pointsHeartrate.Add(newPoint);
+                    this.pointsHeartrate.Add(newPoint);
                     GraphicsPath path = new GraphicsPath();
                     path.StartFigure();
-                    for (int i = 0; i < pointsHeartrate.Count; i++)
+                    for (int i = 0; i < this.pointsHeartrate.Count; i++)
                     {
-                        Point point = pointsHeartrate[i];
+                        Point point = this.pointsHeartrate[i];
                         point.X -= 4;
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsHeartrate[i] = point;
+                        this.pointsHeartrate[i] = point;
                     }
-                    for (int j = pointsHeartrate.Count - 1; j > 0; j--)
+                    for (int j = this.pointsHeartrate.Count - 1; j > 0; j--)
                     {
-                        Point point = pointsHeartrate[j];
+                        Point point = this.pointsHeartrate[j];
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsHeartrate[j] = point;
+                        this.pointsHeartrate[j] = point;
                     }
                     g.DrawPath(p, path);
-                    for (int k = 0; k < pointsHeartrate.Count; k++)
+                    for (int k = 0; k < this.pointsHeartrate.Count; k++)
                     {
-                        if (pointsHeartrate[k].X < 0)
+                        if (this.pointsHeartrate[k].X < 0)
                         {
-                            pointsHeartrate.RemoveAt(k);
+                            this.pointsHeartrate.RemoveAt(k);
                         }
                     }
                 }
@@ -132,186 +137,190 @@ namespace WindowsFormsApplication1
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetRPM() / 1.2+5));
-                    pointsRPM.Add(newPoint);
+                    this.pointsRPM.Add(newPoint);
                     GraphicsPath path = new GraphicsPath();
                     path.StartFigure();
-                    for (int i = 0; i < pointsRPM.Count; i++)
+                    for (int i = 0; i < this.pointsRPM.Count; i++)
                     {
-                        Point point = pointsRPM[i];
+                        Point point = this.pointsRPM[i];
                         point.X -= 4;
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsRPM[i] = point;
+                        this.pointsRPM[i] = point;
                     }
-                    for (int j = pointsRPM.Count - 1; j > 0; j--)
+                    for (int j = this.pointsRPM.Count - 1; j > 0; j--)
                     {
-                        Point point = pointsRPM[j];
+                        Point point = this.pointsRPM[j];
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsRPM[j] = point;
+                        this.pointsRPM[j] = point;
                     }
                     g.DrawPath(p, path);
-                    for (int k = 0; k < pointsRPM.Count; k++)
+                    for (int k = 0; k < this.pointsRPM.Count; k++)
                     {
-                        if (pointsRPM[k].X < 0)
+                        if (this.pointsRPM[k].X < 0)
                         {
-                            pointsRPM.RemoveAt(k);
+                            this.pointsRPM.RemoveAt(k);
                         }
                     }
                 }
+                
                 if (comboBox1.Text == "Speed")
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-((int)bike.GetSpeed() / 4.2+5));
-                    pointsSpeed.Add(newPoint);
+                    this.pointsSpeed.Add(newPoint);
                     GraphicsPath path = new GraphicsPath();
                     path.StartFigure();
-                    for (int i = 0; i < pointsSpeed.Count; i++)
+                    for (int i = 0; i < this.pointsSpeed.Count; i++)
                     {
-                        Point point = pointsSpeed[i];
+                        Point point = this.pointsSpeed[i];
                         point.X -= 4;
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsSpeed[i] = point;
+                        this.pointsSpeed[i] = point;
                     }
-                    for (int j = pointsSpeed.Count - 1; j > 0; j--)
+                    for (int j = this.pointsSpeed.Count - 1; j > 0; j--)
                     {
-                        Point point = pointsSpeed[j];
+                        Point point = this.pointsSpeed[j];
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsSpeed[j] = point;
+                        this.pointsSpeed[j] = point;
                     }
                     g.DrawPath(p, path);
-                    for (int k = 0; k < pointsSpeed.Count; k++)
+                    for (int k = 0; k < this.pointsSpeed.Count; k++)
                     {
-                        if (pointsSpeed[k].X < 0)
+                        if (this.pointsSpeed[k].X < 0)
                         {
-                            pointsSpeed.RemoveAt(k);
+                            this.pointsSpeed.RemoveAt(k);
                         }
                     }
                 }
+                
                 if (comboBox1.Text == "Distance")
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetDistance() / 600+5));
-                    pointsDistance.Add(newPoint);
+                    this.pointsDistance.Add(newPoint);
                     GraphicsPath path = new GraphicsPath();
                     path.StartFigure();
-                    for (int i = 0; i < pointsDistance.Count; i++)
+                    for (int i = 0; i < this.pointsDistance.Count; i++)
                     {
-                        Point point = pointsDistance[i];
+                        Point point = this.pointsDistance[i];
                         point.X -= 4;
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsDistance[i] = point;
+                        this.pointsDistance[i] = point;
                     }
-                    for (int j = pointsDistance.Count - 1; j > 0; j--)
+                    for (int j = this.pointsDistance.Count - 1; j > 0; j--)
                     {
-                        Point point = pointsDistance[j];
+                        Point point = this.pointsDistance[j];
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsDistance[j] = point;
+                        this.pointsDistance[j] = point;
                     }
                     g.DrawPath(p, path);
-                    for (int k = 0; k < pointsDistance.Count; k++)
+                    for (int k = 0; k < this.pointsDistance.Count; k++)
                     {
-                        if (pointsDistance[k].X < 0)
+                        if (this.pointsDistance[k].X < 0)
                         {
-                            pointsDistance.RemoveAt(k);
+                            this.pointsDistance.RemoveAt(k);
                         }
                     }
                 }
+                
                 if (comboBox1.Text == "Power")
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetPower() / 2.4+5));
-                    pointsPower.Add(newPoint);
+                    this.pointsPower.Add(newPoint);
                     GraphicsPath path = new GraphicsPath();
                     path.StartFigure();
-                    for (int i = 0; i < pointsPower.Count; i++)
+                    for (int i = 0; i < this.pointsPower.Count; i++)
                     {
-                        Point point = pointsPower[i];
+                        Point point = this.pointsPower[i];
                         point.X -= 4;
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsPower[i] = point;
+                        this.pointsPower[i] = point;
                     }
-                    for (int j = pointsPower.Count - 1; j > 0; j--)
+                    for (int j = this.pointsPower.Count - 1; j > 0; j--)
                     {
-                        Point point = pointsPower[j];
+                        Point point = this.pointsPower[j];
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsPower[j] = point;
+                        this.pointsPower[j] = point;
                     }
                     g.DrawPath(p, path);
-                    for (int k = 0; k < pointsPower.Count; k++)
+                    for (int k = 0; k < this.pointsPower.Count; k++)
                     {
-                        if (pointsPower[k].X < 0)
+                        if (this.pointsPower[k].X < 0)
                         {
-                            pointsPower.RemoveAt(k);
+                            this.pointsPower.RemoveAt(k);
                         }
                     }
                 }
+                
                 if (comboBox1.Text == "Energy")
                 {
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetEnergy() / 600 + 5));
-                    pointsEnergy.Add(newPoint);
+                    this.pointsEnergy.Add(newPoint);
                     GraphicsPath path = new GraphicsPath();
                     path.StartFigure();
-                    for (int i = 0; i < pointsEnergy.Count; i++)
+                    for (int i = 0; i < this.pointsEnergy.Count; i++)
                     {
-                        Point point = pointsEnergy[i];
+                        Point point = this.pointsEnergy[i];
                         point.X -= 4;
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsEnergy[i] = point;
+                        this.pointsEnergy[i] = point;
                     }
-                    for (int j = pointsEnergy.Count - 1; j > 0; j--)
+                    for (int j = this.pointsEnergy.Count - 1; j > 0; j--)
                     {
-                        Point point = pointsEnergy[j];
+                        Point point = this.pointsEnergy[j];
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsEnergy[j] = point;
+                        this.pointsEnergy[j] = point;
                     }
                     g.DrawPath(p, path);
-                    for (int k = 0; k < pointsEnergy.Count; k++)
+                    for (int k = 0; k < this.pointsEnergy.Count; k++)
                     {
-                        if (pointsEnergy[k].X < 0)
+                        if (this.pointsEnergy[k].X < 0)
                         {
-                            pointsEnergy.RemoveAt(k);
+                            this.pointsEnergy.RemoveAt(k);
                         }
                     }
                 }
+                
                 if (comboBox1.Text == "CurrentPower")
                 {
-                    Console.WriteLine("Current Power");
                     g.TranslateTransform(0, panel1.Height);
                     Point newPoint = new Point(panel1.Width, (int)-(bike.GetCurrentPower() / 2.4+5));
-                    pointsCurrentPower.Add(newPoint);
+                    this.pointsCurrentPower.Add(newPoint);
                     GraphicsPath path = new GraphicsPath();
                     path.StartFigure();
-                    for (int i = 0; i < pointsCurrentPower.Count; i++)
+                    for (int i = 0; i < this.pointsCurrentPower.Count; i++)
                     {
-                        Point point = pointsCurrentPower[i];
+                        Point point = this.pointsCurrentPower[i];
                         point.X -= 4;
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsCurrentPower[i] = point;
+                        this.pointsCurrentPower[i] = point;
                     }
-                    for (int j = pointsCurrentPower.Count - 1; j > 0; j--)
+                    for (int j = this.pointsCurrentPower.Count - 1; j > 0; j--)
                     {
-                        Point point = pointsCurrentPower[j];
+                        Point point = this.pointsCurrentPower[j];
                         path.AddLine(oldPoint, point);
                         oldPoint = point;
-                        pointsCurrentPower[j] = point;
+                        this.pointsCurrentPower[j] = point;
                     }
                     g.DrawPath(p, path);
-                    for (int k = 0; k < pointsCurrentPower.Count; k++)
+                    for (int k = 0; k < this.pointsCurrentPower.Count; k++)
                     {
-                        if (pointsCurrentPower[k].X < 0)
+                        if (this.pointsCurrentPower[k].X < 0)
                         {
-                            pointsCurrentPower.RemoveAt(k);
+                            this.pointsCurrentPower.RemoveAt(k);
                         }
                     }
                 }
@@ -367,7 +376,7 @@ namespace WindowsFormsApplication1
             {
                 if (((VirtBike)bike).GetHeartRateConnected())
                 {
-                    heartRateData.Text = bike.GetHeartRate().ToString();
+                    heartRateData.Text = data.ElementAt(data.Count - 1).heartRate.ToString();
                 }
                 else
                 {
@@ -376,37 +385,34 @@ namespace WindowsFormsApplication1
             }
             else if (bike is PhysBike)
             {
-                heartRateData.Text = bike.GetHeartRate().ToString();
+                heartRateData.Text = data.ElementAt(data.Count-1).heartRate.ToString();
             }
-            RPMData.Text = bike.GetRPM().ToString();
-            speedData.Text = bike.GetSpeed().ToString();
-            distanceData.Text = bike.GetDistance().ToString();
-            powerData.Text = bike.GetPower().ToString();
-            energyData.Text = bike.GetEnergy().ToString();
-            currentPowerData.Text = bike.GetCurrentPower().ToString();
-            timeData.Text = bike.GetTime();
+            RPMData.Text = data.ElementAt(data.Count - 1).RPM.ToString();
+            speedData.Text = data.ElementAt(data.Count - 1).speed.ToString();
+            distanceData.Text = data.ElementAt(data.Count - 1).distance.ToString();
+            powerData.Text = data.ElementAt(data.Count - 1).power.ToString();
+            energyData.Text = data.ElementAt(data.Count - 1).energy.ToString();
+            currentPowerData.Text = data.ElementAt(data.Count - 1).currentPower.ToString();
+            timeData.Text = data.ElementAt(data.Count - 1).time;
+            data.ElementAt(data.Count - 1).pointsHeartrate = this.pointsHeartrate;
+            data.ElementAt(data.Count - 1).pointsRPM = this.pointsRPM;
+            data.ElementAt(data.Count - 1).pointsSpeed = this.pointsSpeed;
+            data.ElementAt(data.Count - 1).pointsDistance = this.pointsDistance;
+            data.ElementAt(data.Count - 1).pointsPower = this.pointsPower;
+            data.ElementAt(data.Count - 1).pointsEnergy = this.pointsEnergy;
+            data.ElementAt(data.Count - 1).pointsCurrentPower = this.pointsCurrentPower;
         }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             e.Cancel = false;
-            foreach (BikeData bdata in data)
-            {
-                bdata.pointsHeartrate = this.pointsHeartrate;
-                bdata.pointsRPM = this.pointsRPM;
-                bdata.pointsSpeed = this.pointsSpeed;
-                bdata.pointsDistance = this.pointsDistance;
-                bdata.pointsPower = this.pointsPower;
-                bdata.pointsEnergy = this.pointsEnergy;
-                bdata.pointsCurrentPower = this.pointsCurrentPower;
-            }
             //Console.WriteLine(saveFileDialog1.FileName);
             ObjectToFile(data,saveFileDialog1.FileName);
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            
+            FileToObject(openFileDialog1.FileName);
         }
         /// <summary>
         /// Function to save object to external file
@@ -463,8 +469,15 @@ namespace WindowsFormsApplication1
             try
             {
                 System.IO.FileStream fileStream = new FileStream(_FileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite);
-                byte[] byteArray;
-
+                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter _BinaryFormatter
+                            = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                this.data = (List<BikeData>)_BinaryFormatter.Deserialize(fileStream);
+                Console.WriteLine(data.Count);
+                Console.WriteLine("?");
+                updateLabels();
+                updatePoints();
+                updateBike();
+                return true;
             }
             catch (Exception _Exception)
             {
@@ -474,6 +487,22 @@ namespace WindowsFormsApplication1
             //Error occured, return null;
             return false;
         }
-        
+
+        private void updatePoints()
+        {
+            this.pointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
+            this.pointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
+            this.pointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
+            this.pointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
+            this.pointsPower = data.ElementAt(data.Count - 1).pointsPower;
+            this.pointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
+            this.pointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
+            panel1.Invalidate();
+        }
+
+        private void updateBike()
+        {
+            this.bike = new VirtBike(data.ElementAt(data.Count - 1).heartRate, data.ElementAt(data.Count - 1).RPM, data.ElementAt(data.Count - 1).speed, data.ElementAt(data.Count - 1).distance, data.ElementAt(data.Count - 1).power, data.ElementAt(data.Count - 1).energy, data.ElementAt(data.Count - 1).currentPower, data.ElementAt(data.Count - 1).time);
+        }
     }
 }

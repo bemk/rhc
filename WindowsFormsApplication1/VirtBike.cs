@@ -24,6 +24,18 @@ namespace WindowsFormsApplication1
             Random i = new Random();
             this.ID = i.Next();
         }
+        public VirtBike(int heartRate, int rpm, int speed, int distance, int power, int energy, int currentPower, string time)
+        {
+            this.heartRate = heartRate;
+            this.RPM = rpm;
+            this.speed = speed;
+            this.distance = distance;
+            this.power = power;
+            this.energy = energy;
+            this.currentPower = currentPower;
+            Random i = new Random();
+            this.ID = i.Next();
+        }
         ~VirtBike()
         {
         }

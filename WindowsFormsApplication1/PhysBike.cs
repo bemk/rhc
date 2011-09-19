@@ -17,23 +17,27 @@ namespace WindowsFormsApplication1
 
         private void sendMsg(String Msg)
         {
-            if (connection == null)
+            try
             {
-                Console.WriteLine("ERROR: Connection doesn't exist!");
+                connection.WriteLine(Msg);
             }
-            if (!connection.IsOpen)
-                Console.WriteLine("ERROR: Connection closed!");
-            connection.WriteLine(Msg);
+            catch (Exception e)
+            {
+                if (Program.DEBUG) Console.WriteLine("ERROR: Sending message to bike failed, " + e.Message);
+            }
         }
 
         private String getMsg(String Msg)
         {
-            if (connection == null)
-                Console.WriteLine("ERROR: Connection doesn't exist!");
-            if (!connection.IsOpen)
-                Console.WriteLine("ERROR: Connection closed!");
-
-            connection.WriteLine(Msg);
+            try
+            {
+                connection.WriteLine(Msg);
+            }
+            catch (Exception e)
+            {
+                if (Program.DEBUG) Console.WriteLine("ERROR: Getting message from bike failed, " + e.Message);
+                return null;
+            }
             return (connection.ReadLine());
         }
 
@@ -45,9 +49,9 @@ namespace WindowsFormsApplication1
                 if (!connection.IsOpen)
                     connection.Open();
             }
-            catch
+            catch (Exception e)
             {
-
+                if(Program.DEBUG) Console.WriteLine("ERROR: Connecting to bike failed, " + e.Message);
             }
         }
         public PhysBike(String comport)
@@ -60,18 +64,18 @@ namespace WindowsFormsApplication1
                 connection.Close();
         }
 
-        public void reset()
+        public void Reset()
         {
             sendMsg("RS");
         }
 
-        public void setPower(int power)
+        public void SetPower(int power)
         {
             sendMsg("CM");
             sendMsg("PW " + power.ToString());
         }
 
-        public int getPower()
+        public int GetPower()
         {
             String pw = getMsg("PW");
             if (pw != "ERR")
@@ -82,7 +86,7 @@ namespace WindowsFormsApplication1
             return -1;
         }
 
-        public int getCurrentPower()
+        public int GetCurrentPower()
         {
             String pw = getMsg("PW");
             if (pw != "ERR")
@@ -92,7 +96,29 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
-        public int getHeartBeat()
+
+        public int GetEnergy()
+        {
+            String pw = getMsg("PW");
+            if (pw != "ERR")
+            {
+                String[] split = pw.Split('\t');
+                return Int32.Parse(split[6]); // 5 or 6.
+            }
+            return -1;
+        }
+
+        public int GetDistance()
+        {
+            string pw = getMsg("PW");
+            if(pw != "ERR")
+            {
+                string[] split = pw.Split('\t');
+                return Int32.Parse(split[3]);
+            }
+            return -1;
+        }
+        public int GetHeartRate()
         {
             String hb = getMsg("PW");
             if (hb != "ERR")
@@ -102,7 +128,7 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
-        public decimal getSpeed()
+        public decimal GetSpeed()
         {
             String spd = getMsg("PW");
             if (spd != "ERR")
@@ -112,21 +138,21 @@ namespace WindowsFormsApplication1
             }
             return -1;
         }
-        public int getRPM()
+        public int GetRPM()
         {
             String RPM = getMsg("VS");
             if (RPM != "ERR")
                 return Int32.Parse(RPM);
             return -1;
         }
-        public int getBikeID()
+        public int GetBikeID()
         {
             String ID = getMsg("ID");
             if (ID != "ERR") 
                return Int32.Parse(ID);
             return -1;
         }
-        public String getTime()
+        public String GetTime()
         {
             String time = getMsg("TE");
             if (time != "ERR")

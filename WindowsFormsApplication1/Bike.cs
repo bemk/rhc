@@ -5,16 +5,18 @@ using System.Text;
 
 namespace WindowsFormsApplication1
 {
-    interface Bike
+    public interface Bike
     {
-        void reset();
-        void setPower(int power); // Set maximum power in Watt
-        int getPower(); // Maximum power in Watt
-        int getCurrentPower(); // Current power in Watt
-        int getHeartBeat(); // Heartbeat in beats per minute
-        int getRPM(); // Rotations of the wheel per minute
-        decimal getSpeed();
-        int getBikeID();
-        String getTime();
+        void Reset();
+        void SetPower(int power); // Set maximum power in Watt
+        int GetDistance(); // Distance in meters
+        int GetPower(); // Maximum power in Watt
+        int GetCurrentPower(); // Current power in Watt
+        int GetHeartRate(); // Heartbeat in beats per minute
+        int GetRPM(); // Rotations of the wheel per minute (rounds per minute)
+        int GetEnergy(); // Energy in KiloJoule
+        decimal GetSpeed(); // (Speed / 10) is in km/h
+        int GetBikeID();
+        string GetTime();
     }
 }

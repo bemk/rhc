@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.energyNumber = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.distanceNumber = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.seconds = new System.Windows.Forms.NumericUpDown();
+            this.minutes = new System.Windows.Forms.NumericUpDown();
+            this.hour = new System.Windows.Forms.NumericUpDown();
             this.currentPowerBar = new System.Windows.Forms.TrackBar();
             this.powerBar = new System.Windows.Forms.TrackBar();
             this.speedBar = new System.Windows.Forms.TrackBar();
@@ -51,33 +54,32 @@
             this.speed = new System.Windows.Forms.Label();
             this.RPM = new System.Windows.Forms.Label();
             this.heartRate = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.energyNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.distanceNumber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seconds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPowerBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RPMBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heartRateBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.numericUpDown4);
+            this.groupBox1.Controls.Add(this.energyNumber);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.distanceNumber);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.numericUpDown3);
-            this.groupBox1.Controls.Add(this.numericUpDown2);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.seconds);
+            this.groupBox1.Controls.Add(this.minutes);
+            this.groupBox1.Controls.Add(this.hour);
             this.groupBox1.Controls.Add(this.currentPowerBar);
             this.groupBox1.Controls.Add(this.powerBar);
             this.groupBox1.Controls.Add(this.speedBar);
@@ -99,6 +101,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(297, 267);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 13);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "kj";
+            // 
+            // energyNumber
+            // 
+            this.energyNumber.Location = new System.Drawing.Point(87, 265);
+            this.energyNumber.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.energyNumber.Name = "energyNumber";
+            this.energyNumber.Size = new System.Drawing.Size(204, 20);
+            this.energyNumber.TabIndex = 32;
+            this.energyNumber.ValueChanged += new System.EventHandler(this.energyNumber_ValueChanged);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -119,6 +143,7 @@
             this.distanceNumber.Name = "distanceNumber";
             this.distanceNumber.Size = new System.Drawing.Size(204, 20);
             this.distanceNumber.TabIndex = 30;
+            this.distanceNumber.ValueChanged += new System.EventHandler(this.distanceNumber_ValueChanged);
             // 
             // label3
             // 
@@ -147,41 +172,44 @@
             this.label1.TabIndex = 27;
             this.label1.Text = "h";
             // 
-            // numericUpDown3
+            // seconds
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(219, 361);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.seconds.Location = new System.Drawing.Point(219, 361);
+            this.seconds.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown3.TabIndex = 26;
+            this.seconds.Name = "seconds";
+            this.seconds.Size = new System.Drawing.Size(41, 20);
+            this.seconds.TabIndex = 26;
+            this.seconds.ValueChanged += new System.EventHandler(this.Seconds_ValueChanged);
             // 
-            // numericUpDown2
+            // minutes
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(149, 361);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.minutes.Location = new System.Drawing.Point(149, 361);
+            this.minutes.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(43, 20);
-            this.numericUpDown2.TabIndex = 25;
+            this.minutes.Name = "minutes";
+            this.minutes.Size = new System.Drawing.Size(43, 20);
+            this.minutes.TabIndex = 25;
+            this.minutes.ValueChanged += new System.EventHandler(this.Minutes_ValueChanged);
             // 
-            // numericUpDown1
+            // hour
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(87, 361);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.hour.Location = new System.Drawing.Point(87, 361);
+            this.hour.Maximum = new decimal(new int[] {
             99,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(37, 20);
-            this.numericUpDown1.TabIndex = 24;
+            this.hour.Name = "hour";
+            this.hour.Size = new System.Drawing.Size(37, 20);
+            this.hour.TabIndex = 24;
+            this.hour.ValueChanged += new System.EventHandler(this.Hour_ValueChanged);
             // 
             // currentPowerBar
             // 
@@ -193,6 +221,7 @@
             this.currentPowerBar.TabIndex = 23;
             this.currentPowerBar.TickFrequency = 25;
             this.currentPowerBar.Value = 25;
+            this.currentPowerBar.Scroll += new System.EventHandler(this.currentPowerBar_Scroll);
             // 
             // powerBar
             // 
@@ -201,9 +230,11 @@
             this.powerBar.Minimum = 25;
             this.powerBar.Name = "powerBar";
             this.powerBar.Size = new System.Drawing.Size(227, 45);
+            this.powerBar.SmallChange = 5;
             this.powerBar.TabIndex = 21;
             this.powerBar.TickFrequency = 25;
             this.powerBar.Value = 25;
+            this.powerBar.ValueChanged += new System.EventHandler(this.powerBar_Scroll);
             // 
             // speedBar
             // 
@@ -213,6 +244,7 @@
             this.speedBar.Size = new System.Drawing.Size(227, 45);
             this.speedBar.TabIndex = 19;
             this.speedBar.TickFrequency = 100;
+            this.speedBar.Scroll += new System.EventHandler(this.speedBar_Scroll);
             // 
             // RPMBar
             // 
@@ -222,6 +254,7 @@
             this.RPMBar.Size = new System.Drawing.Size(227, 45);
             this.RPMBar.TabIndex = 18;
             this.RPMBar.TickFrequency = 25;
+            this.RPMBar.Scroll += new System.EventHandler(this.RPMBar_Scroll);
             // 
             // heartRateBar
             // 
@@ -231,6 +264,7 @@
             this.heartRateBar.Size = new System.Drawing.Size(227, 45);
             this.heartRateBar.TabIndex = 17;
             this.heartRateBar.TickFrequency = 25;
+            this.heartRateBar.Scroll += new System.EventHandler(this.heartRateBar_Scroll);
             // 
             // heartRateConnected
             // 
@@ -241,6 +275,7 @@
             this.heartRateConnected.TabIndex = 16;
             this.heartRateConnected.Text = "Connected";
             this.heartRateConnected.UseVisualStyleBackColor = true;
+            this.heartRateConnected.CheckedChanged += new System.EventHandler(this.heartRateConnected_CheckedChanged);
             // 
             // time
             // 
@@ -314,26 +349,11 @@
             this.heartRate.TabIndex = 0;
             this.heartRate.Text = "Heart rate:";
             // 
-            // numericUpDown4
+            // timer1
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(87, 265);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(204, 20);
-            this.numericUpDown4.TabIndex = 32;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(297, 267);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(15, 13);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "kj";
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // VirtSettings
             // 
@@ -346,16 +366,16 @@
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.energyNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.distanceNumber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seconds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPowerBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.speedBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RPMBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.heartRateBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -377,15 +397,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown seconds;
+        private System.Windows.Forms.NumericUpDown minutes;
+        private System.Windows.Forms.NumericUpDown hour;
         private System.Windows.Forms.TrackBar currentPowerBar;
         private System.Windows.Forms.TrackBar powerBar;
         private System.Windows.Forms.TrackBar speedBar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown distanceNumber;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown energyNumber;
+        private System.Windows.Forms.Timer timer1;
     }
 }

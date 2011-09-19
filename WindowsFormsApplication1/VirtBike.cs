@@ -5,60 +5,150 @@ using System.Text;
 
 namespace WindowsFormsApplication1
 {
-    class VirtBike : Bike
+    public class VirtBike : Bike
     {
-        private Int32 HeartBeat = 0;
-        private Int32 Speed = 0;
-        private Int32 Power = 0;
-        private Int32 CurrentPower = 0;
+        private Int32 heartRate = 0;
+        private Int32 speed = 0;
+        private Int32 power = 0;
+        private Int32 currentPower = 0;
         private Int32 RPM = 0;
         private Int32 ID = 0;
+        private Int32 distance = 0;
+        private Int32 energy = 0;
+        private string time = "";
+        private bool heartRateConnected = false; // The checkbox is unchecked by default.
 
         public VirtBike()
         {
-            this.reset();
+            Reset();
+            Random i = new Random();
+            this.ID = i.Next();
+        }
+
+        // Remove this constructor if possible ,,
+        public VirtBike(int heartRate, int rpm, int speed, int distance, int power, int energy, int currentPower, string time)
+        {
+            this.heartRate = heartRate;
+            this.RPM = rpm;
+            this.speed = speed;
+            this.distance = distance;
+            this.power = power;
+            this.energy = energy;
+            this.currentPower = currentPower;
             Random i = new Random();
             this.ID = i.Next();
         }
         ~VirtBike()
         {
         }
-        public void reset() 
+
+        public void Reset() 
         {
-            this.Power = 65;
-            this.CurrentPower = 65;
+            this.power = 25;
+            this.currentPower = 0;
         }
-        public void setPower(int power) 
+
+        #region virtual bike setters
+
+        public void SetHeartRateConnected(bool newHeartRateConnected)
         {
-            this.Power = power;
+            heartRateConnected = newHeartRateConnected;
         }
-        public int getPower() 
-        { 
-            return this.Power; 
-        }
-        public int getCurrentPower() 
-        { 
-            return this.CurrentPower;
-        }
-        public int getHeartBeat() 
-        { 
-            return this.HeartBeat;
-        }
-        public int getRPM() 
-        { 
-            return this.RPM;
-        }
-        public decimal getSpeed()
+
+        public void SetPower(int newPower) 
         {
-            return this.Speed;
+            power = newPower;
         }
-        public int getBikeID() 
+
+        public void SetHeartRate(int newHeartRate)
+        {
+            heartRate = newHeartRate;
+        }
+
+        public void SetRPM(int newRPM)
+        {
+            RPM = newRPM;
+        }
+
+        public void SetSpeed(int newSpeed)
+        {
+            speed = newSpeed;
+        }
+
+        public void SetDistance(int newDistance)
+        {
+            distance = newDistance;
+        }
+
+        public void SetEnergy(int newEnergy)
+        {
+            energy = newEnergy;
+        }
+
+        public void SetCurrentPower(int newCurrentPower)
+        {
+            currentPower = newCurrentPower;
+        }
+
+        public void SetTime(string newTime)
+        {
+            time = newTime;
+        }
+
+        #endregion
+
+        #region virtual bike getters
+
+        public int GetPower()
+        {
+            return power;
+        }
+
+        public int GetCurrentPower()
+        {
+            return currentPower;
+        }
+
+        public int GetHeartRate()
+        {
+            return heartRate;
+        }
+
+        public int GetDistance()
+        {
+            return distance;
+        }
+
+        public int GetRPM() 
         { 
-            return this.ID;
+            return RPM;
         }
-        public String getTime() 
+
+        public decimal GetSpeed()
+        {
+            return speed;
+        }
+
+        public int GetBikeID() 
         { 
-            return null;
+            return ID;
         }
+
+        public string GetTime()
+        {
+            return time;
+        }
+
+        public bool GetHeartRateConnected()
+        {
+            return heartRateConnected;
+        }
+
+        public int GetEnergy()
+        {
+            return energy;
+        }
+
+        #endregion
     }
 }

@@ -82,7 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeData.cs" />
-    <Compile Include="Chart.cs" />
+    <Compile Include="Chart.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DubbleBufferedPanel.cs">
       <SubType>Component</SubType>
     </Compile>

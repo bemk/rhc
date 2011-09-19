@@ -18,8 +18,6 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             bike = b;
-            this.c = c;
-            timer1.Start();
         }
 
         private void heartRateBar_Scroll(object sender, EventArgs e)
@@ -77,15 +75,15 @@ namespace WindowsFormsApplication1
             bike.SetTime(hour.Value + ":" + minutes.Value + ":" + seconds.Value);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            int heartrate;
-            if(!bike.GetHeartRateConnected())
-                heartrate = 0;
-            else
-                heartrate = bike.GetHeartRate();
-            BikeData bikedata = new BikeData(heartrate, bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
-            c.addBikeDataToList(bikedata);
-        }
+       // private void timer1_Tick(object sender, EventArgs e)
+     //   {
+       //    int heartrate;
+         //   if(!bike.GetHeartRateConnected())
+         //       heartrate = 0;
+        //    else
+          //      heartrate = bike.GetHeartRate();
+          //  BikeData bikedata = new BikeData(heartrate, bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
+            //c.addBikeDataToList(bikedata);
+       // }
     }
 }

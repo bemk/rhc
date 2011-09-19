@@ -2,7 +2,6 @@
 *.cache
 *.suo
 *.sln
-/RHC/RHC/obj/x86/Debug
 /RHC/RHC/obj
 /RHC/RHC/Properties
-/RHC/RHC/obj
+/RHC/RHC/dbg/

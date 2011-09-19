@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             bike = b;
             this.c = c;
-            timer1.Start();
+            //timer1.Start();
         }
 
         private void heartRateBar_Scroll(object sender, EventArgs e)

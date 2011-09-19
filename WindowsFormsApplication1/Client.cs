@@ -197,7 +197,7 @@ namespace WindowsFormsApplication1
             {
                 // Error
 
-                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
             }
 
             // Error occured, return null
@@ -222,7 +222,7 @@ namespace WindowsFormsApplication1
             catch (Exception Exception)
             {
                 //Error
-                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
             }
             //Error occured, return null;
             return false;
@@ -250,7 +250,7 @@ namespace WindowsFormsApplication1
         {
             string input = chatInput.Text;
             chatOutput.Text += input;
-
+        }
         public ComboBox GetComboBox1()
         {
             return this.comboBox1;

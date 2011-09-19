@@ -12,6 +12,8 @@ namespace WindowsFormsApplication1
         public const UInt32 POWER = 4;
         public const UInt32 SPEED = 2;
         public const UInt32 HEARTBEAT = 0;
+        public const UInt32 ENERGY = 6;
+        public const UInt32 DISTANCE = 3;
 
         private SerialPort connection;
 
@@ -103,7 +105,7 @@ namespace WindowsFormsApplication1
             if (pw != "ERR")
             {
                 String[] split = pw.Split('\t');
-                return Int32.Parse(split[6]); // 5 or 6.
+                return Int32.Parse(split[ENERGY]); // 5 or 6.
             }
             return -1;
         }
@@ -114,7 +116,7 @@ namespace WindowsFormsApplication1
             if(pw != "ERR")
             {
                 string[] split = pw.Split('\t');
-                return Int32.Parse(split[3]);
+                return Int32.Parse(split[DISTANCE]);
             }
             return -1;
         }

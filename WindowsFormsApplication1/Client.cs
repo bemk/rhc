@@ -103,7 +103,7 @@ namespace WindowsFormsApplication1
             p.LineJoin = LineJoin.Bevel;
             string selectedData = comboBox1.SelectedText;
             SizeF stringsize = g.MeasureString(selectedData,panel1.Font);
-            g.DrawString(selectedData,panel1.Font,p.Brush,new Point(panel1.Width-(int)stringsize.Width,0));
+            g.DrawString(selectedData, panel1.Font, p.Brush, new Point(panel1.Width - (int)stringsize.Width, 0));
 
             if (bike is VirtBike)
             {
@@ -509,7 +509,8 @@ namespace WindowsFormsApplication1
 
         private void sendButton_Click(object sender, EventArgs e)
         {
-
+            string input = chatInput.Text;
+            chatOutput.Text += input;
         }
     }
 }

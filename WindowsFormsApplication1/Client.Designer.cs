@@ -65,11 +65,11 @@
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chatOutput = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.sendButton = new System.Windows.Forms.Button();
             this.chatInput = new System.Windows.Forms.TextBox();
-            this.chatOutput = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -332,14 +332,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.Form1_Load);
             // 
@@ -347,7 +347,7 @@
             // 
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -363,14 +363,14 @@
             // physicalToolStripMenuItem
             // 
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
             // virtualToolStripMenuItem
             // 
             this.virtualToolStripMenuItem.Name = "virtualToolStripMenuItem";
-            this.virtualToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.virtualToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.virtualToolStripMenuItem.Text = "Virtual";
             this.virtualToolStripMenuItem.Click += new System.EventHandler(this.virtualToolStripMenuItem_Click);
             // 
@@ -413,6 +413,15 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chat";
             // 
+            // chatOutput
+            // 
+            this.chatOutput.Location = new System.Drawing.Point(6, 13);
+            this.chatOutput.Multiline = true;
+            this.chatOutput.Name = "chatOutput";
+            this.chatOutput.ReadOnly = true;
+            this.chatOutput.Size = new System.Drawing.Size(188, 194);
+            this.chatOutput.TabIndex = 0;
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "RHCData";
@@ -447,15 +456,6 @@
             this.chatInput.Name = "chatInput";
             this.chatInput.Size = new System.Drawing.Size(200, 20);
             this.chatInput.TabIndex = 7;
-            // 
-            // chatOutput
-            // 
-            this.chatOutput.Location = new System.Drawing.Point(6, 13);
-            this.chatOutput.Multiline = true;
-            this.chatOutput.Name = "chatOutput";
-            this.chatOutput.ReadOnly = true;
-            this.chatOutput.Size = new System.Drawing.Size(188, 194);
-            this.chatOutput.TabIndex = 0;
             // 
             // Client
             // 

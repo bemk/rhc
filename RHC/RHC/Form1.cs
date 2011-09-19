@@ -35,5 +35,10 @@ namespace RHC
             textBoxOutput.AppendText(String.Format("{0}\n", "HEART   RPM     SPEED   DIST.   POWER   ENERGY  TIME    HUIDIG POWER"));
             textBoxOutput.AppendText(String.Format("{0}\n\n", data));           
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

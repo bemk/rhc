@@ -35,6 +35,7 @@ namespace WindowsFormsApplication1
             this.power = power;
             this.energy = energy;
             this.currentPower = currentPower;
+            this.time = time;
             Random i = new Random();
             this.ID = i.Next();
         }

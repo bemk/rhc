@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +18,24 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             bike = b;
+            this.c = c;
+            setValues();
+        }
+
+        private void setValues()
+        {
+            heartRateConnected.Checked = bike.GetHeartRateConnected();
+            heartRateBar.Value = bike.GetHeartRate();
+            RPMBar.Value = bike.GetRPM();
+            speedBar.Value = (int)bike.GetSpeed();
+            distanceNumber.Value = bike.GetDistance();
+            powerBar.Value = bike.GetPower();
+            energyNumber.Value = bike.GetEnergy();
+            currentPowerBar.Value = bike.GetCurrentPower();
+            String[] split = bike.GetTime().Split(':');
+            hour.Value = Int32.Parse(split[0]);
+            minutes.Value = int.Parse(split[1]);
+            seconds.Value = int.Parse(split[2]);
         }
 
         private void heartRateBar_Scroll(object sender, EventArgs e)
@@ -97,16 +115,5 @@ namespace WindowsFormsApplication1
         {
             bike.SetTime(hour.Value + ":" + minutes.Value + ":" + seconds.Value);
         }
-
-       // private void timer1_Tick(object sender, EventArgs e)
-     //   {
-       //    int heartrate;
-         //   if(!bike.GetHeartRateConnected())
-         //       heartrate = 0;
-        //    else
-          //      heartrate = bike.GetHeartRate();
-          //  BikeData bikedata = new BikeData(heartrate, bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
-            //c.addBikeDataToList(bikedata);
-       // }
     }
 }

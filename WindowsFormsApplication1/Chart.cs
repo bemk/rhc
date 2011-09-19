@@ -12,13 +12,13 @@ namespace WindowsFormsApplication1
     {
         private Client c;
 
-        private List<Point> pointsHeartrate = new List<Point>();
-        private List<Point> pointsRPM = new List<Point>();
-        private List<Point> pointsSpeed = new List<Point>();
-        private List<Point> pointsDistance = new List<Point>();
-        private List<Point> pointsPower = new List<Point>();
-        private List<Point> pointsEnergy = new List<Point>();
-        private List<Point> pointsCurrentPower = new List<Point>();
+        public List<Point> PointsHeartrate = new List<Point>();
+        public List<Point> PointsRPM = new List<Point>();
+        public List<Point> PointsSpeed = new List<Point>();
+        public List<Point> PointsDistance = new List<Point>();
+        public List<Point> PointsPower = new List<Point>();
+        public List<Point> PointsEnergy = new List<Point>();
+        public List<Point> PointsCurrentPower = new List<Point>();
         private Point oldPoint;
 
         public Chart(Client c)
@@ -38,75 +38,107 @@ namespace WindowsFormsApplication1
             g.SmoothingMode = SmoothingMode.HighQuality;
             Pen p = new Pen(c.GetPanel1().ForeColor, 3);
             p.LineJoin = LineJoin.Bevel;
-            string selectedData = c.GetComboBox1().SelectedText;
+            string selectedData ="" +  c.GetComboBox1().SelectedItem;
             SizeF stringsize = g.MeasureString(selectedData, c.GetPanel1().Font);
             g.DrawString(selectedData, c.GetPanel1().Font, p.Brush, new Point(c.GetPanel1().Width - (int)stringsize.Width, 0));
-
+            Console.WriteLine(selectedData);
             if (c.GetBike() is VirtBike)
             {
-                // Hell no, prefer comboBox1.SelectedIndex in a switchstate :z
                 switch (c.GetComboBox1().SelectedIndex)
                 {
-                    case 1:
+                    case 0:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetHeartRate() / 1.5 + 5));
-                            pointsHeartrate.Add(newPoint);
+                            PointsHeartrate.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
-                            for (int i = 0; i < pointsHeartrate.Count; i++)
+                            for (int i = 0; i < PointsHeartrate.Count; i++)
                             {
-                                Point point = pointsHeartrate[i];
+                                Point point = PointsHeartrate[i];
                                 point.X -= 4;
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                pointsHeartrate[i] = point;
+                                PointsHeartrate[i] = point;
                             }
-                            for (int j = pointsHeartrate.Count - 1; j > 0; j--)
+                            for (int j = PointsHeartrate.Count - 1; j > 0; j--)
                             {
-                                Point point = pointsHeartrate[j];
+                                Point point = PointsHeartrate[j];
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                pointsHeartrate[j] = point;
+                                PointsHeartrate[j] = point;
                             }
                             g.DrawPath(p, path);
-                            for (int k = 0; k < pointsHeartrate.Count; k++)
+                            for (int k = 0; k < PointsHeartrate.Count; k++)
                             {
-                                if (pointsHeartrate[k].X < 0)
+                                if (PointsHeartrate[k].X < 0)
                                 {
-                                    pointsHeartrate.RemoveAt(k);
+                                    PointsHeartrate.RemoveAt(k);
                                 }
                             }
                             break;
                         }
-                    case 2:
+                    case 1:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetRPM() / 1.2 + 5));
-                            this.pointsRPM.Add(newPoint);
+                            this.PointsRPM.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
-                            for (int i = 0; i < this.pointsRPM.Count; i++)
+                            for (int i = 0; i < this.PointsRPM.Count; i++)
                             {
-                                Point point = this.pointsRPM[i];
+                                Point point = this.PointsRPM[i];
                                 point.X -= 4;
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsRPM[i] = point;
+                                this.PointsRPM[i] = point;
                             }
-                            for (int j = this.pointsRPM.Count - 1; j > 0; j--)
+                            for (int j = this.PointsRPM.Count - 1; j > 0; j--)
                             {
-                                Point point = this.pointsRPM[j];
+                                Point point = this.PointsRPM[j];
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsRPM[j] = point;
+                                this.PointsRPM[j] = point;
                             }
                             g.DrawPath(p, path);
-                            for (int k = 0; k < this.pointsRPM.Count; k++)
+                            for (int k = 0; k < this.PointsRPM.Count; k++)
                             {
-                                if (this.pointsRPM[k].X < 0)
+                                if (this.PointsRPM[k].X < 0)
                                 {
-                                    this.pointsRPM.RemoveAt(k);
+                                    this.PointsRPM.RemoveAt(k);
+                                }
+                            }
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-((int)c.GetBike().GetSpeed() / (4.2/10) + 5));
+                            this.PointsSpeed.Add(newPoint);
+                            GraphicsPath path = new GraphicsPath();
+                            path.StartFigure();
+                            for (int i = 0; i < this.PointsSpeed.Count; i++)
+                            {
+                                Point point = this.PointsSpeed[i];
+                                point.X -= 4;
+                                path.AddLine(oldPoint, point);
+                                oldPoint = point;
+                                this.PointsSpeed[i] = point;
+                            }
+                            for (int j = this.PointsSpeed.Count - 1; j > 0; j--)
+                            {
+                                Point point = this.PointsSpeed[j];
+                                path.AddLine(oldPoint, point);
+                                oldPoint = point;
+                                this.PointsSpeed[j] = point;
+                            }
+                            g.DrawPath(p, path);
+                            for (int k = 0; k < this.PointsSpeed.Count; k++)
+                            {
+                                if (this.PointsSpeed[k].X < 0)
+                                {
+                                    this.PointsSpeed.RemoveAt(k);
                                 }
                             }
                             break;
@@ -115,31 +147,31 @@ namespace WindowsFormsApplication1
                     case 3:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
-                            Point newPoint = new Point(c.GetPanel1().Width, (int)-((int)c.GetBike().GetSpeed() / 4.2 + 5));
-                            this.pointsSpeed.Add(newPoint);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetDistance() / 600 + 5));
+                            this.PointsDistance.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
-                            for (int i = 0; i < this.pointsSpeed.Count; i++)
+                            for (int i = 0; i < this.PointsDistance.Count; i++)
                             {
-                                Point point = this.pointsSpeed[i];
+                                Point point = this.PointsDistance[i];
                                 point.X -= 4;
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsSpeed[i] = point;
+                                this.PointsDistance[i] = point;
                             }
-                            for (int j = this.pointsSpeed.Count - 1; j > 0; j--)
+                            for (int j = this.PointsDistance.Count - 1; j > 0; j--)
                             {
-                                Point point = this.pointsSpeed[j];
+                                Point point = this.PointsDistance[j];
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsSpeed[j] = point;
+                                this.PointsDistance[j] = point;
                             }
                             g.DrawPath(p, path);
-                            for (int k = 0; k < this.pointsSpeed.Count; k++)
+                            for (int k = 0; k < this.PointsDistance.Count; k++)
                             {
-                                if (this.pointsSpeed[k].X < 0)
+                                if (this.PointsDistance[k].X < 0)
                                 {
-                                    this.pointsSpeed.RemoveAt(k);
+                                    this.PointsDistance.RemoveAt(k);
                                 }
                             }
                             break;
@@ -148,31 +180,31 @@ namespace WindowsFormsApplication1
                     case 4:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
-                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetDistance() / 600 + 5));
-                            this.pointsDistance.Add(newPoint);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetPower() / 2.4 + 5));
+                            this.PointsPower.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
-                            for (int i = 0; i < this.pointsDistance.Count; i++)
+                            for (int i = 0; i < this.PointsPower.Count; i++)
                             {
-                                Point point = this.pointsDistance[i];
+                                Point point = this.PointsPower[i];
                                 point.X -= 4;
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsDistance[i] = point;
+                                this.PointsPower[i] = point;
                             }
-                            for (int j = this.pointsDistance.Count - 1; j > 0; j--)
+                            for (int j = this.PointsPower.Count - 1; j > 0; j--)
                             {
-                                Point point = this.pointsDistance[j];
+                                Point point = this.PointsPower[j];
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsDistance[j] = point;
+                                this.PointsPower[j] = point;
                             }
                             g.DrawPath(p, path);
-                            for (int k = 0; k < this.pointsDistance.Count; k++)
+                            for (int k = 0; k < this.PointsPower.Count; k++)
                             {
-                                if (this.pointsDistance[k].X < 0)
+                                if (this.PointsPower[k].X < 0)
                                 {
-                                    this.pointsDistance.RemoveAt(k);
+                                    this.PointsPower.RemoveAt(k);
                                 }
                             }
                             break;
@@ -181,31 +213,31 @@ namespace WindowsFormsApplication1
                     case 5:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
-                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetPower() / 2.4 + 5));
-                            this.pointsPower.Add(newPoint);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetEnergy() / 600 + 5));
+                            this.PointsEnergy.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
-                            for (int i = 0; i < this.pointsPower.Count; i++)
+                            for (int i = 0; i < this.PointsEnergy.Count; i++)
                             {
-                                Point point = this.pointsPower[i];
+                                Point point = this.PointsEnergy[i];
                                 point.X -= 4;
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsPower[i] = point;
+                                this.PointsEnergy[i] = point;
                             }
-                            for (int j = this.pointsPower.Count - 1; j > 0; j--)
+                            for (int j = this.PointsEnergy.Count - 1; j > 0; j--)
                             {
-                                Point point = this.pointsPower[j];
+                                Point point = this.PointsEnergy[j];
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsPower[j] = point;
+                                this.PointsEnergy[j] = point;
                             }
                             g.DrawPath(p, path);
-                            for (int k = 0; k < this.pointsPower.Count; k++)
+                            for (int k = 0; k < this.PointsEnergy.Count; k++)
                             {
-                                if (this.pointsPower[k].X < 0)
+                                if (this.PointsEnergy[k].X < 0)
                                 {
-                                    this.pointsPower.RemoveAt(k);
+                                    this.PointsEnergy.RemoveAt(k);
                                 }
                             }
                             break;
@@ -214,64 +246,31 @@ namespace WindowsFormsApplication1
                     case 6:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
-                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetEnergy() / 600 + 5));
-                            this.pointsEnergy.Add(newPoint);
-                            GraphicsPath path = new GraphicsPath();
-                            path.StartFigure();
-                            for (int i = 0; i < this.pointsEnergy.Count; i++)
-                            {
-                                Point point = this.pointsEnergy[i];
-                                point.X -= 4;
-                                path.AddLine(oldPoint, point);
-                                oldPoint = point;
-                                this.pointsEnergy[i] = point;
-                            }
-                            for (int j = this.pointsEnergy.Count - 1; j > 0; j--)
-                            {
-                                Point point = this.pointsEnergy[j];
-                                path.AddLine(oldPoint, point);
-                                oldPoint = point;
-                                this.pointsEnergy[j] = point;
-                            }
-                            g.DrawPath(p, path);
-                            for (int k = 0; k < this.pointsEnergy.Count; k++)
-                            {
-                                if (this.pointsEnergy[k].X < 0)
-                                {
-                                    this.pointsEnergy.RemoveAt(k);
-                                }
-                            }
-                            break;
-                        }
-
-                    case 7:
-                        {
-                            g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetCurrentPower() / 2.4 + 5));
-                            this.pointsCurrentPower.Add(newPoint);
+                            this.PointsCurrentPower.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
-                            for (int i = 0; i < this.pointsCurrentPower.Count; i++)
+                            for (int i = 0; i < this.PointsCurrentPower.Count; i++)
                             {
-                                Point point = this.pointsCurrentPower[i];
+                                Point point = this.PointsCurrentPower[i];
                                 point.X -= 4;
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsCurrentPower[i] = point;
+                                this.PointsCurrentPower[i] = point;
                             }
-                            for (int j = this.pointsCurrentPower.Count - 1; j > 0; j--)
+                            for (int j = this.PointsCurrentPower.Count - 1; j > 0; j--)
                             {
-                                Point point = this.pointsCurrentPower[j];
+                                Point point = this.PointsCurrentPower[j];
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                this.pointsCurrentPower[j] = point;
+                                this.PointsCurrentPower[j] = point;
                             }
                             g.DrawPath(p, path);
-                            for (int k = 0; k < this.pointsCurrentPower.Count; k++)
+                            for (int k = 0; k < this.PointsCurrentPower.Count; k++)
                             {
-                                if (this.pointsCurrentPower[k].X < 0)
+                                if (this.PointsCurrentPower[k].X < 0)
                                 {
-                                    this.pointsCurrentPower.RemoveAt(k);
+                                    this.PointsCurrentPower.RemoveAt(k);
                                 }
                             }
                             break;

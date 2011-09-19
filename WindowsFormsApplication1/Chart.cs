@@ -44,7 +44,6 @@ namespace WindowsFormsApplication1
             Console.WriteLine(selectedData);
             if (c.GetBike() is VirtBike)
             {
-                // Hell no, prefer comboBox1.SelectedIndex in a switchstate :z
                 switch (c.GetComboBox1().SelectedIndex)
                 {
                     case 0:

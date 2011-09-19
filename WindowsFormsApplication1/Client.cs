@@ -14,33 +14,25 @@ namespace WindowsFormsApplication1
 {
     public partial class Client : Form
     {
-        public Bike bike{get; set;}
+        private Bike bike;
         private List<BikeData> data = new List<BikeData>();
         private VirtSettings virtSettings;
-
-        //Temp place for the points
-        //as soon as BikeData is Serializeble
-        //they will get copied the BikeData
-        
-
-        private Point oldPoint;
+        private Chart chart;
         
         public Client()
         {
             // Please no methods here ;)
+            
             InitializeComponent();
+            chart = new Chart(this);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             setBike(new PhysBike(Program.COM_PORT));
             openFileDialog1.ShowDialog();
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
-            oldPoint = new Point(panel1.Width, (int)-(25 / 2.3));
-            UpdateStyles();
-            this.DoubleBuffered = true;
+
             timer1.Start();
         }
 
@@ -237,19 +229,34 @@ namespace WindowsFormsApplication1
 
         private void updatePoints()
         {
-            this.pointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
-            this.pointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
-            this.pointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
-            this.pointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
-            this.pointsPower = data.ElementAt(data.Count - 1).pointsPower;
-            this.pointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
-            this.pointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
+            //this.pointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
+            //this.pointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
+            //this.pointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
+            //this.pointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
+            //this.pointsPower = data.ElementAt(data.Count - 1).pointsPower;
+            //this.pointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
+            //this.pointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
             panel1.Invalidate();
         }
 
         private void updateBike()
         {
             this.bike = new VirtBike(data.ElementAt(data.Count - 1).heartRate, data.ElementAt(data.Count - 1).RPM, data.ElementAt(data.Count - 1).speed, data.ElementAt(data.Count - 1).distance, data.ElementAt(data.Count - 1).power, data.ElementAt(data.Count - 1).energy, data.ElementAt(data.Count - 1).currentPower, data.ElementAt(data.Count - 1).time);
+        }
+
+        public ComboBox GetComboBox1()
+        {
+            return this.comboBox1;
+        }
+
+        public Bike GetBike()
+        {
+            return this.bike;
+        }
+
+        public Panel GetPanel1()
+        {
+            return panel1;
         }
     }
 }

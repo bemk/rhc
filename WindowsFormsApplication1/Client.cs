@@ -22,14 +22,17 @@ namespace WindowsFormsApplication1
         public Client()
         {
             // Please no methods here ;)
-            
             InitializeComponent();
-            chart = new Chart(this);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+<<<<<<< Updated upstream
+=======
+            chart = new Chart(this);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
+>>>>>>> Stashed changes
             setBike(new PhysBike(Program.COM_PORT));
             openFileDialog1.ShowDialog();
             timer1.Start();
@@ -44,6 +47,7 @@ namespace WindowsFormsApplication1
         {
             if (b is PhysBike)
             {
+<<<<<<< Updated upstream
                 resetLabels();
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
@@ -51,15 +55,30 @@ namespace WindowsFormsApplication1
 
                 if(virtSettings != null)
                     virtSettings.Close();b
+=======
+                if (!physicalToolStripMenuItem.Checked)
+                {
+                    resetLabels();
+                    physicalToolStripMenuItem.Checked = true;
+                    virtualToolStripMenuItem.Checked = false;
+                    //bike = new PhysBike(Program.COM_PORT); // Why make a new bike?
+                    if (virtSettings != null)
+                        virtSettings.Close();
+                }
+>>>>>>> Stashed changes
             }
             else if (b is VirtBike)
             {
-                resetLabels();
-                virtualToolStripMenuItem.Checked = true;
-                physicalToolStripMenuItem.Checked = false;
-                virtSettings = new VirtSettings((VirtBike)b, this);
-                virtSettings.Show();
+                if (!virtualToolStripMenuItem.Checked)
+                {
+                    resetLabels();
+                    virtualToolStripMenuItem.Checked = true;
+                    physicalToolStripMenuItem.Checked = false;
+                    virtSettings = new VirtSettings((VirtBike)b, this);
+                    virtSettings.Show();
+                }
             }
+            bike = b;
         }
 
         public void addBikeDataToList(BikeData bd)
@@ -69,9 +88,7 @@ namespace WindowsFormsApplication1
 
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (bike == null || bike is PhysBike)
-                bike = new VirtBike();
-            setBike(bike);
+            setBike(new VirtBike());
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -197,8 +214,12 @@ namespace WindowsFormsApplication1
             catch (Exception Exception)
             {
                 // Error
+<<<<<<< Updated upstream
 
                 Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
+=======
+                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
+>>>>>>> Stashed changes
             }
 
             // Error occured, return null
@@ -222,10 +243,15 @@ namespace WindowsFormsApplication1
             }
             catch (Exception Exception)
             {
+<<<<<<< Updated upstream
                 //Error
 
                 Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
 
+=======
+                // Error
+				if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
+>>>>>>> Stashed changes
             }
             //Error occured, return null;
             return false;

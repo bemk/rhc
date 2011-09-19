@@ -8,6 +8,11 @@ namespace WindowsFormsApplication1
 {
     class PhysBike : Bike
     {
+        public const UInt32 CURRENTPOWER = 7;
+        public const UInt32 POWER = 4;
+        public const UInt32 SPEED = 2;
+        public const UInt32 HEARTBEAT = 0;
+
         private SerialPort connection;
 
         private void sendMsg(String Msg)
@@ -76,7 +81,7 @@ namespace WindowsFormsApplication1
             if (pw != "ERR")
             {
                 String[] split = pw.Split('\t');
-                return Int32.Parse(split[4]);
+                return Int32.Parse(split[POWER]);
             }
             return -1;
         }
@@ -87,7 +92,7 @@ namespace WindowsFormsApplication1
             if (pw != "ERR")
             {
                 String[] split = pw.Split('\t');
-                return Int32.Parse(split[7]);
+                return Int32.Parse(split[CURRENTPOWER]);
             }
             return -1;
         }
@@ -119,7 +124,7 @@ namespace WindowsFormsApplication1
             if (hb != "ERR")
             {
                 String[] split = hb.Split('\t');
-                return Int32.Parse(split[0]);
+                return Int32.Parse(split[HEARTBEAT]);
             }
             return -1;
         }
@@ -129,7 +134,7 @@ namespace WindowsFormsApplication1
             if (spd != "ERR")
             {
                 String[] split = spd.Split('\t');
-                return decimal.Parse(split[2])/10;
+                return decimal.Parse(split[SPEED])/10;
             }
             return -1;
         }

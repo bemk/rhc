@@ -15,10 +15,10 @@ namespace WindowsFormsApplication1
         private Int32 ID = 0;
         private Int32 distance = 0;
         private Int32 energy = 0;
-        private string time = "";
+        private string time = "00:00:00";
         private bool heartRateConnected = false; // The checkbox is unchecked by default.
 
-        public VirtBike()
+        public VirtBike() 
         {
             Reset();
             Random i = new Random();
@@ -45,8 +45,15 @@ namespace WindowsFormsApplication1
 
         public void Reset() 
         {
-            this.power = 25;
-            this.currentPower = 0;
+            heartRate = 0;
+            speed = 0;
+            power = 25;
+            currentPower = 0;
+            RPM = 0;
+            ID = 0;
+            distance = 0;
+            energy = 0;
+            time = "00:00:00";
         }
 
         #region virtual bike setters
@@ -127,7 +134,7 @@ namespace WindowsFormsApplication1
 
         public decimal GetSpeed()
         {
-            return speed;
+            return speed / 10;
         }
 
         public int GetBikeID() 

@@ -212,13 +212,11 @@
             // currentPowerBar
             // 
             this.currentPowerBar.Location = new System.Drawing.Point(85, 315);
-            this.currentPowerBar.Maximum = 400;
-            this.currentPowerBar.Minimum = 25;
+            this.currentPowerBar.Maximum = 25;
             this.currentPowerBar.Name = "currentPowerBar";
             this.currentPowerBar.Size = new System.Drawing.Size(227, 45);
             this.currentPowerBar.TabIndex = 23;
             this.currentPowerBar.TickFrequency = 25;
-            this.currentPowerBar.Value = 25;
             this.currentPowerBar.Scroll += new System.EventHandler(this.currentPowerBar_Scroll);
             // 
             // powerBar

@@ -22,14 +22,14 @@ namespace WindowsFormsApplication1
         public Client()
         {
             // Please no methods here ;)
-            
             InitializeComponent();
-            chart = new Chart(this);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            chart = new Chart(this);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
             setBike(new PhysBike(Program.COM_PORT));
             openFileDialog1.ShowDialog();
             timer1.Start();
@@ -50,15 +50,29 @@ namespace WindowsFormsApplication1
                 bike = new PhysBike(Program.COM_PORT);
                 if(virtSettings != null)
                     virtSettings.Close();
+                if (!physicalToolStripMenuItem.Checked)
+                {
+                    resetLabels();
+                    physicalToolStripMenuItem.Checked = true;
+                    virtualToolStripMenuItem.Checked = false;
+                    //bike = new PhysBike(Program.COM_PORT); // Why make a new bike?
+                    if (virtSettings != null)
+                        virtSettings.Close();
+                }
+
             }
             else if (b is VirtBike)
             {
-                resetLabels();
-                virtualToolStripMenuItem.Checked = true;
-                physicalToolStripMenuItem.Checked = false;
-                virtSettings = new VirtSettings((VirtBike)b, this);
-                virtSettings.Show();
+                if (!virtualToolStripMenuItem.Checked)
+                {
+                    resetLabels();
+                    virtualToolStripMenuItem.Checked = true;
+                    physicalToolStripMenuItem.Checked = false;
+                    virtSettings = new VirtSettings((VirtBike)b, this);
+                    virtSettings.Show();
+                }
             }
+            bike = b;
         }
 
         public void addBikeDataToList(BikeData bd)
@@ -68,9 +82,7 @@ namespace WindowsFormsApplication1
 
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (bike == null || bike is PhysBike)
-                bike = new VirtBike();
-            setBike(bike);
+            setBike(new VirtBike());
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -125,6 +137,7 @@ namespace WindowsFormsApplication1
             {
                 heartRateData.Text = bike.GetHeartRate().ToString();
             }
+
             RPMData.Text = bike.GetRPM().ToString();
             speedData.Text = bike.GetSpeed().ToString();
             distanceData.Text = bike.GetDistance().ToString();
@@ -132,6 +145,7 @@ namespace WindowsFormsApplication1
             energyData.Text = bike.GetEnergy().ToString();
             currentPowerData.Text = bike.GetCurrentPower().ToString();
             timeData.Text = bike.GetTime();
+
             addBikeDataToList(new BikeData(bike.GetHeartRate(),bike.GetRPM(),(int)bike.GetSpeed(),bike.GetDistance(),bike.GetPower(),bike.GetEnergy(),bike.GetCurrentPower(),bike.GetTime()));
         }
 
@@ -198,7 +212,6 @@ namespace WindowsFormsApplication1
 
                 if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
             }
-
             // Error occured, return null
             return false;
         }
@@ -249,6 +262,7 @@ namespace WindowsFormsApplication1
             string input = chatInput.Text;
             chatOutput.Text += input;
         }
+
         public ComboBox GetComboBox1()
         {
             return this.comboBox1;

@@ -36,7 +36,7 @@ namespace WindowsFormsApplication1
             catch (Exception e)
             {
                 if (Program.DEBUG) Console.WriteLine("ERROR: Getting message from bike failed, " + e.Message);
-                return null;
+                return "ERR";
             }
             return (connection.ReadLine());
         }
@@ -54,10 +54,12 @@ namespace WindowsFormsApplication1
                 if(Program.DEBUG) Console.WriteLine("ERROR: Connecting to bike failed, " + e.Message);
             }
         }
-        public PhysBike(String comport)
+
+        public PhysBike(string comport)
         {
             connect(comport);
         }
+
         ~PhysBike()
         {
             if (connection.IsOpen)
@@ -134,7 +136,7 @@ namespace WindowsFormsApplication1
             if (spd != "ERR")
             {
                 String[] split = spd.Split('\t');
-                return decimal.Parse(split[SPEED])/10;
+                return decimal.Parse(split[SPEED]) / 10;
             }
             return -1;
         }
@@ -157,7 +159,7 @@ namespace WindowsFormsApplication1
             String time = getMsg("TE");
             if (time != "ERR")
                 return time;
-            return null;
+            return "-1:-1:-1";
         }
     }
 }

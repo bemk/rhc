@@ -70,6 +70,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.sendButton = new System.Windows.Forms.Button();
             this.chatInput = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -80,6 +81,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.timeData);
             this.groupBox1.Controls.Add(this.currentPowerData);
             this.groupBox1.Controls.Add(this.energyData);
@@ -447,7 +449,6 @@
             this.sendButton.TabIndex = 6;
             this.sendButton.Text = "Send";
             this.sendButton.UseVisualStyleBackColor = true;
-            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
             // 
             // chatInput
             // 
@@ -455,6 +456,15 @@
             this.chatInput.Name = "chatInput";
             this.chatInput.Size = new System.Drawing.Size(200, 20);
             this.chatInput.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(178, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "km/h";
             // 
             // Client
             // 
@@ -532,6 +542,7 @@
         private System.Windows.Forms.TextBox chatOutput;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.TextBox chatInput;
+        private System.Windows.Forms.Label label1;
     }
 }
 

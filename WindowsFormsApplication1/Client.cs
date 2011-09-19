@@ -132,20 +132,19 @@ namespace WindowsFormsApplication1
             energyData.Text = bike.GetEnergy().ToString();
             currentPowerData.Text = bike.GetCurrentPower().ToString();
             timeData.Text = bike.GetTime();
-            //data.ElementAt(data.Count - 1).pointsHeartrate = this.pointsHeartrate;
-          //  data.ElementAt(data.Count - 1).pointsRPM = this.pointsRPM;
-          //  data.ElementAt(data.Count - 1).pointsSpeed = this.pointsSpeed;
-           // data.ElementAt(data.Count - 1).pointsDistance = this.pointsDistance;
-           // data.ElementAt(data.Count - 1).pointsPower = this.pointsPower;
-           // data.ElementAt(data.Count - 1).pointsEnergy = this.pointsEnergy;
-          //  data.ElementAt(data.Count - 1).pointsCurrentPower = this.pointsCurrentPower;
-
+            addBikeDataToList(new BikeData(bike.GetHeartRate(),bike.GetRPM(),(int)bike.GetSpeed(),bike.GetDistance(),bike.GetPower(),bike.GetEnergy(),bike.GetCurrentPower(),bike.GetTime()));
         }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             e.Cancel = false;
-            //Console.WriteLine(saveFileDialog1.FileName);
+            data.ElementAt(data.Count - 1).pointsHeartrate = chart.PointsHeartrate;
+            data.ElementAt(data.Count - 1).pointsRPM = chart.PointsRPM;
+            data.ElementAt(data.Count - 1).pointsSpeed = chart.PointsSpeed;
+            data.ElementAt(data.Count - 1).pointsDistance = chart.PointsDistance;
+            data.ElementAt(data.Count - 1).pointsPower = chart.PointsPower;
+            data.ElementAt(data.Count - 1).pointsEnergy = chart.PointsEnergy;
+            data.ElementAt(data.Count - 1).pointsCurrentPower = chart.PointsCurrentPower;
             ObjectToFile(data,saveFileDialog1.FileName);
         }
 
@@ -212,9 +211,6 @@ namespace WindowsFormsApplication1
                 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter _BinaryFormatter
                             = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                 this.data = (List<BikeData>)_BinaryFormatter.Deserialize(fileStream);
-                Console.WriteLine(data.Count);
-                Console.WriteLine("?");
-                updateLabels();
                 updatePoints();
                 updateBike();
                 return true;
@@ -230,19 +226,21 @@ namespace WindowsFormsApplication1
 
         private void updatePoints()
         {
-            //this.pointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
-            //this.pointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
-            //this.pointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
-            //this.pointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
-            //this.pointsPower = data.ElementAt(data.Count - 1).pointsPower;
-            //this.pointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
-            //this.pointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
+            chart.PointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
+            chart.PointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
+            chart.PointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
+            chart.PointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
+            chart.PointsPower = data.ElementAt(data.Count - 1).pointsPower;
+            chart.PointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
+            chart.PointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
             panel1.Invalidate();
         }
 
         private void updateBike()
         {
             this.bike = new VirtBike(data.ElementAt(data.Count - 1).heartRate, data.ElementAt(data.Count - 1).RPM, data.ElementAt(data.Count - 1).speed, data.ElementAt(data.Count - 1).distance, data.ElementAt(data.Count - 1).power, data.ElementAt(data.Count - 1).energy, data.ElementAt(data.Count - 1).currentPower, data.ElementAt(data.Count - 1).time);
+            virtSettings = new VirtSettings((VirtBike)bike, this);
+            virtSettings.Show();
         }
 
 

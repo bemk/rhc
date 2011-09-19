@@ -114,7 +114,7 @@ namespace WindowsFormsApplication1
                     case 2:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
-                            Point newPoint = new Point(c.GetPanel1().Width, (int)-((int)c.GetBike().GetSpeed() / 4.2 + 5));
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-((int)c.GetBike().GetSpeed() / (4.2/10) + 5));
                             this.PointsSpeed.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();

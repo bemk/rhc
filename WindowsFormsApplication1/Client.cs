@@ -28,11 +28,8 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-<<<<<<< Updated upstream
-=======
             chart = new Chart(this);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
->>>>>>> Stashed changes
             setBike(new PhysBike(Program.COM_PORT));
             openFileDialog1.ShowDialog();
             timer1.Start();
@@ -47,15 +44,6 @@ namespace WindowsFormsApplication1
         {
             if (b is PhysBike)
             {
-<<<<<<< Updated upstream
-                resetLabels();
-                physicalToolStripMenuItem.Checked = true;
-                virtualToolStripMenuItem.Checked = false;
-                bike = new PhysBike(Program.COM_PORT);
-
-                if(virtSettings != null)
-                    virtSettings.Close();b
-=======
                 if (!physicalToolStripMenuItem.Checked)
                 {
                     resetLabels();
@@ -65,7 +53,6 @@ namespace WindowsFormsApplication1
                     if (virtSettings != null)
                         virtSettings.Close();
                 }
->>>>>>> Stashed changes
             }
             else if (b is VirtBike)
             {
@@ -143,7 +130,7 @@ namespace WindowsFormsApplication1
             else if (bike is PhysBike)
             {
                 heartRateData.Text = bike.GetHeartRate().ToString();
-            }bb
+            }
             RPMData.Text = bike.GetRPM().ToString();
             speedData.Text = bike.GetSpeed().ToString();
             distanceData.Text = bike.GetDistance().ToString();
@@ -214,12 +201,7 @@ namespace WindowsFormsApplication1
             catch (Exception Exception)
             {
                 // Error
-<<<<<<< Updated upstream
-
-                Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
-=======
                 if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
->>>>>>> Stashed changes
             }
 
             // Error occured, return null
@@ -243,15 +225,8 @@ namespace WindowsFormsApplication1
             }
             catch (Exception Exception)
             {
-<<<<<<< Updated upstream
-                //Error
-
-                Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
-
-=======
                 // Error
 				if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
->>>>>>> Stashed changes
             }
             //Error occured, return null;
             return false;
@@ -272,7 +247,7 @@ namespace WindowsFormsApplication1
         private void updateBike()
         {
             this.bike = new VirtBike(data.ElementAt(data.Count - 1).heartRate, data.ElementAt(data.Count - 1).RPM, data.ElementAt(data.Count - 1).speed, data.ElementAt(data.Count - 1).distance, data.ElementAt(data.Count - 1).power, data.ElementAt(data.Count - 1).energy, data.ElementAt(data.Count - 1).currentPower, data.ElementAt(data.Count - 1).time);
-        }h
+        }
         public ComboBox GetComboBox1()
         {
             return this.comboBox1;

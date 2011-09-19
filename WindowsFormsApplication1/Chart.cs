@@ -19,63 +19,70 @@ namespace WindowsFormsApplication1
         private List<Point> pointsPower = new List<Point>();
         private List<Point> pointsEnergy = new List<Point>();
         private List<Point> pointsCurrentPower = new List<Point>();
+        private Point oldPoint;
 
         public Chart(Client c)
         {
             this.c = c;
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            oldPoint = new Point(c.GetPanel1().Width, (int)-(25 / 2.3));
+            UpdateStyles();
+            this.DoubleBuffered = true;
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        public void panel1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.HighQuality;
-            Pen p = new Pen(this.ForeColor, 3);
+            Pen p = new Pen(c.GetPanel1().ForeColor, 3);
             p.LineJoin = LineJoin.Bevel;
             string selectedData = c.GetComboBox1().SelectedText;
-            SizeF stringsize = g.MeasureString(selectedData, this.Font);
-            g.DrawString(selectedData, this.Font, p.Brush, new Point(this.Width - (int)stringsize.Width, 0));
+            SizeF stringsize = g.MeasureString(selectedData, c.GetPanel1().Font);
+            g.DrawString(selectedData, c.GetPanel1().Font, p.Brush, new Point(c.GetPanel1().Width - (int)stringsize.Width, 0));
 
-            if (c.Bike() is VirtBike)
+            if (c.GetBike() is VirtBike)
             {
                 // Hell no, prefer comboBox1.SelectedIndex in a switchstate :z
                 switch (c.GetComboBox1().SelectedIndex)
                 {
                     case 1:
                         {
-                            g.TranslateTransform(0, this.Height);
-                            Point newPoint = new Point(this.Width, (int)-(c.GetBike.GetHeartRate() / 1.5 + 5));
-                            c.GetpointsHeartrate().Add(newPoint);
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetHeartRate() / 1.5 + 5));
+                            pointsHeartrate.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
-                            for (int i = 0; i < c.GetpointsHeartrate().Count; i++)
+                            for (int i = 0; i < pointsHeartrate.Count; i++)
                             {
-                                Point point = c.GetpointsHeartrate()[i];
+                                Point point = pointsHeartrate[i];
                                 point.X -= 4;
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                c.GetpointsHeartrate()[i] = point;
+                                pointsHeartrate[i] = point;
                             }
-                            for (int j = c.GetpointsHeartrate().Count - 1; j > 0; j--)
+                            for (int j = pointsHeartrate.Count - 1; j > 0; j--)
                             {
-                                Point point = c.GetpointsHeartrate()[j];
+                                Point point = pointsHeartrate[j];
                                 path.AddLine(oldPoint, point);
                                 oldPoint = point;
-                                c.GetpointsHeartrate()[j] = point;
+                                pointsHeartrate[j] = point;
                             }
                             g.DrawPath(p, path);
-                            for (int k = 0; k < c.GetpointsHeartrate().Count; k++)
+                            for (int k = 0; k < pointsHeartrate.Count; k++)
                             {
-                                if (c.GetpointsHeartrate()[k].X < 0)
+                                if (pointsHeartrate[k].X < 0)
                                 {
-                                    c.GetpointsHeartrate().RemoveAt(k);
+                                    pointsHeartrate.RemoveAt(k);
                                 }
                             }
                             break;
                         }
                     case 2:
                         {
-                            g.TranslateTransform(0, panel1.Height);
-                            Point newPoint = new Point(panel1.Width, (int)-(bike.GetRPM() / 1.2 + 5));
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetRPM() / 1.2 + 5));
                             this.pointsRPM.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
@@ -102,12 +109,13 @@ namespace WindowsFormsApplication1
                                     this.pointsRPM.RemoveAt(k);
                                 }
                             }
+                            break;
                         }
 
                     case 3:
                         {
-                            g.TranslateTransform(0, panel1.Height);
-                            Point newPoint = new Point(panel1.Width, (int)-((int)bike.GetSpeed() / 4.2 + 5));
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-((int)c.GetBike().GetSpeed() / 4.2 + 5));
                             this.pointsSpeed.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
@@ -134,12 +142,13 @@ namespace WindowsFormsApplication1
                                     this.pointsSpeed.RemoveAt(k);
                                 }
                             }
+                            break;
                         }
 
                     case 4:
                         {
-                            g.TranslateTransform(0, panel1.Height);
-                            Point newPoint = new Point(panel1.Width, (int)-(bike.GetDistance() / 600 + 5));
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetDistance() / 600 + 5));
                             this.pointsDistance.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
@@ -166,12 +175,13 @@ namespace WindowsFormsApplication1
                                     this.pointsDistance.RemoveAt(k);
                                 }
                             }
+                            break;
                         }
 
                     case 5:
                         {
-                            g.TranslateTransform(0, panel1.Height);
-                            Point newPoint = new Point(panel1.Width, (int)-(bike.GetPower() / 2.4 + 5));
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetPower() / 2.4 + 5));
                             this.pointsPower.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
@@ -198,12 +208,13 @@ namespace WindowsFormsApplication1
                                     this.pointsPower.RemoveAt(k);
                                 }
                             }
+                            break;
                         }
 
                     case 6:
                         {
-                            g.TranslateTransform(0, panel1.Height);
-                            Point newPoint = new Point(panel1.Width, (int)-(bike.GetEnergy() / 600 + 5));
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetEnergy() / 600 + 5));
                             this.pointsEnergy.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
@@ -230,12 +241,13 @@ namespace WindowsFormsApplication1
                                     this.pointsEnergy.RemoveAt(k);
                                 }
                             }
+                            break;
                         }
 
                     case 7:
                         {
-                            g.TranslateTransform(0, panel1.Height);
-                            Point newPoint = new Point(panel1.Width, (int)-(bike.GetCurrentPower() / 2.4 + 5));
+                            g.TranslateTransform(0, c.GetPanel1().Height);
+                            Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetCurrentPower() / 2.4 + 5));
                             this.pointsCurrentPower.Add(newPoint);
                             GraphicsPath path = new GraphicsPath();
                             path.StartFigure();
@@ -262,11 +274,12 @@ namespace WindowsFormsApplication1
                                     this.pointsCurrentPower.RemoveAt(k);
                                 }
                             }
+                            break;
                         }
-                        base.OnPaint(e);
-
-                        g.Dispose();
                 }
+                base.OnPaint(e);
+
+                g.Dispose();
 
             }
         }

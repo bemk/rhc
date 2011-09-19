@@ -8,12 +8,12 @@ namespace WindowsFormsApplication1
 {
     class PhysBike : Bike
     {
+        public const UInt32 HEARTBEAT    = 0;
+        public const UInt32 SPEED        = 2;
+        public const UInt32 DISTANCE     = 3;
+        public const UInt32 POWER        = 4;
+        public const UInt32 ENERGY       = 6;
         public const UInt32 CURRENTPOWER = 7;
-        public const UInt32 POWER = 4;
-        public const UInt32 SPEED = 2;
-        public const UInt32 HEARTBEAT = 0;
-        public const UInt32 ENERGY = 6;
-        public const UInt32 DISTANCE = 3;
 
         private SerialPort connection;
 

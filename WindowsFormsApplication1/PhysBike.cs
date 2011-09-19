@@ -12,23 +12,28 @@ namespace WindowsFormsApplication1
 
         private void sendMsg(String Msg)
         {
-            checkConnection();
-            connection.WriteLine(Msg);
+            try
+            {
+                connection.WriteLine(Msg);
+            }
+            catch (Exception e)
+            {
+                if (Program.DEBUG) Console.WriteLine("ERROR: Sending message to bike failed, " + e.Message);
+            }
         }
 
         private String getMsg(String Msg)
         {
-            checkConnection();
-            connection.WriteLine(Msg);
+            try
+            {
+                connection.WriteLine(Msg);
+            }
+            catch (Exception e)
+            {
+                if (Program.DEBUG) Console.WriteLine("ERROR: Getting message from bike failed, " + e.Message);
+                return null;
+            }
             return (connection.ReadLine());
-        }
-
-        private void checkConnection()
-        {
-            if (connection == null)
-                Console.WriteLine("ERROR: Connection doesn't exist!");
-            if (!connection.IsOpen)
-                Console.WriteLine("ERROR: Connection isn't open!");
         }
 
         private void connect(String comport)
@@ -39,9 +44,9 @@ namespace WindowsFormsApplication1
                 if (!connection.IsOpen)
                     connection.Open();
             }
-            catch
+            catch (Exception e)
             {
-
+                if(Program.DEBUG) Console.WriteLine("ERROR: Connecting to bike failed, " + e.Message);
             }
         }
         public PhysBike(String comport)

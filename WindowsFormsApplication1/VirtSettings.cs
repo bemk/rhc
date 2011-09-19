@@ -12,11 +12,14 @@ namespace WindowsFormsApplication1
     public partial class VirtSettings : Form
     {
         private VirtBike bike;
+        private Client c;
 
-        public VirtSettings(VirtBike b)
+        public VirtSettings(VirtBike b, Client c)
         {
-            bike = b;
             InitializeComponent();
+            bike = b;
+            this.c = c;
+            timer1.Start();
         }
 
         private void heartRateBar_Scroll(object sender, EventArgs e)
@@ -72,6 +75,17 @@ namespace WindowsFormsApplication1
         private void Seconds_ValueChanged(object sender, EventArgs e)
         {
             bike.SetTime(hour.Value + ":" + minutes.Value + ":" + seconds.Value);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int heartrate;
+            if(!bike.GetHeartRateConnected())
+                heartrate = 0;
+            else
+                heartrate = bike.GetHeartRate();
+            BikeData bikedata = new BikeData(heartrate, bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
+            c.addBikeDataToList(bikedata);
         }
     }
 }

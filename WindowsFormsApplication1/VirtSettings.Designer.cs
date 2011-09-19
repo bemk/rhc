@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.energyNumber = new System.Windows.Forms.NumericUpDown();
@@ -53,6 +54,7 @@
             this.speed = new System.Windows.Forms.Label();
             this.RPM = new System.Windows.Forms.Label();
             this.heartRate = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.energyNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.distanceNumber)).BeginInit();
@@ -347,6 +349,12 @@
             this.heartRate.TabIndex = 0;
             this.heartRate.Text = "Heart rate:";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // VirtSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,6 +407,6 @@
         private System.Windows.Forms.NumericUpDown distanceNumber;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown energyNumber;
-        private System.Windows.Forms.Timer updateTimer;
+        private System.Windows.Forms.Timer timer1;
     }
 }

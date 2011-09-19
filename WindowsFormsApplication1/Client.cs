@@ -39,8 +39,8 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            setBike(new PhysBike(Program.COM_PORT));
-            openFileDialog1.ShowDialog();
+            setBike(new VirtBike());
+            //openFileDialog1.ShowDialog();
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
@@ -59,18 +59,19 @@ namespace WindowsFormsApplication1
         {
             if (b is PhysBike)
             {
-                //resetLabels();
+                resetLabels();
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
                 bike = new PhysBike(Program.COM_PORT);
-                virtSettings.Close();
+                if(virtSettings != null)
+                    virtSettings.Close();
             }
             else if (b is VirtBike)
             {
-                //resetLabels();
+                resetLabels();
                 virtualToolStripMenuItem.Checked = true;
                 physicalToolStripMenuItem.Checked = false;
-                virtSettings = new VirtSettings((VirtBike)bike);
+                virtSettings = new VirtSettings((VirtBike)b, this);
                 virtSettings.Show();
             }
         }
@@ -388,7 +389,7 @@ namespace WindowsFormsApplication1
             {
                 heartRateData.Text = data.ElementAt(data.Count-1).heartRate.ToString();
             }
-            RPMData.Text = data.ElementAt(data.Count - 1).RPM.ToString();
+            RPMData.Text = data.ElementAt(data.Count -1).RPM.ToString();
             speedData.Text = data.ElementAt(data.Count - 1).speed.ToString();
             distanceData.Text = data.ElementAt(data.Count - 1).distance.ToString();
             powerData.Text = data.ElementAt(data.Count - 1).power.ToString();
@@ -458,7 +459,7 @@ namespace WindowsFormsApplication1
             catch (Exception _Exception)
             {
                 // Error
-                Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
             }
 
             // Error occured, return null
@@ -483,7 +484,7 @@ namespace WindowsFormsApplication1
             catch (Exception _Exception)
             {
                 //Error
-                Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
+                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
             }
             //Error occured, return null;
             return false;
@@ -504,6 +505,11 @@ namespace WindowsFormsApplication1
         private void updateBike()
         {
             this.bike = new VirtBike(data.ElementAt(data.Count - 1).heartRate, data.ElementAt(data.Count - 1).RPM, data.ElementAt(data.Count - 1).speed, data.ElementAt(data.Count - 1).distance, data.ElementAt(data.Count - 1).power, data.ElementAt(data.Count - 1).energy, data.ElementAt(data.Count - 1).currentPower, data.ElementAt(data.Count - 1).time);
+        }
+
+        private void sendButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

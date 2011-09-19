@@ -12,10 +12,14 @@ namespace WindowsFormsApplication1
     public partial class VirtSettings : Form
     {
         private VirtBike bike;
+        private Client c;
 
-        public VirtSettings(VirtBike b)
+        public VirtSettings(VirtBike b, Client c)
         {
             InitializeComponent();
+            bike = b;
+            this.c = c;
+            timer1.Start();
         }
 
         private void heartRateBar_Scroll(object sender, EventArgs e)
@@ -81,7 +85,7 @@ namespace WindowsFormsApplication1
             else
                 heartrate = bike.GetHeartRate();
             BikeData bikedata = new BikeData(heartrate, bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
-            //c.addBikeDataToList(bikedata);
+            c.addBikeDataToList(bikedata);
         }
     }
 }

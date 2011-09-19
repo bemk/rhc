@@ -67,11 +67,15 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.sendButton = new System.Windows.Forms.Button();
+            this.chatInput = new System.Windows.Forms.TextBox();
+            this.chatOutput = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.menu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -328,14 +332,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.Form1_Load);
             // 
@@ -343,7 +347,7 @@
             // 
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -401,6 +405,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.chatOutput);
             this.groupBox4.Location = new System.Drawing.Point(463, 27);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 213);
@@ -426,11 +431,39 @@
             this.saveFileDialog1.Title = "Save";
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
+            // sendButton
+            // 
+            this.sendButton.Location = new System.Drawing.Point(463, 286);
+            this.sendButton.Name = "sendButton";
+            this.sendButton.Size = new System.Drawing.Size(200, 23);
+            this.sendButton.TabIndex = 6;
+            this.sendButton.Text = "Send";
+            this.sendButton.UseVisualStyleBackColor = true;
+            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
+            // 
+            // chatInput
+            // 
+            this.chatInput.Location = new System.Drawing.Point(463, 255);
+            this.chatInput.Name = "chatInput";
+            this.chatInput.Size = new System.Drawing.Size(200, 20);
+            this.chatInput.TabIndex = 7;
+            // 
+            // chatOutput
+            // 
+            this.chatOutput.Location = new System.Drawing.Point(6, 13);
+            this.chatOutput.Multiline = true;
+            this.chatOutput.Name = "chatOutput";
+            this.chatOutput.ReadOnly = true;
+            this.chatOutput.Size = new System.Drawing.Size(188, 194);
+            this.chatOutput.TabIndex = 0;
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 352);
+            this.Controls.Add(this.chatInput);
+            this.Controls.Add(this.sendButton);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox3);
@@ -451,6 +484,8 @@
             this.menu.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,6 +530,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TextBox chatOutput;
+        private System.Windows.Forms.Button sendButton;
+        private System.Windows.Forms.TextBox chatInput;
     }
 }
 

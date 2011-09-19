@@ -85,6 +85,5 @@ namespace WindowsFormsApplication1
           //  BikeData bikedata = new BikeData(heartrate, bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
             //c.addBikeDataToList(bikedata);
        // }
-
     }
 }

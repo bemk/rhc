@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Drawing.Drawing2D;
+using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace WindowsFormsApplication1
 {
@@ -18,6 +20,7 @@ namespace WindowsFormsApplication1
         private List<BikeData> data = new List<BikeData>();
         private VirtSettings virtSettings;
         private Chart chart;
+        ClientChatModule Chat = new ClientChatModule();
         
         public Client()
         {
@@ -26,6 +29,11 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             chart = new Chart(this);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
+            if (Chat.Connect("127.0.0.1", 1234))
+            {
+                Chat.OnDataReceive += OnDataReceive;
+                Chat.StartReceiving();
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -245,12 +253,43 @@ namespace WindowsFormsApplication1
             this.bike = new VirtBike(data.ElementAt(data.Count - 1).heartRate, data.ElementAt(data.Count - 1).RPM, data.ElementAt(data.Count - 1).speed, data.ElementAt(data.Count - 1).distance, data.ElementAt(data.Count - 1).power, data.ElementAt(data.Count - 1).energy, data.ElementAt(data.Count - 1).currentPower, data.ElementAt(data.Count - 1).time);
         }
 
+        protected void OnDataReceive(string message)
+        {
+            Console.WriteLine(message);
+            //chatOutput.AppendText(message + '\n');
+            //met een delegate de gui update doen
+        }
+
+        private void SendMessage(string message)
+        {
+            if (!String.IsNullOrEmpty(message))
+            {
+                if (Chat.SendMessage(message))
+                {
+                    chatOutput.AppendText(message + '\n');
+                    chatInput.Clear();
+                }
+                else
+                {
+                    chatOutput.AppendText("Error sending message\n");
+                }
+            }
+        }
+
+        private void OnUserInputType(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                SendMessage(chatInput.Text);
+            }
+            e.Handled = true;
+        }
 
         private void sendButton_Click(object sender, EventArgs e)
         {
-            string input = chatInput.Text;
-            chatOutput.Text += input;
+            SendMessage(chatInput.Text);           
         }
+
         public ComboBox GetComboBox1()
         {
             return this.comboBox1;

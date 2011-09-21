@@ -331,14 +331,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.Form1_Load);
             // 
@@ -346,7 +346,7 @@
             // 
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -362,14 +362,14 @@
             // physicalToolStripMenuItem
             // 
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
             // virtualToolStripMenuItem
             // 
             this.virtualToolStripMenuItem.Name = "virtualToolStripMenuItem";
-            this.virtualToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.virtualToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.virtualToolStripMenuItem.Text = "Virtual";
             this.virtualToolStripMenuItem.Click += new System.EventHandler(this.virtualToolStripMenuItem_Click);
             // 
@@ -455,6 +455,7 @@
             this.chatInput.Name = "chatInput";
             this.chatInput.Size = new System.Drawing.Size(200, 20);
             this.chatInput.TabIndex = 7;
+            this.chatInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnUserInputType);
             // 
             // Client
             // 

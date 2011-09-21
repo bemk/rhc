@@ -23,8 +23,7 @@ namespace WindowsFormsApplication1
         public Client()
         {
             // Please no methods here ;)
-            InitializeComponent();
-            
+            InitializeComponent();  
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,7 +31,7 @@ namespace WindowsFormsApplication1
             chart = new Chart(this);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
             setBike(new PhysBike(Program.COM_PORT));
-            openFileDialog1.ShowDialog();
+           // openFileDialog1.ShowDialog();
             timer1.Start();
         }
 
@@ -82,10 +81,7 @@ namespace WindowsFormsApplication1
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (bike is VirtBike)
-            {
-                updateLabels();
-            }
+            updateLabels();
             panel1.Invalidate();
         }
 

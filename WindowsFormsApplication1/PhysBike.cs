@@ -12,8 +12,9 @@ namespace WindowsFormsApplication1
         public const UInt32 SPEED        = 2;
         public const UInt32 DISTANCE     = 3;
         public const UInt32 POWER        = 4;
-        public const UInt32 ENERGY       = 6;
+        public const UInt32 ENERGY       = 5;
         public const UInt32 CURRENTPOWER = 7;
+        public const UInt32 TIME = 6;
 
         private SerialPort connection;
 
@@ -158,9 +159,12 @@ namespace WindowsFormsApplication1
         }
         public String GetTime()
         {
-            String time = getMsg("TE");
+            String time = getMsg("PW");
             if (time != "ERR")
-                return time;
+            {
+                String[] split = time.Split('\t');
+                return split[TIME];
+            }
             return "-1:-1:-1";
         }
     }

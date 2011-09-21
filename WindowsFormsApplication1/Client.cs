@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Drawing.Drawing2D;
+using System.Net.Sockets;
 
 namespace WindowsFormsApplication1
 {
@@ -194,7 +195,7 @@ namespace WindowsFormsApplication1
 
                 // Writes a block of bytes to this stream using data from a byte array.
                 FileStream.Write(ByteArray.ToArray(), 0, ByteArray.Length);
-
+                
                 // close file stream
                 FileStream.Close();
 

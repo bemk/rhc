@@ -49,7 +49,7 @@ namespace Server
         private static string ReadMessage(TcpClient client)
         {
             byte[] buffer = new byte[256];
-            int totalRead = 0;
+            int totalRead = 1;
             //read bytes until stream indicates there are no more
             do
             {
@@ -58,7 +58,7 @@ namespace Server
                 Console.WriteLine("ReadMessage: " + read);
             } while (client.GetStream().DataAvailable);
 
-            return Encoding.Unicode.GetString(buffer, 0, totalRead);
+            return Encoding.Unicode.GetString(buffer, 1, totalRead);
         }
 
         private static void SendResponse(TcpClient client, string message)

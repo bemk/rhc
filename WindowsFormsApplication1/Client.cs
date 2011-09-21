@@ -51,16 +51,6 @@ namespace WindowsFormsApplication1
                 bike = new PhysBike(Program.COM_PORT);
                 if(virtSettings != null)
                     virtSettings.Close();
-                if (!physicalToolStripMenuItem.Checked)
-                {
-                    resetLabels();
-                    physicalToolStripMenuItem.Checked = true;
-                    virtualToolStripMenuItem.Checked = false;
-                    //bike = new PhysBike(Program.COM_PORT); // Why make a new bike?
-                    if (virtSettings != null)
-                        virtSettings.Close();
-                }
-
             }
             else if (b is VirtBike)
             {
@@ -138,7 +128,6 @@ namespace WindowsFormsApplication1
             {
                 heartRateData.Text = bike.GetHeartRate().ToString();
             }
-
             RPMData.Text = bike.GetRPM().ToString();
             speedData.Text = bike.GetSpeed().ToString();
             distanceData.Text = bike.GetDistance().ToString();
@@ -210,7 +199,6 @@ namespace WindowsFormsApplication1
             catch (Exception Exception)
             {
                 // Error
-
                 if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
             }
             // Error occured, return null
@@ -231,8 +219,8 @@ namespace WindowsFormsApplication1
             }
             catch (Exception Exception)
             {
-                //Error
-                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
+                // Error
+				if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
             }
             //Error occured, return null;
             return false;

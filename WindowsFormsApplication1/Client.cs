@@ -49,7 +49,7 @@ namespace WindowsFormsApplication1
                 resetLabels();
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
-                bike = new PhysBike(Program.COM_PORT);
+                //bike = new PhysBike(Program.COM_PORT);
                 if(virtSettings != null)
                     virtSettings.Close();
             }
@@ -83,7 +83,7 @@ namespace WindowsFormsApplication1
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            updateLabels();
+           // updateLabels();
             panel1.Invalidate();
         }
 
@@ -246,7 +246,7 @@ namespace WindowsFormsApplication1
         protected void OnDataReceive(string message)
         {
             Console.WriteLine(message);
-            //chatOutput.AppendText(message + '\n');
+            chatOutput.AppendText(message + '\n');
             //met een delegate de gui update doen
         }
 

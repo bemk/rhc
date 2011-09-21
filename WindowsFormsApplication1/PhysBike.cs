@@ -50,7 +50,10 @@ namespace WindowsFormsApplication1
             try
             {
                 if (!connection.IsOpen)
+                {
                     connection.Open();
+                    Console.WriteLine("bike connected!");
+                }
             }
             catch (Exception e)
             {

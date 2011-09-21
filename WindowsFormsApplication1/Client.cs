@@ -10,6 +10,7 @@ using System.IO;
 using System.Xml;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace WindowsFormsApplication1
 {
@@ -19,6 +20,7 @@ namespace WindowsFormsApplication1
         private List<BikeData> data = new List<BikeData>();
         private VirtSettings virtSettings;
         private Chart chart;
+        ClientChatModule Chat = new ClientChatModule();
         
         public Client()
         {
@@ -241,11 +243,41 @@ namespace WindowsFormsApplication1
             virtSettings.Show();
         }
 
+        protected void OnDataReceive(string message)
+        {
+            Console.WriteLine(message);
+            //chatOutput.AppendText(message + '\n');
+            //met een delegate de gui update doen
+        }
+
+        private void SendMessage(string message)
+        {
+            if (!String.IsNullOrEmpty(message))
+            {
+                if (Chat.SendMessage(message))
+                {
+                    chatOutput.AppendText(message + '\n');
+                    chatInput.Clear();
+                }
+                else
+                {
+                    chatOutput.AppendText("Error sending message\n");
+                }
+            }
+        }
+
+        private void OnUserInputType(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                SendMessage(chatInput.Text);
+            }
+            e.Handled = true;
+        }
 
         private void sendButton_Click(object sender, EventArgs e)
         {
-            string input = chatInput.Text;
-            chatOutput.Text += input;
+            SendMessage(chatInput.Text);           
         }
 
         public ComboBox GetComboBox1()

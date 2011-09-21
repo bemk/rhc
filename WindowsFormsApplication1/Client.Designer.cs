@@ -65,11 +65,11 @@
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chatOutput = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.sendButton = new System.Windows.Forms.Button();
             this.chatInput = new System.Windows.Forms.TextBox();
-            this.chatOutput = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -412,6 +412,15 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chat";
             // 
+            // chatOutput
+            // 
+            this.chatOutput.Location = new System.Drawing.Point(6, 13);
+            this.chatOutput.Multiline = true;
+            this.chatOutput.Name = "chatOutput";
+            this.chatOutput.ReadOnly = true;
+            this.chatOutput.Size = new System.Drawing.Size(188, 194);
+            this.chatOutput.TabIndex = 0;
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "RHCData";
@@ -446,15 +455,7 @@
             this.chatInput.Name = "chatInput";
             this.chatInput.Size = new System.Drawing.Size(200, 20);
             this.chatInput.TabIndex = 7;
-            // 
-            // chatOutput
-            // 
-            this.chatOutput.Location = new System.Drawing.Point(6, 13);
-            this.chatOutput.Multiline = true;
-            this.chatOutput.Name = "chatOutput";
-            this.chatOutput.ReadOnly = true;
-            this.chatOutput.Size = new System.Drawing.Size(188, 194);
-            this.chatOutput.TabIndex = 0;
+            this.chatInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnUserInputType);
             // 
             // Client
             // 

@@ -38,16 +38,16 @@ namespace WindowsFormsApplication1
             g.SmoothingMode = SmoothingMode.HighQuality;
             Pen p = new Pen(c.GetPanel1().ForeColor, 3);
             p.LineJoin = LineJoin.Bevel;
-            string selectedData = c.GetComboBox1().SelectedText;
+            string selectedData ="" +  c.GetComboBox1().SelectedItem;
             SizeF stringsize = g.MeasureString(selectedData, c.GetPanel1().Font);
             g.DrawString(selectedData, c.GetPanel1().Font, p.Brush, new Point(c.GetPanel1().Width - (int)stringsize.Width, 0));
-
+            Console.WriteLine(selectedData);
             if (c.GetBike() is VirtBike)
             {
                 // Hell no, prefer comboBox1.SelectedIndex in a switchstate :z
                 switch (c.GetComboBox1().SelectedIndex)
                 {
-                    case 1:
+                    case 0:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetHeartRate() / 1.5 + 5));
@@ -79,7 +79,7 @@ namespace WindowsFormsApplication1
                             }
                             break;
                         }
-                    case 2:
+                    case 1:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetRPM() / 1.2 + 5));
@@ -112,7 +112,7 @@ namespace WindowsFormsApplication1
                             break;
                         }
 
-                    case 3:
+                    case 2:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-((int)c.GetBike().GetSpeed() / 4.2 + 5));
@@ -145,7 +145,7 @@ namespace WindowsFormsApplication1
                             break;
                         }
 
-                    case 4:
+                    case 3:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetDistance() / 600 + 5));
@@ -178,7 +178,7 @@ namespace WindowsFormsApplication1
                             break;
                         }
 
-                    case 5:
+                    case 4:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetPower() / 2.4 + 5));
@@ -211,7 +211,7 @@ namespace WindowsFormsApplication1
                             break;
                         }
 
-                    case 6:
+                    case 5:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetEnergy() / 600 + 5));
@@ -244,7 +244,7 @@ namespace WindowsFormsApplication1
                             break;
                         }
 
-                    case 7:
+                    case 6:
                         {
                             g.TranslateTransform(0, c.GetPanel1().Height);
                             Point newPoint = new Point(c.GetPanel1().Width, (int)-(c.GetBike().GetCurrentPower() / 2.4 + 5));

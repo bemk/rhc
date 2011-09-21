@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Drawing.Drawing2D;
+using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace WindowsFormsApplication1
 {
@@ -18,6 +20,7 @@ namespace WindowsFormsApplication1
         private List<BikeData> data = new List<BikeData>();
         private VirtSettings virtSettings;
         private Chart chart;
+        ClientChatModule Chat = new ClientChatModule();
         
         public Client()
         {
@@ -26,6 +29,11 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             chart = new Chart(this);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
+            if (Chat.Connect("127.0.0.1", 1234))
+            {
+                Chat.OnDataReceive += OnDataReceive;
+                Chat.StartReceiving();
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -50,7 +58,7 @@ namespace WindowsFormsApplication1
                 bike = new PhysBike(Program.COM_PORT);
 
                 if(virtSettings != null)
-                    virtSettings.Close();b
+                    virtSettings.Close();
             }
             else if (b is VirtBike)
             {
@@ -78,7 +86,6 @@ namespace WindowsFormsApplication1
         {
             saveFileDialog1.ShowDialog();
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (bike is VirtBike)
@@ -126,7 +133,8 @@ namespace WindowsFormsApplication1
             else if (bike is PhysBike)
             {
                 heartRateData.Text = bike.GetHeartRate().ToString();
-            }bb
+
+            }
             RPMData.Text = bike.GetRPM().ToString();
             speedData.Text = bike.GetSpeed().ToString();
             distanceData.Text = bike.GetDistance().ToString();
@@ -141,6 +149,7 @@ namespace WindowsFormsApplication1
            // data.ElementAt(data.Count - 1).pointsPower = this.pointsPower;
            // data.ElementAt(data.Count - 1).pointsEnergy = this.pointsEnergy;
           //  data.ElementAt(data.Count - 1).pointsCurrentPower = this.pointsCurrentPower;
+
         }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -198,7 +207,7 @@ namespace WindowsFormsApplication1
             {
                 // Error
 
-                Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
+                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
             }
 
             // Error occured, return null
@@ -224,8 +233,7 @@ namespace WindowsFormsApplication1
             {
                 //Error
 
-                Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
-
+                if(Program.DEBUG) Console.WriteLine("Exception caught in process: {0}", Exception.ToString());
             }
             //Error occured, return null;
             return false;
@@ -246,7 +254,46 @@ namespace WindowsFormsApplication1
         private void updateBike()
         {
             this.bike = new VirtBike(data.ElementAt(data.Count - 1).heartRate, data.ElementAt(data.Count - 1).RPM, data.ElementAt(data.Count - 1).speed, data.ElementAt(data.Count - 1).distance, data.ElementAt(data.Count - 1).power, data.ElementAt(data.Count - 1).energy, data.ElementAt(data.Count - 1).currentPower, data.ElementAt(data.Count - 1).time);
-        }h
+
+        }
+
+        protected void OnDataReceive(string message)
+        {
+            Console.WriteLine(message);
+            //chatOutput.AppendText(message + '\n');
+            //met een delegate de gui update doen
+        }
+
+        private void SendMessage(string message)
+        {
+            if (!String.IsNullOrEmpty(message))
+            {
+                if (Chat.SendMessage(message))
+                {
+                    chatOutput.AppendText(message + '\n');
+                    chatInput.Clear();
+                }
+                else
+                {
+                    chatOutput.AppendText("Error sending message\n");
+                }
+            }
+        }
+
+        private void OnUserInputType(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                SendMessage(chatInput.Text);
+            }
+            e.Handled = true;
+        }
+
+        private void sendButton_Click(object sender, EventArgs e)
+        {
+            SendMessage(chatInput.Text);           
+        }
+
         public ComboBox GetComboBox1()
         {
             return this.comboBox1;

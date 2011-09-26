@@ -20,12 +20,12 @@ namespace WindowsFormsApplication1
         private List<BikeData> data = new List<BikeData>();
         private VirtSettings virtSettings;
         private Chart chart;
-        ClientChatModule Chat = new ClientChatModule();
+        ClientChatModule Chat = new ClientChatModule("127.0.0.1", 1234, true);
         
         public Client()
         {
             // Please no methods here ;)
-            InitializeComponent();  
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -97,6 +97,7 @@ namespace WindowsFormsApplication1
             updateLabels();
         }
 
+        #region Labels
         private void resetLabels()
         {
             heartRateData.Text = "0";
@@ -136,7 +137,19 @@ namespace WindowsFormsApplication1
 
             addBikeDataToList(new BikeData(bike.GetHeartRate(),bike.GetRPM(),(int)bike.GetSpeed(),bike.GetDistance(),bike.GetPower(),bike.GetEnergy(),bike.GetCurrentPower(),bike.GetTime()));
         }
-
+        private void updatePoints()
+        {
+            chart.PointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
+            chart.PointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
+            chart.PointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
+            chart.PointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
+            chart.PointsPower = data.ElementAt(data.Count - 1).pointsPower;
+            chart.PointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
+            chart.PointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
+            panel1.Invalidate();
+        }
+        #endregion
+        #region FileIO
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             e.Cancel = false;
@@ -147,9 +160,8 @@ namespace WindowsFormsApplication1
             data.ElementAt(data.Count - 1).pointsPower = chart.PointsPower;
             data.ElementAt(data.Count - 1).pointsEnergy = chart.PointsEnergy;
             data.ElementAt(data.Count - 1).pointsCurrentPower = chart.PointsCurrentPower;
-            ObjectToFile(data,saveFileDialog1.FileName);
+            ObjectToFile(data, saveFileDialog1.FileName);
         }
-
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             FileToObject(openFileDialog1.FileName);
@@ -223,18 +235,7 @@ namespace WindowsFormsApplication1
             //Error occured, return null;
             return false;
         }
-
-        private void updatePoints()
-        {
-            chart.PointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
-            chart.PointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
-            chart.PointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
-            chart.PointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
-            chart.PointsPower = data.ElementAt(data.Count - 1).pointsPower;
-            chart.PointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
-            chart.PointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
-            panel1.Invalidate();
-        }
+        #endregion
 
         private void updateBike()
         {
@@ -293,6 +294,11 @@ namespace WindowsFormsApplication1
         public Panel GetPanel1()
         {
             return panel1;
+        }
+
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Chat.Close();
         }
     }
 }

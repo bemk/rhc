@@ -3,3 +3,4 @@ C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\obj\Debug\ResolveA
 C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\obj\Debug\Server.pdb
 C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\bin\Debug\Server.exe
 C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\obj\Debug\Server.exe
+C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\bin\Debug\Server.XML

@@ -4,6 +4,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Server
 {
@@ -30,20 +31,32 @@ namespace Server
         static void HandleClientThread(object obj)
         {
             TcpClient client = obj as TcpClient;
-            Console.WriteLine("Connection accepted");
-
-            bool done = false;
-            while (!done)
+            try
             {
-                string received = ReadMessage(client);
-                Console.WriteLine("Received: {0}", received);
-                done = received.Equals("bye");
-                if (done) SendResponse(client, "BYE");
-                else SendResponse(client, "OK");
+                Debug.WriteLine("Connection accepted");
+                Console.WriteLine("Connection accepted");
 
+                bool done = false;
+                while (!done)
+                {
+                    string received = ReadMessage(client);
+                    Console.WriteLine("Received: {0}", received);
+                    done = received.Equals("-=+CleanCloseConnection+=-", StringComparison.CurrentCultureIgnoreCase);
+                    if (done) SendResponse(client, "-=+CleanCloseConnection+=-");
+                    else SendResponse(client, "OK");
+                }
             }
-            client.Close();
-            Console.WriteLine("Connection closed");
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                client.Close();
+                Debug.WriteLine("Connection closed");
+                Console.WriteLine("Connection closed");
+            }
         }
 
         private static string ReadMessage(TcpClient client)

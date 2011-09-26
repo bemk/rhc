@@ -25,7 +25,6 @@ namespace Server
                 Thread thread = new Thread(HandleClientThread);
                 thread.Start(client);
             }
-
         }
 
         static void HandleClientThread(object obj)

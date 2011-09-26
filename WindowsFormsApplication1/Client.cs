@@ -33,6 +33,11 @@ namespace WindowsFormsApplication1
             InitializeComponent();  
         }
 
+        public BikeData getData()
+        {
+            return data.ElementAt(data.Count - 1);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             chart = new Chart(this);
@@ -40,8 +45,10 @@ namespace WindowsFormsApplication1
             COM_port_Selection comSelection = new COM_port_Selection();
             if (comSelection.ShowDialog() == DialogResult.OK)
             {
-                    Console.WriteLine(comSelection.getSelected());
+                if (comSelection.getSelected() != null)
                     setBike(new PhysBike(comSelection.getSelected()));
+                else
+                    setBike(new VirtBike());
             }
             else
             {
@@ -51,6 +58,19 @@ namespace WindowsFormsApplication1
  
             Thread thread = new Thread(new ThreadStart(timer2_Tick));
             thread.Start();
+            Thread uploadThread = new Thread(new ThreadStart(saveToServer));
+            uploadThread.Start();
+        }
+
+        private void saveToServer()
+        {
+            while (true)
+            {
+                if (data.Count > 125)
+                {
+                    data.RemoveAt(0);
+                }
+            }
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)

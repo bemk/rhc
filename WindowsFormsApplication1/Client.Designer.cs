@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.timeData = new System.Windows.Forms.Label();
             this.currentPowerData = new System.Windows.Forms.Label();
             this.energyData = new System.Windows.Forms.Label();
@@ -70,7 +71,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.sendButton = new System.Windows.Forms.Button();
             this.chatInput = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -104,6 +105,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(178, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "km/h";
             // 
             // timeData
             // 
@@ -400,7 +410,6 @@
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 60;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
@@ -458,14 +467,9 @@
             this.chatInput.TabIndex = 7;
             this.chatInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnUserInputType);
             // 
-            // label1
+            // timer2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(178, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "km/h";
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Client
             // 
@@ -485,6 +489,7 @@
             this.MaximizeBox = false;
             this.Name = "Client";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Client_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -544,6 +549,7 @@
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.TextBox chatInput;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

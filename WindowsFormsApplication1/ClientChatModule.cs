@@ -41,6 +41,7 @@ namespace WindowsFormsApplication1
             int porte = 1234;
             this.Connect(ip,porte);
         }
+
         public bool SendMessage(string message)
         {
             try

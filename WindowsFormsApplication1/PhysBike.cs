@@ -132,7 +132,14 @@ namespace WindowsFormsApplication1
             if (hb != "ERR")
             {
                 String[] split = hb.Split('\t');
-                return Int32.Parse(split[HEARTBEAT]);
+                try
+                {
+                    return Int32.Parse(split[HEARTBEAT]);
+                }
+                catch (Exception e)
+                {
+                    if (Program.DEBUG) Console.WriteLine(e);
+                }
             }
             return -1;
         }

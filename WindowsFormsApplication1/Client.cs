@@ -34,7 +34,7 @@ namespace WindowsFormsApplication1
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
             setBike(new PhysBike(Program.COM_PORT));
            // openFileDialog1.ShowDialog();
-            timer1.Start();
+           // timer1.Start();
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,7 +83,8 @@ namespace WindowsFormsApplication1
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-           // updateLabels();
+            
+            updateLabels();
             panel1.Invalidate();
         }
 
@@ -94,7 +95,7 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            updateLabels();
+            timer1.Start();
         }
 
         private void resetLabels()
@@ -246,7 +247,7 @@ namespace WindowsFormsApplication1
         protected void OnDataReceive(string message)
         {
             Console.WriteLine(message);
-            chatOutput.AppendText(message + '\n');
+            //chatOutput.AppendText(message + '\n');
             //met een delegate de gui update doen
         }
 
@@ -293,6 +294,16 @@ namespace WindowsFormsApplication1
         public Panel GetPanel1()
         {
             return panel1;
+        }
+
+        private void Client_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }

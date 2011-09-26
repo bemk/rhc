@@ -9,12 +9,13 @@ namespace Server
 {
     class Program
     {
+        public const bool active = true;
         static void Main(string[] args)
         {
             TcpListener listener = new TcpListener(IPAddress.Loopback, 1234);
             listener.Start();
 
-            while (true)
+            while (active)
             {
                 Console.WriteLine("Waiting for connection");
                 //AcceptTcpClient waits for a connection from the client

@@ -3,3 +3,8 @@ C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\obj\Debug\ResolveA
 C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\obj\Debug\Server.pdb
 C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\bin\Debug\Server.exe
 C:\Users\TYB\Documents\Visual Studio 2010\Projects\RHC\Server\obj\Debug\Server.exe
+C:\Users\Jasper\Desktop\Git Periode 1 Jaar 2\Server\bin\Debug\Server.exe
+C:\Users\Jasper\Desktop\Git Periode 1 Jaar 2\Server\bin\Debug\Server.pdb
+C:\Users\Jasper\Desktop\Git Periode 1 Jaar 2\Server\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jasper\Desktop\Git Periode 1 Jaar 2\Server\obj\Debug\Server.exe
+C:\Users\Jasper\Desktop\Git Periode 1 Jaar 2\Server\obj\Debug\Server.pdb

@@ -82,7 +82,7 @@ namespace WindowsFormsApplication1
         public void SetPower(int power)
         {
             sendMsg("CD");
-            Thread.Sleep(500);
+            Thread.Sleep(100);
             sendMsg("PW " + power.ToString());
         }
 

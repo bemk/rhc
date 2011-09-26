@@ -22,14 +22,9 @@ namespace WindowsFormsApplication1
         private List<BikeData> data = new List<BikeData>();
         private VirtSettings virtSettings;
         private Chart chart;
-<<<<<<< HEAD
-        ClientChatModule Chat = new ClientChatModule("127.0.0.1", 1234, true);
-=======
         ClientChatModule Chat = new ClientChatModule();
 
         private delegate void addBikeDataToListD(BikeData data);
-
->>>>>>> 9827eb34a566655504a86102a929af1a0a0acbcc
         
         public Client()
         {

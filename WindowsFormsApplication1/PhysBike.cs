@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO.Ports;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
     class PhysBike : Bike
     {
         public const UInt32 HEARTBEAT    = 0;
+        public const UInt32 RPM          = 1;
         public const UInt32 SPEED        = 2;
         public const UInt32 DISTANCE     = 3;
         public const UInt32 POWER        = 4;
@@ -79,16 +81,18 @@ namespace WindowsFormsApplication1
 
         public void SetPower(int power)
         {
-            sendMsg("CM");
+            sendMsg("CD");
+            Thread.Sleep(100);
             sendMsg("PW " + power.ToString());
         }
 
         public int GetPower()
         {
-            String pw = getMsg("PW");
-            if (pw != "ERR")
+            String pw = getMsg("ST");
+            if (pw != "ERROR" || pw != "RUN\r")
             {
-                String[] split = pw.Split('\t');
+                String[] split = pw.Split('\t'); 
+                if(split.Length > 1)
                 return Int32.Parse(split[POWER]);
             }
             return -1;
@@ -96,10 +100,11 @@ namespace WindowsFormsApplication1
 
         public int GetCurrentPower()
         {
-            String pw = getMsg("PW");
-            if (pw != "ERR")
+            String pw = getMsg("ST");
+            if (pw != "ERROR" || pw != "RUN\r")
             {
                 String[] split = pw.Split('\t');
+                if (split.Length > 1)
                 return Int32.Parse(split[CURRENTPOWER]);
             }
             return -1;
@@ -107,10 +112,11 @@ namespace WindowsFormsApplication1
 
         public int GetEnergy()
         {
-            String pw = getMsg("PW");
-            if (pw != "ERR")
+            String pw = getMsg("ST");
+            if (pw != "ERROR" || pw != "RUN\r")
             {
                 String[] split = pw.Split('\t');
+                if (split.Length > 1)
                 return Int32.Parse(split[ENERGY]); // 5 or 6.
             }
             return -1;
@@ -118,46 +124,46 @@ namespace WindowsFormsApplication1
 
         public int GetDistance()
         {
-            string pw = getMsg("PW");
+            string pw = getMsg("ST");
             if(pw != "ERR")
             {
                 string[] split = pw.Split('\t');
+                if (split.Length > 1)
                 return Int32.Parse(split[DISTANCE]);
             }
             return -1;
         }
         public int GetHeartRate()
         {
-            String hb = getMsg("PW");
+            String hb = getMsg("ST");
             if (hb != "ERR")
             {
                 String[] split = hb.Split('\t');
-                try
-                {
+                if (split.Length > 1)
                     return Int32.Parse(split[HEARTBEAT]);
-                }
-                catch (Exception e)
-                {
-                    if (Program.DEBUG) Console.WriteLine(e);
-                }
             }
             return -1;
         }
         public decimal GetSpeed()
         {
-            String spd = getMsg("PW");
-            if (spd != "ERR")
+            String spd = getMsg("ST");
+            if (spd != "ERROR" || spd != "RUN\r")
             {
                 String[] split = spd.Split('\t');
+                if (split.Length > 1)
                 return decimal.Parse(split[SPEED]) / 10;
             }
             return -1;
         }
         public int GetRPM()
         {
-            String RPM = getMsg("VS");
-            if (RPM != "ERR")
-                return Int32.Parse(RPM);
+            String rpm = getMsg("ST");
+            if (rpm != "ERROR" || rpm != "RUN\r")
+            {
+                String[] split = rpm.Split('\t');
+                if (split.Length > 1)
+                return Int32.Parse(split[RPM]);
+            }
             return -1;
         }
         public int GetBikeID()
@@ -169,10 +175,11 @@ namespace WindowsFormsApplication1
         }
         public String GetTime()
         {
-            String time = getMsg("PW");
+            String time = getMsg("ST");
             if (time != "ERR")
             {
                 String[] split = time.Split('\t');
+                if (split.Length > 1)
                 return split[TIME];
             }
             return "-1:-1:-1";

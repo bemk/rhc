@@ -34,6 +34,8 @@ namespace WindowsFormsApplication1
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
             setBike(new PhysBike(Program.COM_PORT));
            // openFileDialog1.ShowDialog();
+            data.Add(new BikeData(0, 0, 0, 0, 25, 0, 0, "00:00:00"));
+            timer2.Start();
             timer1.Start();
         }
 
@@ -49,7 +51,6 @@ namespace WindowsFormsApplication1
                 resetLabels();
                 physicalToolStripMenuItem.Checked = true;
                 virtualToolStripMenuItem.Checked = false;
-                bike = new PhysBike(Program.COM_PORT);
                 if(virtSettings != null)
                     virtSettings.Close();
             }
@@ -70,6 +71,11 @@ namespace WindowsFormsApplication1
         public void addBikeDataToList(BikeData bd)
         {
             data.Add(bd);
+        }
+
+        public BikeData getLastBikeDataFromList()
+        {
+            return data.ElementAt(data.Count - 1);
         }
 
         private void virtualToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,7 +100,7 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            updateLabels();
+            timer1.Start();
         }
 
         #region Labels
@@ -112,11 +118,12 @@ namespace WindowsFormsApplication1
 
         private void updateLabels()
         {
+            
             if (bike is VirtBike)
             {
                 if (((VirtBike)bike).GetHeartRateConnected())
                 {
-                    heartRateData.Text = bike.GetHeartRate().ToString();
+                    heartRateData.Text = getLastBikeDataFromList().heartRate.ToString();
                 }
                 else
                 {
@@ -125,17 +132,15 @@ namespace WindowsFormsApplication1
             }
             else if (bike is PhysBike)
             {
-                heartRateData.Text = bike.GetHeartRate().ToString();
+                heartRateData.Text = getLastBikeDataFromList().heartRate.ToString();
             }
-            RPMData.Text = bike.GetRPM().ToString();
-            speedData.Text = bike.GetSpeed().ToString();
-            distanceData.Text = bike.GetDistance().ToString();
-            powerData.Text = bike.GetPower().ToString();
-            energyData.Text = bike.GetEnergy().ToString();
-            currentPowerData.Text = bike.GetCurrentPower().ToString();
-            timeData.Text = bike.GetTime();
-
-            addBikeDataToList(new BikeData(bike.GetHeartRate(),bike.GetRPM(),(int)bike.GetSpeed(),bike.GetDistance(),bike.GetPower(),bike.GetEnergy(),bike.GetCurrentPower(),bike.GetTime()));
+            RPMData.Text = getLastBikeDataFromList().RPM.ToString();
+            speedData.Text = getLastBikeDataFromList().speed.ToString();
+            distanceData.Text = getLastBikeDataFromList().distance.ToString();
+            powerData.Text = getLastBikeDataFromList().power.ToString();
+            energyData.Text = getLastBikeDataFromList().energy.ToString();
+            currentPowerData.Text = getLastBikeDataFromList().currentPower.ToString();
+            timeData.Text = getLastBikeDataFromList().time;
         }
         private void updatePoints()
         {
@@ -299,6 +304,31 @@ namespace WindowsFormsApplication1
         private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
             Chat.Close();
+        }
+        private void Client_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            addBikeDataToList(new BikeData(bike.GetHeartRate(), bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime()));
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            // Algorithm so it makes steps of 5
+            int barValue = trackBar1.Value;
+            int rest = barValue % 5;
+            if (rest == 1 || rest == 2)
+            {
+                barValue -= rest + 5;
+            }
+            else if (rest == 3 || rest == 4)
+            {
+                barValue -= rest;
+            }
+            bike.SetPower(barValue);
         }
     }
 }

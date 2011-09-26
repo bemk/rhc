@@ -50,6 +50,7 @@ namespace WindowsFormsApplication1
                 throw new Exception(String.Format("Error connecting to server: {0}:{1}", ip, port));
             }
         }
+
         public bool SendMessage(string message)
         {
             try

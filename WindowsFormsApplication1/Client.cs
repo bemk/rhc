@@ -11,6 +11,8 @@ using System.Xml;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.IO.Ports;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
@@ -21,6 +23,9 @@ namespace WindowsFormsApplication1
         private VirtSettings virtSettings;
         private Chart chart;
         ClientChatModule Chat = new ClientChatModule();
+
+        private delegate void addBikeDataToListD(BikeData data);
+
         
         public Client()
         {
@@ -32,11 +37,20 @@ namespace WindowsFormsApplication1
         {
             chart = new Chart(this);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
-            setBike(new PhysBike(Program.COM_PORT));
-           // openFileDialog1.ShowDialog();
+            COM_port_Selection comSelection = new COM_port_Selection();
+            if (comSelection.ShowDialog() == DialogResult.OK)
+            {
+                    Console.WriteLine(comSelection.getSelected());
+                    setBike(new PhysBike(comSelection.getSelected()));
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
             data.Add(new BikeData(0, 0, 0, 0, 25, 0, 0, "00:00:00"));
-            timer2.Start();
-            timer1.Start();
+ 
+            Thread thread = new Thread(new ThreadStart(timer2_Tick));
+            thread.Start();
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -305,9 +319,22 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void timer2_Tick()
         {
-            addBikeDataToList(new BikeData(bike.GetHeartRate(), bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime()));
+            while (true)
+            {
+                if (!InvokeRequired)
+                {
+                    addBikeDataToList(new BikeData(bike.GetHeartRate(), bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime()));
+                }
+                else
+                {
+                    addBikeDataToListD delegatedata = addBikeDataToList;
+                    BikeData data = new BikeData(bike.GetHeartRate(), bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
+                    delegatedata(data);
+                }
+                Thread.Sleep(60);
+            }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -324,6 +351,7 @@ namespace WindowsFormsApplication1
                 barValue -= rest;
             }
             bike.SetPower(barValue);
+            updateLabels();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace SslTcpClient
 {
     class SslTcpClient
     {
-        private const string server = "127.0.0.1";
+        private const string server = "192.168.0.2";
         // According to documentation 1234
         private const int port = 1234;
 

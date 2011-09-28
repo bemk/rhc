@@ -1,0 +1,10 @@
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\bin\Debug\MasterClient.exe
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\bin\Debug\MasterClient.pdb
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\MasterClient.masterClient.resources
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\MasterClient.Properties.Resources.resources
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\MasterClient.exe
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\MasterClient.pdb
+C:\Users\Jeremy\AppData\Local\Temporary Projects\MasterClient\obj\x86\Debug\MasterClient.About.resources

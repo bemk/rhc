@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +19,23 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             bike = b;
             this.c = c;
-            timer1.Start();
+            setValues();
+        }
+
+        private void setValues()
+        {
+            heartRateConnected.Checked = bike.GetHeartRateConnected();
+            heartRateBar.Value = bike.GetHeartRate();
+            RPMBar.Value = bike.GetRPM();
+            speedBar.Value = (int)bike.GetSpeed();
+            distanceNumber.Value = bike.GetDistance();
+            powerBar.Value = bike.GetPower();
+            energyNumber.Value = bike.GetEnergy();
+            currentPowerBar.Value = bike.GetCurrentPower();
+            String[] split = bike.GetTime().Split(':');
+            hour.Value = Int32.Parse(split[0]);
+            minutes.Value = int.Parse(split[1]);
+            seconds.Value = int.Parse(split[2]);
         }
 
         private void heartRateBar_Scroll(object sender, EventArgs e)
@@ -49,7 +65,23 @@ namespace WindowsFormsApplication1
 
         private void powerBar_Scroll(object sender, EventArgs e)
         {
-            bike.SetPower(powerBar.Value);
+            // Algorithm so it makes steps of 5
+            int barValue = powerBar.Value;
+            int rest = barValue % 5;
+            if (rest == 1 || rest == 2)
+            {
+                barValue -= rest + 5;
+            }
+            else if (rest == 3 || rest == 4)
+            {
+                barValue -= rest;
+            }
+            bike.SetPower(barValue);
+            currentPowerBar.Maximum = barValue;
+            if (currentPowerBar.Value >= barValue)
+            {
+                bike.SetCurrentPower(barValue);
+            }
         }
 
         private void energyNumber_ValueChanged(object sender, EventArgs e)
@@ -59,7 +91,14 @@ namespace WindowsFormsApplication1
 
         private void currentPowerBar_Scroll(object sender, EventArgs e)
         {
-            bike.SetCurrentPower(currentPowerBar.Value);
+            if (currentPowerBar.Value <= powerBar.Value)
+            {
+                bike.SetCurrentPower(currentPowerBar.Value);
+            }
+            else
+            {
+                if (Program.DEBUG) Console.WriteLine("ERROR: Currentpower is higher than max power :C");
+            }
         }
 
         private void Hour_ValueChanged(object sender, EventArgs e)
@@ -75,17 +114,6 @@ namespace WindowsFormsApplication1
         private void Seconds_ValueChanged(object sender, EventArgs e)
         {
             bike.SetTime(hour.Value + ":" + minutes.Value + ":" + seconds.Value);
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            int heartrate;
-            if(!bike.GetHeartRateConnected())
-                heartrate = 0;
-            else
-                heartrate = bike.GetHeartRate();
-            BikeData bikedata = new BikeData(heartrate, bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
-            c.addBikeDataToList(bikedata);
         }
     }
 }

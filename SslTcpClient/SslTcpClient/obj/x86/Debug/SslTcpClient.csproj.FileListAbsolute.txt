@@ -1,0 +1,10 @@
+C:\Users\Jeremy\AppData\Local\Temporary Projects\SslTcpClient\bin\Debug\SslTcpClient.exe
+C:\Users\Jeremy\AppData\Local\Temporary Projects\SslTcpClient\bin\Debug\SslTcpClient.pdb
+C:\Users\Jeremy\AppData\Local\Temporary Projects\SslTcpClient\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Jeremy\AppData\Local\Temporary Projects\SslTcpClient\obj\x86\Debug\SslTcpClient.exe
+C:\Users\Jeremy\AppData\Local\Temporary Projects\SslTcpClient\obj\x86\Debug\SslTcpClient.pdb
+C:\Users\Jeremy\Desktop\Project\SslTcpClient\SslTcpClient\obj\x86\Debug\SslTcpClient.exe
+C:\Users\Jeremy\Desktop\Project\SslTcpClient\SslTcpClient\obj\x86\Debug\SslTcpClient.pdb
+C:\Users\Jeremy\Desktop\Project\SslTcpClient\SslTcpClient\bin\Debug\SslTcpClient.exe
+C:\Users\Jeremy\Desktop\Project\SslTcpClient\SslTcpClient\bin\Debug\SslTcpClient.pdb
+C:\Users\Jeremy\Desktop\Project\SslTcpClient\SslTcpClient\obj\x86\Debug\ResolveAssemblyReference.cache

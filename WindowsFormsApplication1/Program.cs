@@ -8,7 +8,7 @@ namespace WindowsFormsApplication1
     static class Program
     {
         public const bool DEBUG = true;
-        public const string COM_PORT = "COM7"; // This must become an option to select at startup.
+        public const string COM_PORT = "COM7"; //- This must become an option to select at startup.
 
         /// <summary>
         /// The main entry point for the application.

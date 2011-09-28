@@ -35,11 +35,20 @@ namespace WindowsFormsApplication1
             }
         }
 
-        public ClientChatModule()
-        { 
-            string ip ="localhost";
-            int porte = 1234;
-            this.Connect(ip,porte);
+        public ClientChatModule():this ("127.0.0.1", 1234, true) {}
+        public ClientChatModule(string ip, int port, bool autoStartReceiving)
+        {
+            if (Connect(ip, port))
+            {
+                if (autoStartReceiving)
+                {
+                    StartReceiving();
+                }
+            }
+            else
+            {
+                throw new Exception(String.Format("Error connecting to server: {0}:{1}", ip, port));
+            }
         }
 
         public bool SendMessage(string message)
@@ -69,7 +78,12 @@ namespace WindowsFormsApplication1
                     int read = client.GetStream().Read(buffer, totalRead, buffer.Length - totalRead);
                     totalRead += read;
                 } while (client.GetStream().DataAvailable);
-                return Encoding.Unicode.GetString(buffer, 0, totalRead);
+                string message = Encoding.Unicode.GetString(buffer, 0, totalRead);
+                if (message.Equals("-=+CleanCloseConnection+=-", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    Close();
+                }
+                return message;
             }
             catch (Exception e) //else
             {
@@ -127,6 +141,12 @@ namespace WindowsFormsApplication1
                 return false;
             }
             return true;
+        }
+        public void Close()
+        {
+            SendMessage("-=+CleanCloseConnection+=-");
+            socket.Close();
+            StopReceiving();
         }
     }
 }

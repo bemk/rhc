@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\WindowsFormsApplication1.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -87,6 +88,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ClientChatModule.cs" />
+    <Compile Include="COM-port Selection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COM-port Selection.Designer.cs">
+      <DependentUpon>COM-port Selection.cs</DependentUpon>
+    </Compile>
     <Compile Include="DubbleBufferedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -109,6 +116,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Client.resx">
       <DependentUpon>Client.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COM-port Selection.resx">
+      <DependentUpon>COM-port Selection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -11,6 +11,8 @@ using System.Xml;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.IO.Ports;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
@@ -21,22 +23,53 @@ namespace WindowsFormsApplication1
         private VirtSettings virtSettings;
         private Chart chart;
         ClientChatModule Chat = new ClientChatModule();
+
+        private delegate void addBikeDataToListD(BikeData data);
         
         public Client()
         {
             // Please no methods here ;)
-            InitializeComponent();  
+            InitializeComponent();
+        }
+
+        public BikeData getData()
+        {
+            return data.ElementAt(data.Count - 1);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             chart = new Chart(this);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.chart.panel1_Paint);
-            setBike(new PhysBike(Program.COM_PORT));
-           // openFileDialog1.ShowDialog();
+            COM_port_Selection comSelection = new COM_port_Selection();
+            if (comSelection.ShowDialog() == DialogResult.OK)
+            {
+                if (comSelection.getSelected() != null)
+                    setBike(new PhysBike(comSelection.getSelected()));
+                else
+                    setBike(new VirtBike());
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
             data.Add(new BikeData(0, 0, 0, 0, 25, 0, 0, "00:00:00"));
-            timer2.Start();
-            timer1.Start();
+ 
+            Thread thread = new Thread(new ThreadStart(timer2_Tick));
+            thread.Start();
+            Thread uploadThread = new Thread(new ThreadStart(saveToServer));
+            uploadThread.Start();
+        }
+
+        private void saveToServer()
+        {
+            while (true)
+            {
+                if (data.Count > 125)
+                {
+                    data.RemoveAt(0);
+                }
+            }
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,6 +136,7 @@ namespace WindowsFormsApplication1
             timer1.Start();
         }
 
+        #region Labels
         private void resetLabels()
         {
             heartRateData.Text = "0";
@@ -141,7 +175,19 @@ namespace WindowsFormsApplication1
             currentPowerData.Text = getLastBikeDataFromList().currentPower.ToString();
             timeData.Text = getLastBikeDataFromList().time;
         }
-
+        private void updatePoints()
+        {
+            chart.PointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
+            chart.PointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
+            chart.PointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
+            chart.PointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
+            chart.PointsPower = data.ElementAt(data.Count - 1).pointsPower;
+            chart.PointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
+            chart.PointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
+            panel1.Invalidate();
+        }
+        #endregion
+        #region FileIO
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             e.Cancel = false;
@@ -152,9 +198,8 @@ namespace WindowsFormsApplication1
             data.ElementAt(data.Count - 1).pointsPower = chart.PointsPower;
             data.ElementAt(data.Count - 1).pointsEnergy = chart.PointsEnergy;
             data.ElementAt(data.Count - 1).pointsCurrentPower = chart.PointsCurrentPower;
-            ObjectToFile(data,saveFileDialog1.FileName);
+            ObjectToFile(data, saveFileDialog1.FileName);
         }
-
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             FileToObject(openFileDialog1.FileName);
@@ -228,18 +273,7 @@ namespace WindowsFormsApplication1
             //Error occured, return null;
             return false;
         }
-
-        private void updatePoints()
-        {
-            chart.PointsHeartrate = data.ElementAt(data.Count - 1).pointsHeartrate;
-            chart.PointsRPM = data.ElementAt(data.Count - 1).pointsRPM;
-            chart.PointsSpeed = data.ElementAt(data.Count - 1).pointsSpeed;
-            chart.PointsDistance = data.ElementAt(data.Count - 1).pointsDistance;
-            chart.PointsPower = data.ElementAt(data.Count - 1).pointsPower;
-            chart.PointsEnergy = data.ElementAt(data.Count - 1).pointsEnergy;
-            chart.PointsCurrentPower = data.ElementAt(data.Count - 1).pointsCurrentPower;
-            panel1.Invalidate();
-        }
+        #endregion
 
         private void updateBike()
         {
@@ -300,14 +334,31 @@ namespace WindowsFormsApplication1
             return panel1;
         }
 
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Chat.Close();
+        }
         private void Client_FormClosed(object sender, FormClosedEventArgs e)
         {
 
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void timer2_Tick()
         {
-            addBikeDataToList(new BikeData(bike.GetHeartRate(), bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime()));
+            while (true)
+            {
+                if (!InvokeRequired)
+                {
+                    addBikeDataToList(new BikeData(bike.GetHeartRate(), bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime()));
+                }
+                else
+                {
+                    addBikeDataToListD delegatedata = addBikeDataToList;
+                    BikeData data = new BikeData(bike.GetHeartRate(), bike.GetRPM(), (int)bike.GetSpeed(), bike.GetDistance(), bike.GetPower(), bike.GetEnergy(), bike.GetCurrentPower(), bike.GetTime());
+                    delegatedata(data);
+                }
+                Thread.Sleep(60);
+            }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -324,6 +375,7 @@ namespace WindowsFormsApplication1
                 barValue -= rest;
             }
             bike.SetPower(barValue);
+            updateLabels();
         }
     }
 }

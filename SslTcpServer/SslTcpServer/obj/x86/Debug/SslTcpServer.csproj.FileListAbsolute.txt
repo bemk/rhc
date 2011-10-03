@@ -1,7 +1,0 @@
-C:\Users\Jeremy\Desktop\Project\MasterClient\SslTcpServer\SslTcpServer\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Jeremy\Desktop\Project\MasterClient\SslTcpServer\SslTcpServer\bin\Debug\SslTcpServer.exe
-C:\Users\Jeremy\Desktop\Project\MasterClient\SslTcpServer\SslTcpServer\bin\Debug\SslTcpServer.pdb
-C:\Users\Jeremy\Desktop\Project\MasterClient\SslTcpServer\SslTcpServer\obj\x86\Debug\SslTcpServer.exe
-C:\Users\Jeremy\Desktop\Project\MasterClient\SslTcpServer\SslTcpServer\obj\x86\Debug\SslTcpServer.pdb
-C:\Users\Jeremy\Desktop\Project\SslTcpServer\SslTcpServer\obj\x86\Debug\SslTcpServer.exe
-C:\Users\Jeremy\Desktop\Project\SslTcpServer\SslTcpServer\obj\x86\Debug\SslTcpServer.pdb

@@ -15,8 +15,8 @@ namespace WindowsFormsApplication1
         public const UInt32 DISTANCE     = 3;
         public const UInt32 POWER        = 4;
         public const UInt32 ENERGY       = 5;
+        public const UInt32 TIME         = 6;
         public const UInt32 CURRENTPOWER = 7;
-        public const UInt32 TIME = 6;
 
         private SerialPort connection;
 

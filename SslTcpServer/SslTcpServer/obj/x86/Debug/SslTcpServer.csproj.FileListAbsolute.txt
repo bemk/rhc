@@ -1,0 +1,5 @@
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\SslTcpServer\SslTcpServer\bin\Debug\SslTcpServer.exe
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\SslTcpServer\SslTcpServer\bin\Debug\SslTcpServer.pdb
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\SslTcpServer\SslTcpServer\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\SslTcpServer\SslTcpServer\obj\x86\Debug\SslTcpServer.exe
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\SslTcpServer\SslTcpServer\obj\x86\Debug\SslTcpServer.pdb

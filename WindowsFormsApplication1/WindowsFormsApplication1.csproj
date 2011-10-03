@@ -84,9 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeData.cs" />
-    <Compile Include="Chart.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Chart.cs" />
     <Compile Include="ClientChatModule.cs" />
     <Compile Include="COM-port Selection.cs">
       <SubType>Form</SubType>

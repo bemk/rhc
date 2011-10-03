@@ -20,3 +20,14 @@ C:\Users\Jeremy\Desktop\Project\LoginClient\WindowsFormsApplication1\obj\x86\Deb
 C:\Users\Jeremy\Desktop\Project\LoginClient\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Jeremy\Desktop\Project\LoginClient\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Jeremy\Desktop\Project\LoginClient\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.About.resources
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.MasterClient.resources
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Login.resources
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Bart\Documents\Visual Studio 2010\Projects\RHC\LoginClient\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe

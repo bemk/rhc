@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace WindowsFormsApplication2
 {
     static class Program
     {
-        public const bool DEBUG = true;
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,7 +15,7 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Client());
+            Application.Run(new frmMain());
         }
     }
 }

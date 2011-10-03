@@ -68,12 +68,11 @@
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chatOutput = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.sendButton = new System.Windows.Forms.Button();
             this.chatInput = new System.Windows.Forms.TextBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.chatOutput = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -85,7 +84,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.timeData);
             this.groupBox1.Controls.Add(this.currentPowerData);
             this.groupBox1.Controls.Add(this.energyData);
@@ -280,6 +278,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(196, 188);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // groupBox3
             // 
@@ -450,15 +449,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chat";
             // 
-            // chatOutput
-            // 
-            this.chatOutput.Location = new System.Drawing.Point(6, 13);
-            this.chatOutput.Multiline = true;
-            this.chatOutput.Name = "chatOutput";
-            this.chatOutput.ReadOnly = true;
-            this.chatOutput.Size = new System.Drawing.Size(188, 194);
-            this.chatOutput.TabIndex = 0;
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "RHCData";
@@ -495,9 +485,14 @@
             this.chatInput.TabIndex = 7;
             this.chatInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnUserInputType);
             // 
-            // toolTip1
+            // chatOutput
             // 
-            this.toolTip1.ToolTipTitle = "????";
+            this.chatOutput.Location = new System.Drawing.Point(6, 13);
+            this.chatOutput.Multiline = true;
+            this.chatOutput.Name = "chatOutput";
+            this.chatOutput.ReadOnly = true;
+            this.chatOutput.Size = new System.Drawing.Size(188, 194);
+            this.chatOutput.TabIndex = 0;
             // 
             // Client
             // 
@@ -579,10 +574,6 @@
         private System.Windows.Forms.TextBox chatOutput;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.TextBox chatInput;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

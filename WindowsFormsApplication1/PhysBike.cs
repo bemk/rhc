@@ -41,7 +41,7 @@ namespace WindowsFormsApplication1
             catch (Exception e)
             {
                 if (Program.DEBUG) Console.WriteLine("ERROR: Getting message from bike failed, " + e.Message);
-                return "ERR";
+                return null;
             }
             return (connection.ReadLine());
         }
@@ -62,12 +62,10 @@ namespace WindowsFormsApplication1
                 if(Program.DEBUG) Console.WriteLine("ERROR: Connecting to bike failed, " + e.Message);
             }
         }
-
-        public PhysBike(string comport)
+        public PhysBike(String comport)
         {
             connect(comport);
         }
-
         ~PhysBike()
         {
             if (connection.IsOpen)

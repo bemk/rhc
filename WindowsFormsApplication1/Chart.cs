@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    class Chart : System.Windows.Forms.Panel
+    class Chart
     {
         private Client c;
 
@@ -279,6 +276,5 @@ namespace WindowsFormsApplication1
             g.Dispose();
 
         }
-
     }
 }

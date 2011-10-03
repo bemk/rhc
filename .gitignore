@@ -2,6 +2,10 @@
 *.cache
 *.suo
 *.sln
+*.obj
+*.bin
+*.pdb
+*dbg
 /RHC/RHC/obj
 /RHC/RHC/Properties
 /RHC/RHC/dbg/
